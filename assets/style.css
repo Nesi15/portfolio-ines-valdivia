@@ -245,7 +245,8 @@ section.tight{ padding: 52px 0; }
   padding: 44px; display:flex; flex-wrap:wrap; gap: 24px; align-items:center; justify-content:space-between;
 }
 .access-panel h3{ color:#fff; margin-bottom: 14px; }
-.access-panel p{ color: #c7c7ca; margin:0; max-width: 46ch; }
+.access-panel p{ color: #c7c7ca; margin:0 0 10px; max-width: 46ch; }
+.access-panel p:last-child{ margin-bottom:0; }
 .access-panel .btn{ background: var(--accent-dark); border-color: var(--accent-dark); }
 .access-panel .btn:hover{ background:#fff; color:var(--ink); border-color:#fff; }
 
