@@ -169,15 +169,18 @@ img{ max-width: 100%; display:block; }
 
 /* ---------- Hero (Guna documentary) ---------- */
 .hero{
-  position:relative; min-height: 82vh; display:flex; align-items:flex-start;
+  position:relative; min-height: 82vh; display:flex; flex-direction:column; justify-content:space-between;
   background-size: cover; background-position: center;
   color:#fff;
 }
 .hero::after{
   content:""; position:absolute; inset:0;
-  background: linear-gradient(180deg, rgba(10,10,11,0.82) 0%, rgba(10,10,11,0.45) 45%, rgba(10,10,11,0.1) 100%);
+  background: linear-gradient(180deg, rgba(10,10,11,0.82) 0%, rgba(10,10,11,0.3) 38%, rgba(10,10,11,0.14) 62%, rgba(10,10,11,0.6) 100%);
 }
-.hero .wrap{ position:relative; z-index:2; padding-top: 130px; padding-bottom: 60px; }
+.hero .wrap{ position:relative; z-index:2; padding-top: 130px; padding-bottom: 0; }
+.hero .wrap.hero-meta-bottom{
+  padding-top:0; padding-bottom: 34px;
+}
 .hero .eyebrow{ color: #8fd3d9; }
 .hero .eyebrow::before{ background:#8fd3d9; }
 .hero h1{ color:#fff; font-size: clamp(2.6rem, 6.4vw, 5.4rem); max-width: 15ch; margin-bottom:0.3em; }
@@ -285,7 +288,7 @@ section.tight{ padding: 52px 0; }
 }
 .card h3{ font-size: 1.25rem; margin-bottom:2px; }
 .card .role{ font-size:0.86rem; color: var(--ink-soft); font-weight:600; }
-.card .org-blurb{ font-size:0.84rem; font-style:italic; color: var(--ink-soft); }
+.card .org-blurb{ font-size:0.84rem; font-style:italic; color: var(--ink-soft); margin-bottom:8px; }
 .card p{ font-size: 0.96rem; margin-bottom: 4px;}
 .card .chip{ align-self:flex-start; }
 
@@ -614,7 +617,7 @@ h1.kinetic{
 
 /* ---------- Floating skill tags (home, Sobre mí) — arranged in a circle ---------- */
 .floating-tags{
-  position:relative; width:680px; height:220px; max-width:100%;
+  position:relative; width:760px; height:250px; max-width:100%;
   margin: 30px auto 10px;
 }
 .floating-tags .chip-slot{

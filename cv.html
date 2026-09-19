@@ -69,27 +69,27 @@
   .contact-bar{
     display:flex; flex-wrap:wrap; gap:18px;
     border-top:1px solid var(--line); border-bottom:1px solid var(--line);
-    padding:14px 0; margin-bottom:40px;
+    padding:12px 0; margin-bottom:26px;
     font-size:13px; color:var(--ink-soft);
   }
   .contact-bar b{ color:var(--ink); font-weight:600; }
 
-  section{ margin-bottom:38px; }
+  section{ margin-bottom:26px; }
   h2{
     font-size:12px; font-weight:800; letter-spacing:0.1em; text-transform:uppercase;
-    color:var(--ink); margin:0 0 16px;
+    color:var(--ink); margin:0 0 12px;
     display:flex; align-items:center; gap:8px;
   }
   h2::after{ content:""; flex:1; height:1px; background:var(--line); }
 
   .lead{
-    font-size:15.5px; line-height:1.65; color:#2b2d31; max-width:680px; margin:0 0 10px;
+    font-size:15.5px; line-height:1.6; color:#2b2d31; max-width:680px; margin:0 0 8px;
   }
   .lead:last-child{ margin-bottom:0; }
 
   .entry{
     display:flex; justify-content:space-between; gap:20px;
-    padding:14px 0; border-bottom:1px solid var(--line-soft);
+    padding:10px 0; border-bottom:1px solid var(--line-soft);
   }
   .entry:first-child{ padding-top:0; }
   .entry .what{ min-width:0; }
@@ -100,6 +100,11 @@
     font-size:12px; color:var(--ink-soft); white-space:nowrap; text-align:right;
     padding-top:2px; flex-shrink:0;
   }
+
+  .entry-grid{ display:grid; grid-template-columns:1fr 1fr; gap:0 20px; }
+  .entry-grid .entry{ flex-direction:column; gap:4px; padding-top:10px; }
+  .entry-grid .entry:first-child{ padding-top:10px; }
+  .entry-grid .entry .when{ text-align:left; padding-top:0; }
   ul.bullets{ margin:6px 0 0; padding-left:16px; }
   ul.bullets li{ font-size:13.5px; line-height:1.55; color:#3a3d42; margin-bottom:3px; }
 
@@ -119,6 +124,11 @@
     font-size:11.5px; font-weight:700; letter-spacing:0.07em; text-transform:uppercase;
     color:var(--ink-soft); margin:0 0 8px;
   }
+  .skill-group.skill-inline{
+    display:flex; align-items:center; flex-wrap:wrap; gap:8px 10px; margin-bottom:10px;
+  }
+  .skill-group.skill-inline .skill-label{ margin:0; flex-shrink:0; white-space:nowrap; }
+  .skill-group.skill-inline .tags{ gap:8px; }
   .skill-text{ font-size:13.5px; line-height:1.6; color:#3a3d42; margin:0; max-width:640px; }
 
   footer.foot{
@@ -147,7 +157,7 @@
 
 <div class="top-actions no-print">
   <a href="index.html">← Portfolio</a>
-  <a href="assets/cv/ines-valdivia-cv.pdf" download>Descargar PDF</a>
+  <a href="assets/cv/ines-valdivia-cv.pdf" download="Inés Valdivia Urbano CV.pdf">Descargar PDF</a>
   <button class="primary" onclick="window.print()">Imprimir</button>
 </div>
 
@@ -165,7 +175,7 @@
 
   <section>
     <h2>Perfil</h2>
-    <p class="lead">Ingeniera de Sistemas de Telecomunicación, Sonido e Imagen y graduada en Comunicación Audiovisual.</p>
+    <p class="lead">Ingeniera de Sistemas de Telecomunicación, Sonido e Imagen y graduada en Comunicación Audiovisual, especializada en producción, edición y montaje con enfoque social.</p>
   </section>
 
   <section>
@@ -225,63 +235,64 @@
     </div>
   </section>
 
-  <div class="two-col">
     <section>
       <h2>Formación</h2>
-      <div class="entry">
-        <div class="what">
-          <p class="role">Ingeniería de Sistemas de Telecomunicación, Sonido e Imagen + Comunicación Audiovisual. Doble titulación.</p>
-          <p class="org">Universitat Politècnica de València</p>
+      <div class="entry-grid">
+        <div class="entry">
+          <div class="what">
+            <p class="role">Ingeniería de Sistemas de Telecomunicación, Sonido e Imagen + Comunicación Audiovisual. Doble titulación.</p>
+            <p class="org">Universitat Politècnica de València</p>
+          </div>
+          <div class="when">2020 - 2025</div>
         </div>
-        <div class="when">2020–2025</div>
-      </div>
-      <div class="entry">
-        <div class="what">
-          <p class="role">Producción Audiovisual</p>
-          <p class="org">Universidad Nebrija</p>
+        <div class="entry">
+          <div class="what">
+            <p class="role">Producción Audiovisual</p>
+            <p class="org">Universidad Nebrija</p>
+          </div>
+          <div class="when">2025 - 2026</div>
         </div>
-        <div class="when">2025–2026</div>
-      </div>
-      <div class="entry">
-        <div class="what">
-          <p class="role">Control de Gestión en la Empresa</p>
-          <p class="org">Instituto Séneca</p>
+        <div class="entry">
+          <div class="what">
+            <p class="role">Control de Gestión en la Empresa</p>
+            <p class="org">Instituto Séneca</p>
+          </div>
+          <div class="when">2026 - Actualidad</div>
         </div>
-        <div class="when">2026 - Actualidad</div>
-      </div>
-      <div class="entry">
-        <div class="what">
-          <p class="role">ComfyUI para profesionales</p>
-          <p class="org">Nekodifications</p>
-          <p class="desc">Generación con IA.</p>
+        <div class="entry">
+          <div class="what">
+            <p class="role">Flujos de generación de imagen y vídeo con IA</p>
+            <p class="org">ComfyUI para profesionales - Nekodifications</p>
+          </div>
+          <div class="when">2026 - Actualidad</div>
         </div>
-        <div class="when">2026 - Actualidad</div>
       </div>
     </section>
 
     <section>
       <h2>Voluntariado</h2>
-      <div class="entry">
-        <div class="what">
-          <p class="role">Edición del teaser de rebranding</p>
-          <p class="org">TECHO (ONG que trabaja para la construcción de viviendas de emergencia y desarrollo comunitario)</p>
+      <div class="entry-grid">
+        <div class="entry">
+          <div class="what">
+            <p class="role">Edición del teaser de rebranding</p>
+            <p class="org">TECHO (ONG que trabaja para la construcción de viviendas de emergencia y desarrollo comunitario)</p>
+          </div>
+          <div class="when">2024</div>
         </div>
-        <div class="when">2024</div>
-      </div>
-      <div class="entry">
-        <div class="what">
-          <p class="role">Refugio de animales</p>
-          <p class="org">Coordinación para el cuidado de los animales SPAMA Safor (Sociedad Protectora de Animales y Medio Ambiente)</p>
+        <div class="entry">
+          <div class="what">
+            <p class="role">Refugio de animales</p>
+            <p class="org">Coordinación para el cuidado de los animales SPAMA Safor (Sociedad Protectora de Animales y Medio Ambiente)</p>
+          </div>
+          <div class="when">2020</div>
         </div>
-        <div class="when">2020</div>
       </div>
     </section>
-  </div>
 
   <section>
     <h2>Habilidades &amp; idiomas</h2>
 
-    <div class="skill-group">
+    <div class="skill-group skill-inline">
       <p class="skill-label">Lenguaje</p>
       <div class="tags">
         <span class="tag accent">Java</span>
@@ -290,16 +301,17 @@
       </div>
     </div>
 
-    <div class="skill-group">
-      <p class="skill-label">Edición y montaje</p>
+    <div class="skill-group skill-inline">
+      <p class="skill-label">Vídeo</p>
       <div class="tags">
         <span class="tag accent">DaVinci Resolve</span>
         <span class="tag accent">Avid Media Composer</span>
+        <span class="tag accent">ComfyUI</span>
       </div>
     </div>
 
-    <div class="skill-group">
-      <p class="skill-label">Pack Adobe</p>
+    <div class="skill-group skill-inline">
+      <p class="skill-label">Adobe</p>
       <div class="tags">
         <span class="tag">After Effects</span>
         <span class="tag">Illustrator</span>
@@ -310,16 +322,8 @@
       </div>
     </div>
 
-    <div class="skill-group">
-      <p class="skill-label">Pack Office</p>
-      <div class="tags">
-        <span class="tag">Word</span>
-        <span class="tag">Excel</span>
-        <span class="tag">PowerPoint</span>
-      </div>
-    </div>
 
-    <div class="skill-group">
+    <div class="skill-group skill-inline">
       <p class="skill-label">Idiomas</p>
       <div class="tags">
         <span class="tag">Español - Nativo</span>
@@ -328,20 +332,22 @@
       </div>
     </div>
 
-    <div class="skill-group">
-      <p class="skill-label">Formación adicional</p>
+  </section>
 
+  <section>
+    <h2>Formación adicional</h2>
+    <div class="entry-grid">
       <div class="entry">
         <div class="what">
-          <p class="role">Jornada formativa - Desarrollo con IA: Programa con Agentes</p>
-          <p class="org">BIG School</p>
+          <p class="role">Desarrollo con IA: Programa con Agentes</p>
+          <p class="org">Curso formativo de BIG School</p>
         </div>
-        <div class="when">2026</div>
+        <div class="when">Jun 2026</div>
       </div>
 
       <div class="entry">
         <div class="what">
-          <p class="role">Emergencia climática en la mesa: los vínculos entre el sistema agroalimentario y la crisis climática</p>
+          <p class="role">Los vínculos entre el sistema agroalimentario y la crisis climática</p>
           <p class="org">Programa INCIDE - Valencia</p>
         </div>
         <div class="when">Feb - Mar 2024</div>
@@ -350,7 +356,7 @@
       <div class="entry">
         <div class="what">
           <p class="role">Curso Miniempresas</p>
-          <p class="org">Madrid</p>
+          <p class="org">Impartido por seniors del SECOT - Madrid</p>
           <p class="desc">Experiencia práctica de la toma de decisiones empresariales a través de la creación de una miniempresa.</p>
         </div>
         <div class="when">Oct 2018 - Feb 2019</div>
@@ -358,22 +364,18 @@
 
       <div class="entry">
         <div class="what">
-          <p class="role">Piano y Lenguaje musical</p>
+          <p class="role">Formación en Piano, Guitarra y Lenguaje Musical</p>
           <p class="org">Escuela Municipal de Música - Madrid</p>
         </div>
         <div class="when">2010 - 2020</div>
       </div>
     </div>
-
-    <div class="skill-group">
-      <p class="skill-label">Sobre mí</p>
-      <p class="skill-text">Persona proactiva, con iniciativa, responsabilidad y capacidad de trabajo en equipo. Con compromiso, profesionalidad y ganas de aprender. Apasionada por la música (piano, guitarra y producción).</p>
-    </div>
   </section>
 
-  <footer class="foot">
-    Proyectos destacados - "100 años de la Revolución" · "Raspado" · Cabanyal · Cáritas "Gente como tú" · TECHO - <a href="index.html">portfolio completo en esta misma web →</a>
-  </footer>
+  <section>
+    <h2>Sobre mí</h2>
+    <p class="skill-text">Persona proactiva, con iniciativa, responsabilidad y capacidad de trabajo en equipo. Con compromiso, profesionalidad y ganas de aprender.</p>
+  </section>
 
 </div>
 </body>
