@@ -547,11 +547,10 @@ h1.kinetic{
   opacity:0; animation: fade-up 0.7s var(--ease) 0.62s both;
 }
 .now-line{
-  display:flex; align-items:flex-start; gap:9px; margin: 26px 0 0;
-  font-size:0.85rem; color: var(--ink-soft); font-weight:600; line-height:1.6;
+  display:flex; align-items:center; gap:9px; margin: 26px 0 0;
+  font-size:0.85rem; color: var(--ink-soft); font-weight:600;
   opacity:0; animation: fade-up 0.7s var(--ease) 0.74s both;
 }
-.now-line .now-dot{ margin-top:7px; }
 .now-dot{
   width:8px; height:8px; border-radius:50%; background: #2fae5b; flex:none;
   box-shadow: 0 0 0 0 rgba(47,174,91,0.5);
