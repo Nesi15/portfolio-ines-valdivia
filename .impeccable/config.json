@@ -1,0 +1,32 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "broken-image",
+        "value": "*",
+        "files": [
+          "assets/script.js"
+        ],
+        "createdAt": "2026-09-22T08:22:38.054Z",
+        "reason": "lightbox <img> template element created hidden with empty src; JS sets the real src before the lightbox becomes visible, so it never renders broken"
+      },
+      {
+        "rule": "overused-font",
+        "value": "instrument sans",
+        "createdAt": "2026-09-22T08:26:25.545Z",
+        "reason": "User confirmed via AskUserQuestion this session: chose Instrument Sans over Sora/keeping Inter"
+      },
+      {
+        "rule": "radial-spotlight-glow",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-09-22T08:26:31.509Z",
+        "reason": "User confirmed: explicitly asked to restore the hero blobs/floating tags after a redesign pass removed them"
+      }
+    ]
+  }
+}
