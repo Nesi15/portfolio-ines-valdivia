@@ -272,6 +272,8 @@ section.tight{ padding: 52px 0; }
 .entry .what{ min-width:0; }
 .entry .role{ font-size:1.05rem; font-weight:700; margin:0 0 3px; color:var(--ink); }
 .entry .org{ font-size:0.92rem; color: var(--ink-soft); margin:0 0 6px; font-weight:500; }
+.entry .org a{ color: var(--ink-soft); }
+.entry .org a:hover{ color: #8fd3d9; }
 .entry .desc{ font-size:0.92rem; color:#3a3d42; margin:0; max-width:56ch; }
 .entry ul.bullets{ margin:8px 0 0; padding-left:18px; }
 .entry ul.bullets li{ font-size:0.92rem; line-height:1.55; color:#3a3d42; margin-bottom:4px; }
