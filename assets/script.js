@@ -60,7 +60,7 @@
     var h = document.documentElement;
     var scrolled = h.scrollTop;
     var height = h.scrollHeight - h.clientHeight;
-    bar.style.width = (height > 0 ? (scrolled / height) * 100 : 0) + '%';
+    bar.style.transform = 'scaleX(' + (height > 0 ? scrolled / height : 0) + ')';
   }
   document.addEventListener('scroll', update, { passive: true });
   update();
