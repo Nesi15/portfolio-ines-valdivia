@@ -667,6 +667,13 @@ h1.kinetic{
   .floating-tags .float-chip{ font-size:0.72rem; padding:7px 12px; animation:none; }
 }
 
+/* ---------- About: fit list (home, Sobre mí) ---------- */
+.fit-list{ display:grid; grid-template-columns:repeat(2, 1fr); gap:18px 32px; margin:0; padding:0; list-style:none; }
+.fit-list li{ border-top:1px solid var(--line); padding-top:14px; }
+.fit-list h3{ font-size:1.05rem; margin:0 0 4px; }
+.fit-list p{ font-size:0.94rem; color:#3a3d42; margin:0; }
+@media (max-width:700px){ .fit-list{ grid-template-columns:1fr; } }
+
 /* ---------- About grid + stats ---------- */
 .about-grid{ display:grid; gap: 48px; }
 .prose-lead{ font-size:1.04rem; max-width:64ch; color:#2b2d31; margin-bottom:20px; }
