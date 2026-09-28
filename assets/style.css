@@ -46,8 +46,8 @@ h1,h2,h3{
 
 p{ margin: 0 0 1em; color: #2b2d31; }
 
-body.documental p, body.proyectos p{ text-align: justify; text-justify: inter-word; hyphens: auto; }
-#sobre-mi .prose-lead, #explora .mini-card p{ text-align: justify; text-justify: inter-word; hyphens: auto; }
+body.documental p, body.proyectos p{ text-align: justify; text-justify: inter-word; hyphens: manual; }
+#sobre-mi .prose-lead, #explora .mini-card p{ text-align: justify; text-justify: inter-word; hyphens: manual; }
 
 a{ color: var(--ink); text-decoration: none; transition: color 0.2s var(--ease), opacity 0.2s var(--ease); }
 a:hover{ color: var(--accent-dark); }
