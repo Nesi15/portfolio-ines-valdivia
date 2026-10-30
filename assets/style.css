@@ -794,3 +794,16 @@ h1.kinetic{
   .nav-links a.nav-cv{ padding:6px 10px; font-size:0.72rem; }
   .nav-links a.cta{ padding:6px 12px; font-size:0.76rem; }
 }
+
+/* Logo en la esquina superior derecha de las tarjetas */
+.card.has-corner-logo{ position: relative; }
+.card .corner-logo{
+  position: absolute; top: 22px; right: 22px;
+  height: 46px; width: auto; max-width: 120px; object-fit: contain; object-position: right top;
+}
+.card.has-corner-logo h3{ padding-right: 120px; }
+@media (max-width: 560px){
+  .card .corner-logo{ height: 36px; max-width: 90px; top: 20px; right: 20px; }
+  .card.has-corner-logo h3{ padding-right: 0; }
+  .card.has-corner-logo .chip{ margin-right: 100px; }
+}
