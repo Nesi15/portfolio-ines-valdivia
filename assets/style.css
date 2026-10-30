@@ -807,3 +807,5 @@ h1.kinetic{
   .card.has-corner-logo h3{ padding-right: 0; }
   .card.has-corner-logo .chip{ margin-right: 100px; }
 }
+
+.card p a.ext-link{ font-weight:600; color: var(--accent); text-decoration: underline; text-underline-offset: 3px; white-space: nowrap; }
