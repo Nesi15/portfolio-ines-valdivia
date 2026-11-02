@@ -170,7 +170,7 @@
 
 // ---------- Lightbox carousel for gallery/mosaic photos ----------
 (function () {
-  var groups = document.querySelectorAll('.gallery, .mosaic');
+  var groups = document.querySelectorAll('.gallery, .mosaic, .hx-gallery');
   if (!groups.length) return;
 
   var lightbox = document.createElement('div');
@@ -181,11 +181,13 @@
     '<button class="lightbox-prev" aria-label="Anterior">&#10094;</button>' +
     '<img class="lightbox-img" src="" alt="">' +
     '<button class="lightbox-next" aria-label="Siguiente">&#10095;</button>' +
+    '<div class="lightbox-caption"></div>' +
     '<div class="lightbox-counter"></div>';
   document.body.appendChild(lightbox);
 
   var imgEl = lightbox.querySelector('.lightbox-img');
   var counterEl = lightbox.querySelector('.lightbox-counter');
+  var captionEl = lightbox.querySelector('.lightbox-caption');
   var closeBtn = lightbox.querySelector('.lightbox-close');
   var prevBtn = lightbox.querySelector('.lightbox-prev');
   var nextBtn = lightbox.querySelector('.lightbox-next');
@@ -194,8 +196,9 @@
 
   function show() {
     var img = currentList[currentIndex];
-    imgEl.src = img.src;
+    imgEl.src = img.getAttribute('data-full') || img.src;
     imgEl.alt = img.alt || '';
+    captionEl.textContent = img.getAttribute('data-caption') || '';
     counterEl.textContent = (currentIndex + 1) + ' / ' + currentList.length;
   }
   function openAt(list, index) {
@@ -234,4 +237,30 @@
       figure.addEventListener('click', function () { openAt(imgs, i); });
     });
   });
+
+  // la imagen fija del recorrido abre la galería del paso activo
+  var frame = document.querySelector('.hx-frame');
+  if (frame) frame.addEventListener('click', function () {
+    var active = document.querySelector('.hx-step.is-active .hx-gallery figure');
+    if (active) active.click();
+  });
+})();
+
+// ---------- Conoce su historia: cambia la imagen fija según el paso visible ----------
+(function () {
+  var steps = document.querySelectorAll('.hx-step');
+  if (!steps.length || !('IntersectionObserver' in window)) return;
+  var imgs = document.querySelectorAll('.hx-img');
+  var caption = document.querySelector('.hx-caption');
+  function activate(i) {
+    steps.forEach(function (s) { s.classList.toggle('is-active', s.getAttribute('data-step') === i); });
+    imgs.forEach(function (im) { im.classList.toggle('is-active', im.getAttribute('data-step') === i); });
+    var step = document.querySelector('.hx-step[data-step="' + i + '"] .hx-gallery img');
+    if (caption && step) caption.textContent = step.getAttribute('data-caption');
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) { if (en.isIntersecting) activate(en.target.getAttribute('data-step')); });
+  }, { rootMargin: '-45% 0px -45% 0px' });
+  steps.forEach(function (s) { io.observe(s); });
+  activate('0');
 })();
