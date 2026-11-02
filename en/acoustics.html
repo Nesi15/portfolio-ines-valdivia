@@ -74,6 +74,13 @@
   table.res tbody tr:last-child td{ border-bottom:0; }
   table.res td.after{ color: var(--accent); font-weight:700; }
 
+  .proto-audio{ display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 16px; margin: 26px 0; }
+  .proto-audio figure{ margin:0; background: var(--accent-darker); color:#fff; border-radius: var(--radius-md); padding: 18px 20px; }
+  .proto-audio figcaption{ font-weight:700; margin-bottom:10px; }
+  .proto-audio audio{ width:100%; }
+  .gallery3{ display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; }
+  .gallery3 img{ aspect-ratio: 4/3; object-fit: cover; }
+  @media (max-width: 760px){ .proto-audio, .gallery3{ grid-template-columns: 1fr; } }
   .gallery2{ display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 16px; }
   .credits{ font-size:0.82rem; color: var(--ink-soft); max-width: 75ch; }
   .credits p{ text-align:left !important; }
@@ -232,6 +239,29 @@
   </div>
 </section>
 
+<section id="prototype">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 class="kicker">Where it started</h2>
+      <h2>A first prototype with household materials</h2>
+    </div>
+    <div class="prose">
+      <p>Before the simulated design, I tried a low-cost treatment in another room of the house (2.6 × 2.5 × 2.8 m) with an upright piano: mattresses and pillows in the corners as improvised bass traps, a wool blanket and a duvet on the walls, open wardrobes full of clothes, thick curtains and a rug. I recorded a nocturne before and after with an XY stereo pair (two Rode M5) and a Zoom H4n Pro, 1 m from the piano and 1.3 m above the floor.</p>
+      <p>The difference is easy to hear, but recordings of music cannot tell you which element does what. The thesis then moved to a simulated design, where each element could be tested and quantified.</p>
+    </div>
+    <div class="proto-audio">
+      <figure><figcaption>Before</figcaption><audio controls preload="none" src="../assets/acoustics/nocturne-before.mp3"></audio></figure>
+      <figure><figcaption>After the household treatment</figcaption><audio controls preload="none" src="../assets/acoustics/nocturne-after.mp3"></audio></figure>
+    </div>
+    <div class="gallery3">
+      <figure class="fig"><img src="../assets/acoustics/room-before.jpg" alt="Upright piano in the untreated room" loading="lazy"><figcaption>The room before treatment.</figcaption></figure>
+      <figure class="fig"><img src="../assets/acoustics/room-after.jpg" alt="Mattresses and pillows around the piano as improvised absorbers" loading="lazy"><figcaption>Mattresses, pillows and a duvet around the piano.</figcaption></figure>
+      <figure class="fig"><img src="../assets/acoustics/mics-xy.jpg" alt="Two Rode M5 microphones in an XY pair" loading="lazy"><figcaption>XY pair of Rode M5 microphones.</figcaption></figure>
+    </div>
+    <p class="ab-note" style="color:var(--ink-soft)!important;margin-top:14px">Two separate takes, first 45 seconds of each, with the same gain applied to both. January 2025.</p>
+  </div>
+</section>
+
 <section id="limits">
   <div class="wrap">
     <div class="two">
@@ -240,7 +270,7 @@
           <h2 class="kicker">Decisions and limits</h2>
         </div>
         <div class="prose">
-          <p><strong>Simulation only.</strong> All results come from MATLAB and CATT-Acoustic. I did not measure the room or study sound insulation to neighbours.</p>
+          <p><strong>Simulation only.</strong> All design results come from MATLAB and CATT-Acoustic. The earlier prototype was recorded, not measured, so it appears here only as a listening example. I did not study sound insulation to neighbours.</p>
           <p><strong>Sabine or Eyring.</strong> After treatment the mean absorption rises to 0.25–0.30, where Sabine's assumption no longer holds, so I used Eyring's reverberation times to recompute the Schroeder frequency.</p>
           <p><strong>A deliberately dry result.</strong> C80 ends at 10–15 dB, above the usual guidelines, and at the pianist's position the reverberation time drops slightly below 0.4 s above 1 kHz. I accepted it, because lowering C80 would mean removing absorption.</p>
           <p><strong>Cost and reuse.</strong> I priced the treatment at about €2,213 with VAT and proposed household alternatives (bookshelves, mattresses, blankets) that could cut it by up to 40 %, favouring removable, single-material products.</p>
