@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Room Acoustics for Piano Practice - Inés Valdivia</title>
+<meta name="description" content="Acoustic treatment of a domestic room for piano practice, designed and validated by simulation in MATLAB and CATT-Acoustic. Bachelor's thesis by Inés Valdivia, UPV, 2025.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  .ac-hero{ padding: 118px 0 46px; border-bottom: 1px solid var(--line-soft); }
+  .ac-hero h1{ font-size: clamp(2.2rem, 5vw, 3.7rem); max-width: 17ch; }
+  .ac-hero .lede{ max-width: 62ch; font-size: 1.12rem; color:#2b2d31; }
+  .ac-meta{ display:flex; flex-wrap:wrap; gap:10px; margin-top: 18px; }
+  .ac-figures{ display:grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 18px; margin-top: 34px; }
+  .ac-fig{ border-top: 3px solid var(--accent); padding-top: 12px; min-width:0; }
+  .ac-fig .num{ font-size: clamp(1.3rem, 2.4vw, 1.8rem); font-weight:700; letter-spacing:-0.03em; color: var(--ink); font-variant-numeric: tabular-nums; line-height:1.1; }
+  .ac-fig .num small{ font-size: 0.55em; color: var(--ink-soft); font-weight:600; letter-spacing:0; }
+  .ac-fig p{ font-size: 0.86rem; color: var(--ink-soft); margin: 6px 0 0; }
+
+  /* A/B player */
+  .ab{ background: var(--accent-darker); color:#fff; border-radius: var(--radius-lg); padding: 28px; display:grid; grid-template-columns: auto minmax(0,1fr); gap: 22px 28px; align-items:center; }
+  .ab h3{ color:#fff; margin:0 0 4px; font-size:1.3rem; }
+  .ab p{ color:#c7d3d5; margin:0; font-size:0.95rem; }
+  .ab-play{ width:74px; height:74px; border-radius:50%; border:0; background:#8fd3d9; color: var(--accent-darker); cursor:pointer; display:grid; place-items:center; transition: transform .2s var(--ease); }
+  .ab-play:hover{ transform: scale(1.05); }
+  .ab-play svg{ width:28px; height:28px; }
+  .ab-switch{ grid-column: 1 / -1; display:flex; flex-wrap:wrap; gap:12px; align-items:center; }
+  .ab-toggle{ display:inline-flex; background: rgba(255,255,255,0.1); border-radius:999px; padding:4px; }
+  .ab-toggle button{ border:0; background:transparent; color:#fff; font: 700 0.95rem var(--font); padding: 10px 20px; border-radius:999px; cursor:pointer; }
+  .ab-toggle button[aria-pressed="true"]{ background:#fff; color: var(--accent-darker); }
+  .ab-progress{ grid-column: 1 / -1; height:6px; background: rgba(255,255,255,0.15); border-radius:3px; overflow:hidden; }
+  .ab-progress span{ display:block; height:100%; width:0; background:#8fd3d9; }
+  .ab-note{ grid-column: 1 / -1; font-size:0.82rem !important; color:#9fb3b6 !important; }
+  .ab-status{ font-size:0.9rem; color:#c7d3d5; min-height:1.4em; }
+
+  .two{ display:grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 36px; align-items:start; }
+  .fig{ margin:0; }
+  .fig img{ border-radius: var(--radius-md); border:1px solid var(--line-soft); background:#fff; width:100%; }
+  .fig figcaption{ font-size:0.84rem; color: var(--ink-soft); margin-top:8px; }
+  .prose p, .prose li{ text-align:left; }
+  .facts{ list-style:none; padding:0; margin: 0; display:flex; flex-direction:column; gap: 12px; }
+  .facts li{ font-size: 0.98rem; }
+  .facts strong{ display:block; font-size:0.78rem; letter-spacing:0.06em; text-transform:uppercase; color: var(--ink-soft); }
+
+  /* charts */
+  .chart-tools{ display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-bottom: 16px; }
+  .seg{ display:inline-flex; border:1px solid var(--line); border-radius:999px; padding:3px; background:#fff; }
+  .seg button{ border:0; background:transparent; font: 600 0.86rem var(--font); padding: 7px 14px; border-radius:999px; cursor:pointer; color: var(--ink-soft); }
+  .seg button[aria-pressed="true"]{ background: var(--ink); color:#fff; }
+  .legend{ display:flex; gap:16px; font-size:0.86rem; color: var(--ink-soft); }
+  .legend span{ display:inline-flex; align-items:center; gap:7px; }
+  .legend svg{ width:26px; height:10px; }
+  .charts{ display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 22px; }
+  .chart{ background:#fff; border:1px solid var(--line-soft); border-radius: var(--radius-md); padding: 16px 14px 10px; min-width:0; }
+  .chart h3{ font-size:1rem; margin:0 0 2px; }
+  .chart p{ font-size:0.8rem; color: var(--ink-soft); margin:0 0 6px; }
+  .chart svg{ width:100%; height:auto; display:block; overflow:visible; }
+  .chart text{ font-family: var(--font); font-size: 11px; fill: var(--ink-soft); }
+
+  .treat{ list-style:none; padding:0; margin:0; display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 14px 28px; }
+  .treat li{ border-left: 3px solid var(--accent-blue); padding-left: 14px; min-width:0; }
+  .treat h3{ font-size:1.02rem; margin:0 0 4px; }
+  .treat p{ font-size:0.92rem; margin:0; text-align:left !important; }
+  .treat .band{ font-size:0.76rem; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; color: var(--accent); }
+
+  .table-wrap{ overflow-x:auto; border:1px solid var(--line-soft); border-radius: var(--radius-md); background:#fff; }
+  table.res{ border-collapse:collapse; width:100%; min-width: 620px; font-size:0.9rem; font-variant-numeric: tabular-nums; }
+  table.res th, table.res td{ padding: 9px 12px; border-bottom:1px solid var(--line-soft); text-align:right; }
+  table.res th:first-child, table.res td:first-child{ text-align:left; }
+  table.res thead th{ font-size:0.74rem; letter-spacing:0.05em; text-transform:uppercase; color: var(--ink-soft); font-weight:700; }
+  table.res tbody tr:last-child td{ border-bottom:0; }
+  table.res td.after{ color: var(--accent); font-weight:700; }
+
+  .gallery2{ display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 16px; }
+  .credits{ font-size:0.82rem; color: var(--ink-soft); max-width: 75ch; }
+  .credits p{ text-align:left !important; }
+
+  @media (max-width: 900px){
+    .charts{ grid-template-columns: 1fr; }
+    .ac-figures{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+  }
+  @media (max-width: 760px){
+    .two, .treat, .gallery2{ grid-template-columns: 1fr; }
+    .ab{ grid-template-columns: 1fr; text-align:left; }
+    .ac-hero{ padding-top: 100px; }
+  }
+</style>
+</head>
+<body class="acoustics">
+
+<div class="cursor-dot" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"></div>
+<div class="scroll-progress" aria-hidden="true"></div>
+
+<nav class="site-nav">
+  <div class="wrap">
+    <a class="brand" href="index.html">Inés Valdivia Urbano</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="documental.html">Documentary</a>
+      <a href="proyectos.html">Projects</a>
+      <a class="nav-cv" href="../cv-en.html">CV</a>
+      <a class="cta" href="mailto:inesvaldivia02@gmail.com">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="ac-hero">
+  <div class="wrap">
+    <span class="eyebrow">Bachelor's thesis · Telecommunication Engineering · UPV 2025</span>
+    <h1>Turning a bedroom into a room for piano practice</h1>
+    <p class="lede">A 32 m³ domestic room was far too reverberant for practising piano. I designed a passive acoustic treatment and validated it by simulation, combining wave-based analysis in MATLAB with a geometrical model in CATT-Acoustic.</p>
+    <div class="ac-meta">
+      <span class="chip">Grade 9.5 / 10</span>
+      <span class="chip">MATLAB · CATT-Acoustic</span>
+      <span class="chip">3.60 × 3.40 × 2.60 m</span>
+    </div>
+    <div class="ac-figures">
+      <div class="ac-fig"><div class="num">1.46 → 0.40 <small>s</small></div><p>Mid-frequency reverberation time (500 Hz–2 kHz, room centre), −72 %</p></div>
+      <div class="ac-fig"><div class="num">456 → 235 <small>Hz</small></div><p>Schroeder frequency: most of the piano's range now sits in the diffuse field</p></div>
+      <div class="ac-fig"><div class="num">40–56 → 81–92 <small>%</small></div><p>Definition D50 at the pianist's head</p></div>
+      <div class="ac-fig"><div class="num">€2,213</div><p>Estimated budget incl. VAT, with a low-cost version using household items</p></div>
+    </div>
+  </div>
+</header>
+
+<section id="listen">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 class="kicker">Listen</h2>
+      <p class="prose-lead">The same piano phrase at the pianist's position, before and after the treatment. Switch while it plays.</p>
+    </div>
+    <div class="ab" id="ab">
+      <button class="ab-play" id="abPlay" type="button" aria-label="Play">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path id="abIcon" fill="currentColor" d="M8 5v14l11-7z"/></svg>
+      </button>
+      <div>
+        <h3>Bach, Prelude in C major (BWV 846), bars 1–4</h3>
+        <p class="ab-status" id="abStatus">Best with headphones. Both versions share the same gain, so the level drop after treatment is real.</p>
+      </div>
+      <div class="ab-switch">
+        <div class="ab-toggle" role="group" aria-label="Room state">
+          <button type="button" id="abBefore" aria-pressed="true">Before</button>
+          <button type="button" id="abAfter" aria-pressed="false">After</button>
+        </div>
+      </div>
+      <div class="ab-progress" aria-hidden="true"><span id="abBar"></span></div>
+      <p class="ab-note">Approximate auralization: impulse responses synthesized per octave band from the simulated reverberation time, D50 and sound strength G at the pianist's head (CATT-Acoustic results), convolved with close-miked piano samples. To be replaced with the impulse responses exported from the CATT-Acoustic model.</p>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="problem">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 class="kicker">The problem</h2>
+      <h2>A small, hard room colours every note</h2>
+    </div>
+    <div class="two">
+      <div class="prose">
+        <p>The room is a typical bedroom with an upright piano, painted walls, a window and little furniture. Its average absorption was very low (ᾱ ≈ 0.05), so the simulated reverberation time reached 1.2–1.5 s in most bands (1.65 s at mid frequencies by Sabine's formula in MATLAB), against the 0.4–0.6 s recommended for individual practice. Note tails overlapped and fast passages blurred.</p>
+        <p>Being small, the room also behaves modally up to about 460 Hz: almost three octaves of the piano fall where individual room modes create audible peaks and dips. Its proportions sit just outside the Bolt area, which suggests modes bunching between 90 and 140 Hz.</p>
+        <ul class="facts">
+          <li><strong>Source</strong>Omnidirectional, at the centre of the keyboard, 90 dB at 1 m</li>
+          <li><strong>Receivers</strong>R1 at the room centre; R2 at the pianist's head, 1.20 m high</li>
+          <li><strong>Simulation</strong>2.12 million rays, 483 ms impulse response, 20 °C, 50 % RH</li>
+        </ul>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:18px;min-width:0">
+        <figure class="fig"><img src="../assets/acoustics/model-3d.jpg" alt="CATT-Acoustic 3D model of the room with source A0 and receivers 01 and 02" loading="lazy"><figcaption>CATT-Acoustic model: source A0 at the piano, receivers 01 (room centre) and 02 (pianist's head).</figcaption></figure>
+      </div>
+    </div>
+    <div class="gallery2" style="margin-top:28px">
+      <figure class="fig"><img src="../assets/acoustics/bolt.jpg" alt="Bolt diagram showing the room's proportions just outside the favourable area" loading="lazy"><figcaption>Bolt diagram: the room's proportions (1.31, 1.38) fall just outside the favourable area.</figcaption></figure>
+      <figure class="fig"><img src="../assets/acoustics/modes.jpg" alt="Histogram of room modes in 5 Hz bands from 0 to 460 Hz" loading="lazy"><figcaption>Room modes in 5 Hz bands up to the Schroeder frequency, computed in MATLAB.</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section id="treatment">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 class="kicker">The treatment</h2>
+      <h2>Five passive elements, each aimed at one problem</h2>
+      <p class="prose-lead">I diagnosed the untreated room twice, analytically in MATLAB (Sabine reverberation time, room modes, Schroeder frequency) and geometrically in CATT-Acoustic, and then tested each element in the model.</p>
+    </div>
+    <ul class="treat">
+      <li><span class="band">Floor–ceiling reflections</span><h3>Wool carpet over the whole floor</h3><p>Damps the reflection path between floor and ceiling, the two largest parallel surfaces.</p></li>
+      <li><span class="band">70–120 Hz</span><h3>14 corner bass traps</h3><p>Three corners plus two units above the door, where modal pressure is highest.</p></li>
+      <li><span class="band">Mid and high frequencies</span><h3>Heavy velvet curtains</h3><p>On the west window, 13 m² with 2:1 pleating, absorbing mid and high frequencies.</p></li>
+      <li><span class="band">500 Hz, α ≈ 0.7</span><h3>Micro-perforated resonator panel</h3><p>1.8 × 1.0 m, tuned with Maa's model to absorb around 500 Hz.</p></li>
+      <li><span class="band">Above ~700 Hz</span><h3>QRD diffusers, 5 wells</h3><p>On the north wall and the central ceiling, to scatter reflections instead of absorbing them all.</p></li>
+    </ul>
+    <div class="gallery2" style="margin-top:32px">
+      <figure class="fig"><img src="../assets/acoustics/before-south.jpg" alt="CATT-Acoustic render of the untreated room, south view" loading="lazy"><figcaption>Before: untreated room (south view).</figcaption></figure>
+      <figure class="fig"><img src="../assets/acoustics/after-south.jpg" alt="CATT-Acoustic render of the treated room with carpet, curtains, diffusers and panels" loading="lazy"><figcaption>After: carpet, curtains, ceiling diffuser, resonator panel and bass traps (south view).</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="results">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 class="kicker">Results</h2>
+      <h2>Shorter reverberation, clearer attacks</h2>
+      <p class="prose-lead">Values per octave band from the CATT-Acoustic simulation. The sound strength G drops 3–6 dB, the price of the added absorption.</p>
+    </div>
+    <div class="chart-tools">
+      <div class="seg" role="group" aria-label="Receiver">
+        <button type="button" data-rx="r2" aria-pressed="true">Pianist's head</button>
+        <button type="button" data-rx="r1" aria-pressed="false">Room centre</button>
+      </div>
+      <div class="legend">
+        <span><svg viewBox="0 0 26 10" aria-hidden="true"><line x1="0" y1="5" x2="26" y2="5" stroke="#c98a2b" stroke-width="2.5" stroke-dasharray="5 3"/><circle cx="13" cy="5" r="3.5" fill="#fff" stroke="#c98a2b" stroke-width="2"/></svg>Before</span>
+        <span><svg viewBox="0 0 26 10" aria-hidden="true"><line x1="0" y1="5" x2="26" y2="5" stroke="#01454f" stroke-width="2.5"/><rect x="9.5" y="1.5" width="7" height="7" fill="#01454f"/></svg>After</span>
+      </div>
+    </div>
+    <div class="charts">
+      <div class="chart"><h3>Reverberation time</h3><p>Seconds · shaded: 0.4–0.6 s recommended for practice</p><svg id="chRT" viewBox="0 0 320 210" role="img" aria-label="Reverberation time by octave band, before and after"></svg></div>
+      <div class="chart"><h3>Definition D50</h3><p>Percent of energy in the first 50 ms</p><svg id="chD50" viewBox="0 0 320 210" role="img" aria-label="D50 by octave band, before and after"></svg></div>
+      <div class="chart"><h3>Clarity C80</h3><p>Decibels</p><svg id="chC80" viewBox="0 0 320 210" role="img" aria-label="C80 by octave band, before and after"></svg></div>
+    </div>
+    <div style="margin-top:26px" class="table-wrap">
+      <table class="res" id="resTable">
+        <thead><tr><th>Octave band</th><th>RT before (s)</th><th>RT after (s)</th><th>D50 before (%)</th><th>D50 after (%)</th><th>C80 before (dB)</th><th>C80 after (dB)</th><th>G before (dB)</th><th>G after (dB)</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="limits">
+  <div class="wrap">
+    <div class="two">
+      <div>
+        <div class="section-head" style="margin-bottom:20px">
+          <h2 class="kicker">Decisions and limits</h2>
+        </div>
+        <div class="prose">
+          <p><strong>Simulation only.</strong> All results come from MATLAB and CATT-Acoustic. I did not measure the room or study sound insulation to neighbours.</p>
+          <p><strong>Sabine or Eyring.</strong> After treatment the mean absorption rises to 0.25–0.30, where Sabine's assumption no longer holds, so I used Eyring's reverberation times to recompute the Schroeder frequency.</p>
+          <p><strong>A deliberately dry result.</strong> C80 ends at 10–15 dB, above the usual guidelines, and at the pianist's position the reverberation time drops slightly below 0.4 s above 1 kHz. I accepted it, because lowering C80 would mean removing absorption.</p>
+          <p><strong>Cost and reuse.</strong> I priced the treatment at about €2,213 with VAT and proposed household alternatives (bookshelves, mattresses, blankets) that could cut it by up to 40 %, favouring removable, single-material products.</p>
+        </div>
+      </div>
+      <div>
+        <div class="section-head" style="margin-bottom:20px">
+          <h2 class="kicker">What I would do next</h2>
+        </div>
+        <div class="prose">
+          <p><strong>Measure it.</strong> Record impulse responses in the real room, before and after, and compare them with the model.</p>
+          <p><strong>Listen in real time.</strong> Move from offline auralization to interactive, binaural listening, so a musician can try treatment options while playing.</p>
+          <p><strong>Design by ear.</strong> Use perceptual tests with pianists to decide how dry a practice room should be, instead of relying only on standard ranges.</p>
+        </div>
+        <figure class="fig" style="margin-top:22px"><img src="../assets/acoustics/plan.jpg" alt="Floor plan of the room with piano, bed, desk and bookcase" loading="lazy"><figcaption>Floor plan: 3.60 × 3.40 m, with the upright piano on the north wall.</figcaption></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="tight">
+  <div class="wrap credits">
+    <p>Bachelor's thesis in Telecommunication Systems, Sound and Image Engineering, Universitat Politècnica de València, Campus de Gandia, September 2025. Supervisor: Prof. Jesús Alba Fernández.</p>
+    <p>Piano samples: Salamander Grand Piano V3 by Alexander Holm, licensed under <a class="ext-link" href="http://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noopener">CC BY 3.0</a>, pitch-shifted and convolved. Music: J. S. Bach, BWV 846 (public domain).</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="contact">
+      <h3>Inés Valdivia Urbano</h3>
+      <p><a href="mailto:inesvaldivia02@gmail.com">inesvaldivia02@gmail.com</a></p>
+    </div>
+    <div class="foot-links">
+      <a href="proyectos.html">See more projects →</a>
+      <a href="../cv-en.html">CV →</a>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/script.js"></script>
+<script>
+(function(){
+  // CATT-Acoustic results, TFG Tables 4 (before) and 10 (after)
+  var BANDS=["125","250","500","1k","2k","4k"];
+  var D={
+    r1:{ rt:[[1.24,1.32,1.43,1.52,1.43,1.08],[0.50,0.48,0.49,0.38,0.34,0.31]],
+         d50:[[26.9,39.8,42.0,42.1,42.6,48.6],[78.5,78.0,67.3,82.0,88.4,87.6]],
+         c80:[[2.3,1.4,0.4,0.9,1.1,2.8],[13.3,11.4,9.9,12.0,13.6,13.1]],
+         g:[[28.4,30.3,30.5,31.8,31.7,30.6],[25.8,25.1,26.4,26.6,26.1,25.0]] },
+    r2:{ rt:[[1.05,1.30,1.19,1.44,1.18,0.93],[0.34,0.38,0.34,0.22,0.24,0.21]],
+         d50:[[49.7,40.0,48.8,42.4,44.6,55.5],[86.0,81.0,84.8,90.4,87.9,91.5]],
+         c80:[[2.1,-0.6,1.1,0.4,1.3,3.8],[10.4,10.6,11.4,13.6,13.8,15.0]],
+         g:[[28.9,30.8,31.8,32.6,32.7,31.3],[26.1,26.6,28.7,27.6,27.8,27.3]] }
+  };
+  var NS="http://www.w3.org/2000/svg", BEFORE="#c98a2b", AFTER="#01454f";
+  function el(n,a,p){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e;}
+  function chart(svg,series,o){
+    while(svg.firstChild)svg.removeChild(svg.firstChild);
+    var L=40,R=310,T=10,B=180,W=R-L,H=B-T;
+    var x=function(i){return L+W*(i+0.5)/BANDS.length;}, y=function(v){return B-H*(v-o.min)/(o.max-o.min);};
+    if(o.band){el("rect",{x:L,y:y(o.band[1]),width:W,height:y(o.band[0])-y(o.band[1]),fill:"#01454f",opacity:"0.09"},svg);}
+    o.ticks.forEach(function(t){el("line",{x1:L,x2:R,y1:y(t),y2:y(t),stroke:"rgba(17,18,20,0.08)"},svg);var tx=el("text",{x:L-6,y:y(t)+4,"text-anchor":"end"},svg);tx.textContent=t;});
+    if(o.min<0){el("line",{x1:L,x2:R,y1:y(0),y2:y(0),stroke:"rgba(17,18,20,0.35)"},svg);}
+    BANDS.forEach(function(b,i){var tx=el("text",{x:x(i),y:B+16,"text-anchor":"middle"},svg);tx.textContent=b;});
+    var u=el("text",{x:R,y:B+30,"text-anchor":"end"},svg);u.textContent="Hz";
+    [[series[0],BEFORE,true],[series[1],AFTER,false]].forEach(function(s){
+      var d=s[0].map(function(v,i){return (i?"L":"M")+x(i)+" "+y(v);}).join(" ");
+      el("path",{d:d,fill:"none",stroke:s[1],"stroke-width":"2.5","stroke-dasharray":s[2]?"6 4":"none","stroke-linejoin":"round"},svg);
+      s[0].forEach(function(v,i){
+        var g=s[2]?el("circle",{cx:x(i),cy:y(v),r:4,fill:"#fff",stroke:s[1],"stroke-width":"2"},svg):el("rect",{x:x(i)-4,y:y(v)-4,width:8,height:8,fill:s[1]},svg);
+        var t=el("title",{},g);t.textContent=(s[2]?"Before":"After")+", "+BANDS[i]+" Hz: "+v+o.unit;
+      });
+    });
+  }
+  function render(rx){
+    var d=D[rx];
+    chart(document.getElementById("chRT"),d.rt,{min:0,max:1.6,ticks:[0,0.4,0.8,1.2,1.6],band:[0.4,0.6],unit:" s"});
+    chart(document.getElementById("chD50"),d.d50,{min:0,max:100,ticks:[0,25,50,75,100],unit:" %"});
+    chart(document.getElementById("chC80"),d.c80,{min:-2,max:16,ticks:[0,4,8,12,16],unit:" dB"});
+    var tb=document.querySelector("#resTable tbody");tb.innerHTML="";
+    BANDS.forEach(function(b,i){
+      var tr=document.createElement("tr"),cells=[b+" Hz",d.rt[0][i].toFixed(2),d.rt[1][i].toFixed(2),d.d50[0][i].toFixed(1),d.d50[1][i].toFixed(1),d.c80[0][i].toFixed(1),d.c80[1][i].toFixed(1),d.g[0][i].toFixed(1),d.g[1][i].toFixed(1)];
+      cells.forEach(function(c,k){var td=document.createElement("td");td.textContent=c;if(k>0&&k%2===0)td.className="after";tr.appendChild(td);});
+      tb.appendChild(tr);
+    });
+  }
+  document.querySelectorAll(".seg button").forEach(function(btn){
+    btn.addEventListener("click",function(){document.querySelectorAll(".seg button").forEach(function(b){b.setAttribute("aria-pressed",b===btn?"true":"false");});render(btn.dataset.rx);});
+  });
+  render("r2");
+
+  // A/B player: both versions play in sync; the switch crossfades between them
+  var ctx,buffers=null,srcs=[],gains=[],playing=false,startAt=0,offset=0,which=0,raf;
+  var playBtn=document.getElementById("abPlay"),icon=document.getElementById("abIcon"),bar=document.getElementById("abBar"),status=document.getElementById("abStatus");
+  var bBefore=document.getElementById("abBefore"),bAfter=document.getElementById("abAfter");
+  var FILES=["../assets/acoustics/piano-before.mp3","../assets/acoustics/piano-after.mp3"];
+  function load(){
+    ctx=ctx||new (window.AudioContext||window.webkitAudioContext)();
+    status.textContent="Loading audio…";
+    return Promise.all(FILES.map(function(f){return fetch(f).then(function(r){return r.arrayBuffer();}).then(function(a){return new Promise(function(res,rej){ctx.decodeAudioData(a,res,rej);});});}))
+      .then(function(b){buffers=b;status.textContent="Playing. Switch between Before and After at any time.";});
+  }
+  function setIcon(p){icon.setAttribute("d",p?"M7 5h4v14H7zM13 5h4v14h-4z":"M8 5v14l11-7z");playBtn.setAttribute("aria-label",p?"Pause":"Play");}
+  function start(){
+    srcs=[];gains=[];
+    buffers.forEach(function(buf,i){var s=ctx.createBufferSource(),g=ctx.createGain();s.buffer=buf;g.gain.value=(i===which)?1:0;s.connect(g).connect(ctx.destination);srcs.push(s);gains.push(g);});
+    startAt=ctx.currentTime-offset;srcs.forEach(function(s){s.start(0,offset);});
+    srcs[0].onended=function(){if(playing&&ctx.currentTime-startAt>=buffers[0].duration-0.05){stop(true);}};
+    playing=true;setIcon(true);tick();
+  }
+  function stop(ended){
+    srcs.forEach(function(s){try{s.onended=null;s.stop();}catch(e){}});
+    offset=ended?0:ctx.currentTime-startAt;playing=false;setIcon(false);cancelAnimationFrame(raf);
+    if(ended){bar.style.width="0";}
+  }
+  function tick(){var d=buffers[0].duration;bar.style.width=Math.min(100,100*(ctx.currentTime-startAt)/d)+"%";raf=requestAnimationFrame(tick);}
+  playBtn.addEventListener("click",function(){
+    if(!buffers){load().then(start).catch(function(){status.textContent="The audio could not be loaded. Please try again.";});return;}
+    if(ctx.state==="suspended")ctx.resume();
+    playing?stop(false):start();
+  });
+  function choose(i){
+    which=i;bBefore.setAttribute("aria-pressed",i===0?"true":"false");bAfter.setAttribute("aria-pressed",i===1?"true":"false");
+    if(playing){var t=ctx.currentTime;gains.forEach(function(g,k){g.gain.cancelScheduledValues(t);g.gain.setValueAtTime(g.gain.value,t);g.gain.linearRampToValueAtTime(k===i?1:0,t+0.04);});}
+  }
+  bBefore.addEventListener("click",function(){choose(0);});
+  bAfter.addEventListener("click",function(){choose(1);});
+})();
+</script>
+</body>
+</html>
