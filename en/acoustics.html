@@ -53,7 +53,10 @@
   .legend{ display:flex; gap:16px; font-size:0.86rem; color: var(--ink-soft); }
   .legend span{ display:inline-flex; align-items:center; gap:7px; }
   .legend svg{ width:26px; height:10px; }
-  .charts{ display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 22px; }
+  .charts{ display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 22px; }
+  .sti{ display:grid; grid-template-columns: auto minmax(0,1fr); gap: 6px 22px; align-items:center; background:#fff; border:1px solid var(--line-soft); border-radius: var(--radius-md); padding: 18px 22px; margin-top: 22px; }
+  .sti .num{ font-size: clamp(1.4rem, 2.6vw, 2rem); font-weight:700; letter-spacing:-0.03em; font-variant-numeric: tabular-nums; }
+  .sti p{ margin:0; color: var(--ink-soft); }
   .chart{ background:#fff; border:1px solid var(--line-soft); border-radius: var(--radius-md); padding: 16px 14px 10px; min-width:0; }
   .chart h3{ font-size:1rem; margin:0 0 2px; }
   .chart p{ font-size:0.8rem; color: var(--ink-soft); margin:0 0 6px; }
@@ -78,6 +81,8 @@
   .proto-audio figure{ margin:0; background: var(--accent-darker); color:#fff; border-radius: var(--radius-md); padding: 18px 20px; }
   .proto-audio figcaption{ font-weight:700; margin-bottom:10px; }
   .proto-audio audio{ width:100%; }
+  .gallery4{ display:grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 16px; align-items:start; }
+  @media (max-width: 900px){ .gallery4{ grid-template-columns: repeat(2, minmax(0,1fr)); } }
   .gallery3{ display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; }
   .gallery3 img{ aspect-ratio: 4/3; object-fit: cover; }
   @media (max-width: 760px){ .proto-audio, .gallery3{ grid-template-columns: 1fr; } }
@@ -181,8 +186,13 @@
       </div>
     </div>
     <div class="gallery2" style="margin-top:28px">
+      <figure class="fig"><img src="../assets/acoustics/plan.jpg" alt="Floor plan of the room with piano, bed, desk and bookcase" loading="lazy"><figcaption>Floor plan: 3.60 × 3.40 m, with the upright piano on the north wall.</figcaption></figure>
+      <figure class="fig"><img src="../assets/acoustics/elevations.png" alt="Elevations of the four walls showing the piano, door, window, desk, bookcase, bed and wardrobes" loading="lazy"><figcaption>Elevations of the four walls, 2.60 m high.</figcaption></figure>
+    </div>
+    <div class="gallery3" style="margin-top:16px">
       <figure class="fig"><img src="../assets/acoustics/bolt.jpg" alt="Bolt diagram showing the room's proportions just outside the favourable area" loading="lazy"><figcaption>Bolt diagram: the room's proportions (1.31, 1.38) fall just outside the favourable area.</figcaption></figure>
       <figure class="fig"><img src="../assets/acoustics/modes.jpg" alt="Histogram of room modes in 5 Hz bands from 0 to 460 Hz" loading="lazy"><figcaption>Room modes in 5 Hz bands up to the Schroeder frequency, computed in MATLAB.</figcaption></figure>
+      <figure class="fig"><img src="../assets/acoustics/modal-density.jpg" alt="Cumulative modal density rising with frequency up to 460 Hz" loading="lazy"><figcaption>Modal density: below ~100 Hz modes are sparse and isolated, so single notes boom or vanish.</figcaption></figure>
     </div>
   </div>
 </section>
@@ -229,12 +239,25 @@
       <div class="chart"><h3>Reverberation time</h3><p>Seconds · shaded: 0.4–0.6 s recommended for practice</p><svg id="chRT" viewBox="0 0 320 210" role="img" aria-label="Reverberation time by octave band, before and after"></svg></div>
       <div class="chart"><h3>Definition D50</h3><p>Percent of energy in the first 50 ms</p><svg id="chD50" viewBox="0 0 320 210" role="img" aria-label="D50 by octave band, before and after"></svg></div>
       <div class="chart"><h3>Clarity C80</h3><p>Decibels</p><svg id="chC80" viewBox="0 0 320 210" role="img" aria-label="C80 by octave band, before and after"></svg></div>
+      <div class="chart"><h3>Early decay time (EDT)</h3><p>Seconds · how reverberant the room sounds while playing</p><svg id="chEDT" viewBox="0 0 320 210" role="img" aria-label="Early decay time by octave band, before and after"></svg></div>
+    </div>
+    <div class="sti">
+      <div class="num">0.53 → 0.71</div>
+      <p><strong style="color:var(--ink)">Speech Transmission Index at the pianist's head</strong>, from "fair" to "good" on the IEC 60268-16 scale. STI is designed for speech, but it is a compact check that detail survives the room.</p>
     </div>
     <div style="margin-top:26px" class="table-wrap">
       <table class="res" id="resTable">
         <thead><tr><th>Octave band</th><th>RT before (s)</th><th>RT after (s)</th><th>D50 before (%)</th><th>D50 after (%)</th><th>C80 before (dB)</th><th>C80 after (dB)</th><th>G before (dB)</th><th>G after (dB)</th></tr></thead>
         <tbody></tbody>
       </table>
+    </div>
+    <h3 style="margin:34px 0 6px">Straight from the software</h3>
+    <p style="margin:0 0 16px;color:var(--ink-soft)">Original CATT-Acoustic output, before (left) and after (right): the statistical reverberation estimate for the whole room, and the STI at the pianist's position.</p>
+    <div class="gallery4">
+      <figure class="fig"><img src="../assets/acoustics/catt-rt-before.png" alt="CATT-Acoustic statistical reverberation estimate for the untreated room, about 1.5 s at mid frequencies" loading="lazy"><figcaption>Statistical RT estimate, untreated: Tmf 1.52–1.56 s.</figcaption></figure>
+      <figure class="fig"><img src="../assets/acoustics/catt-rt-after.png" alt="CATT-Acoustic statistical reverberation estimate for the treated room, about 0.4 s" loading="lazy"><figcaption>Statistical RT estimate, treated: Tmf 0.41–0.45 s.</figcaption></figure>
+      <figure class="fig"><img src="../assets/acoustics/catt-sti-before.png" alt="CATT-Acoustic STI and modulation transfer index by band for the untreated room, STI about 0.53" loading="lazy"><figcaption>STI by band, untreated: 0.52–0.53 (fair).</figcaption></figure>
+      <figure class="fig"><img src="../assets/acoustics/catt-sti-after.png" alt="CATT-Acoustic STI and modulation transfer index by band for the treated room, STI about 0.71" loading="lazy"><figcaption>STI by band, treated: 0.71–0.72 (good).</figcaption></figure>
     </div>
   </div>
 </section>
@@ -285,7 +308,6 @@
           <p><strong>Listen in real time.</strong> Move from offline auralization to interactive, binaural listening, so a musician can try treatment options while playing.</p>
           <p><strong>Design by ear.</strong> Use perceptual tests with pianists to decide how dry a practice room should be, instead of relying only on standard ranges.</p>
         </div>
-        <figure class="fig" style="margin-top:22px"><img src="../assets/acoustics/plan.jpg" alt="Floor plan of the room with piano, bed, desk and bookcase" loading="lazy"><figcaption>Floor plan: 3.60 × 3.40 m, with the upright piano on the north wall.</figcaption></figure>
       </div>
     </div>
   </div>
@@ -318,10 +340,12 @@
   var BANDS=["125","250","500","1k","2k","4k"];
   var D={
     r1:{ rt:[[1.24,1.32,1.43,1.52,1.43,1.08],[0.50,0.48,0.49,0.38,0.34,0.31]],
+         edt:[[1.17,1.25,1.53,1.70,1.55,1.14],[0.39,0.41,0.47,0.42,0.33,0.36]],
          d50:[[26.9,39.8,42.0,42.1,42.6,48.6],[78.5,78.0,67.3,82.0,88.4,87.6]],
          c80:[[2.3,1.4,0.4,0.9,1.1,2.8],[13.3,11.4,9.9,12.0,13.6,13.1]],
          g:[[28.4,30.3,30.5,31.8,31.7,30.6],[25.8,25.1,26.4,26.6,26.1,25.0]] },
     r2:{ rt:[[1.05,1.30,1.19,1.44,1.18,0.93],[0.34,0.38,0.34,0.22,0.24,0.21]],
+         edt:[[1.13,1.30,1.30,1.60,1.45,1.17],[0.42,0.47,0.45,0.36,0.43,0.36]],
          d50:[[49.7,40.0,48.8,42.4,44.6,55.5],[86.0,81.0,84.8,90.4,87.9,91.5]],
          c80:[[2.1,-0.6,1.1,0.4,1.3,3.8],[10.4,10.6,11.4,13.6,13.8,15.0]],
          g:[[28.9,30.8,31.8,32.6,32.7,31.3],[26.1,26.6,28.7,27.6,27.8,27.3]] }
@@ -351,6 +375,7 @@
     chart(document.getElementById("chRT"),d.rt,{min:0,max:1.6,ticks:[0,0.4,0.8,1.2,1.6],band:[0.4,0.6],unit:" s"});
     chart(document.getElementById("chD50"),d.d50,{min:0,max:100,ticks:[0,25,50,75,100],unit:" %"});
     chart(document.getElementById("chC80"),d.c80,{min:-2,max:16,ticks:[0,4,8,12,16],unit:" dB"});
+    chart(document.getElementById("chEDT"),d.edt,{min:0,max:1.8,ticks:[0,0.6,1.2,1.8],unit:" s"});
     var tb=document.querySelector("#resTable tbody");tb.innerHTML="";
     BANDS.forEach(function(b,i){
       var tr=document.createElement("tr"),cells=[b+" Hz",d.rt[0][i].toFixed(2),d.rt[1][i].toFixed(2),d.d50[0][i].toFixed(1),d.d50[1][i].toFixed(1),d.c80[0][i].toFixed(1),d.c80[1][i].toFixed(1),d.g[0][i].toFixed(1),d.g[1][i].toFixed(1)];
