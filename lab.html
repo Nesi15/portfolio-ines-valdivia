@@ -13,12 +13,13 @@
   .lab-hero{ padding: 120px 0 40px; border-bottom:1px solid var(--line-soft); }
   .lab-hero h1{ font-size: clamp(2.2rem,5vw,3.6rem); margin: 12px 0 14px; }
   .lab-hero .lede{ max-width: 62ch; font-size: 1.08rem; color: var(--ink-soft); }
-  .how{ margin-top: 30px; display:grid; grid-template-columns: minmax(0,1.4fr) minmax(0,1fr); gap: 26px; background: var(--accent-darker); color:#fff; border-radius: var(--radius-lg); padding: 26px 28px; }
+  .how{ margin-top: 30px; display:block; width:fit-content; max-width:100%; background: var(--accent-darker); color:#fff; border-radius: var(--radius-lg); padding: 26px 28px; }
   .how h2{ color:#fff; font-size:1.15rem; margin:0 0 8px; }
   .how p{ margin:0; color:#d3dee0; line-height:1.6; }
-  .how ul{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px; align-self:center; }
+  .how ul{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px; }
   .how li{ display:flex; gap:10px; align-items:center; color:#d3dee0; font-size:.92rem; }
-  .lab-toc{ display:flex; flex-wrap:wrap; gap:10px; margin-top: 22px; }
+  .lab-toc{ display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:10px; margin-top: 22px; }
+  @media (max-width: 640px){ .lab-toc{ grid-template-columns: 1fr; } }
   .badge{ display:inline-block; font: 700 .68rem var(--font); letter-spacing:.04em; text-transform:uppercase; padding: 3px 8px; border-radius: 999px; vertical-align: middle; white-space:nowrap; }
   .b-ai{ background:#ead9f7; color:#5a2d82; } .b-me{ background:#d9efe9; color:#0d5a47; } .b-mix{ background:#fbe8cc; color:#7a4a08; } .b-ref{ background:#e6e8ea; color:#3b4148; }
   .exp{ padding: 70px 0; border-bottom: 1px solid var(--line-soft); }
@@ -116,7 +117,6 @@
     <h1>Experimentos con IA</h1>
     <p class="lede">Cuatro experimentos con ComfyUI y modelos abiertos, ejecutados en local. En cada uno cuento qué problema resolvía, cómo es el flujo, qué falló y qué haría después.</p>
     <div class="how">
-      <div><h2>Cómo trabajo con IA</h2><p>Marco la dirección visual y el enfoque; los flujos de ComfyUI, los nodos propios y los scripts se desarrollaron con Claude Code mediante pruebas e iteración constantes.</p></div>
       <ul>
         <li><span class="badge b-me">Mi trabajo</span> Dirección, decisiones, selección y montaje</li>
         <li><span class="badge b-ai">Generado con IA</span> Salida directa de un modelo</li>
