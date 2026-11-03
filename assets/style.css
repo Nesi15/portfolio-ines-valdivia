@@ -706,7 +706,7 @@ h1.kinetic{
 .feature-meta{ display:flex; flex-wrap:wrap; gap:10px; }
 
 /* ---------- Mini card grid (explore) ---------- */
-.mini-grid{ display:grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.mini-grid{ display:grid; grid-template-columns: repeat(auto-fit, minmax(0,1fr)); grid-auto-flow: column; gap: 18px; }
 .mini-card{
   display:flex; flex-direction:column; gap:8px;
   background: var(--paper); border:1px solid transparent; border-radius: var(--radius-lg);
@@ -743,7 +743,8 @@ h1.kinetic{
   .hero-personal-grid{ grid-template-columns:1fr; padding-top:30px; }
   .hero-photo-wrap{ order:-1; margin-bottom: 10px; }
   .stats-row{ grid-template-columns: repeat(2,1fr); row-gap:28px; }
-  .mini-grid{ grid-template-columns: repeat(2,1fr); }
+  .mini-grid{ grid-template-columns: repeat(2,1fr); grid-auto-flow: row; }
+  .mini-grid > :last-child:nth-child(odd){ grid-column: span 2; }
 }
 
 @media (max-width: 780px){
@@ -769,6 +770,7 @@ h1.kinetic{
   .logo-grid{ gap: 28px 32px; }
   .logo-grid img{ max-height: 34px; max-width: 104px; }
   .mini-grid{ grid-template-columns: 1fr; }
+  .mini-grid > :last-child:nth-child(odd){ grid-column: auto; }
   .stats-row{ grid-template-columns: 1fr 1fr; }
   .floating-tag{ font-size:0.72rem; padding:7px 12px; }
   .tag-1{ left:-2%; }
@@ -880,3 +882,5 @@ h1.kinetic{
 }
 .lightbox-img{ max-height: 72vh; margin-bottom: 7vh; }
 .lightbox-caption{ bottom: 50px; }
+
+.mini-card p{ text-align:left; }
