@@ -67,7 +67,8 @@
   .vids video{ width:100%; border-radius: var(--radius-md); background:#000; display:block; }
   .vids figure:first-child video{ aspect-ratio: 480/672; object-fit: contain; background:#f3efe9; }
   .vids figure:not(:first-child) video{ aspect-ratio: 16/9; }
-  .vids figure:first-child{ grid-row: span 1; }
+  .vids figure:first-child{ grid-row: span 2; }
+  .vids figure:nth-child(4){ grid-column: 2 / span 2; }
   figcaption{ font-size:.85rem; color: var(--ink-soft); margin-top:8px; line-height:1.45; }
   .exp figure{ margin:0; }
   .dbg{ display:grid; grid-template-columns: repeat(6,minmax(0,1fr)); gap: 10px; margin-bottom: 26px; }
@@ -81,6 +82,7 @@
   .models .lic{ color: var(--ink-soft); text-align:right; }
   @media (max-width: 900px){
     .how, .exp-intro, .exp-foot, .flow, .vids, .bot{ grid-template-columns: 1fr; }
+    .vids figure:first-child{ grid-row: auto; } .vids figure:nth-child(4){ grid-column: auto; }
     .flow li:not(:last-child)::after{ content:"↓"; right:auto; left:50%; top:auto; bottom:-17px; transform:translateX(-50%); }
     .dbg{ grid-template-columns: repeat(3,minmax(0,1fr)); }
     .bot{ max-width: 420px; }
@@ -269,7 +271,9 @@
       <figure><video src="assets/lab/f4-wan.mp4" poster="assets/lab/f4-wan-poster.jpg" controls muted playsinline preload="none"></video><figcaption>Primer intento con Wan 2.2: los personajes se mueven y los trazos tiemblan. <span class="badge b-ai">Generado con IA</span></figcaption></figure>
       <figure><video src="assets/lab/f4-paneo-2d.mp4" poster="assets/lab/f4-paneo-2d-poster.jpg" controls muted playsinline preload="none"></video><figcaption>Resultado: paneo de boceto a acuarela generado a partir del PSD. <span class="badge b-mix">Mi trabajo + IA</span></figcaption></figure>
       <figure><video src="assets/lab/f4-evolucion.mp4" poster="assets/lab/f4-evolucion-poster.jpg" controls muted playsinline preload="none"></video><figcaption>Variante: de los niños a la obra. <span class="badge b-mix">Mi trabajo + IA</span></figcaption></figure>
+      <figure><video src="assets/lab/f5-vuelo-dron.mp4" poster="assets/lab/f5-vuelo-dron-poster.jpg" controls muted playsinline preload="none"></video><figcaption>Prueba de vuelo de dron sobre el universo ampliado, de boceto a acuarela. <span class="badge b-mix">Mi trabajo + IA</span></figcaption></figure>
     </div>
+    <p class="note-final">Todos los vídeos de los experimentos 03 y 04 son pruebas de trabajo. El resultado final entregado al cliente no se puede publicar.</p>
     <div class="exp-foot">
       <div><h3 class="lab-k">Qué falló y límites</h3><ul class="lim"><li>Wan redibuja la ilustración en cada fotograma: los personajes se mueven, los trazos tiemblan y las cotas salen ilegibles. Lo descarté para el resultado final.</li><li>Los primeros renders tardaban demasiado para iterar. Describir la escena en datos y renderizar borradores lo resolvió.</li><li>El bosque extra de los laterales lo generó Adobe Firefly una sola vez; el resto son capas del cartel y elementos del experimento 03.</li></ul></div>
       <div><h3 class="lab-k">Qué haría ahora</h3><p>Pasar a 2,5D real con profundidad estimada y un editor visual de la línea de tiempo en lugar de editar el JSON.</p>
@@ -280,13 +284,6 @@
   </div>
 </section>
 
-<section class="exp" id="pruebas">
-  <div class="wrap">
-    <div class="exp-head"><span class="exp-num">+</span><div><h2>Vuelo de dron</h2><p class="exp-meta">Ferrovial · Innovate Construction Awards (ICA) 2026</p></div></div>
-    <figure class="final-vid"><video src="assets/lab/f5-vuelo-dron.mp4" poster="assets/lab/f5-vuelo-dron-poster.jpg" controls muted playsinline preload="none"></video><figcaption>Prueba de vuelo de dron sobre el universo ampliado, de boceto a acuarela. <span class="badge b-mix">Mi trabajo + IA</span></figcaption></figure>
-    <p class="note-final">Todo lo que aparece en los experimentos 03 y 04 y en este vídeo son pruebas de trabajo. La versión final entregada al cliente no está disponible para publicar.</p>
-  </div>
-</section>
 
 <footer>
   <div class="wrap">

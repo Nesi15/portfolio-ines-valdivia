@@ -67,7 +67,8 @@
   .vids video{ width:100%; border-radius: var(--radius-md); background:#000; display:block; }
   .vids figure:first-child video{ aspect-ratio: 480/672; object-fit: contain; background:#f3efe9; }
   .vids figure:not(:first-child) video{ aspect-ratio: 16/9; }
-  .vids figure:first-child{ grid-row: span 1; }
+  .vids figure:first-child{ grid-row: span 2; }
+  .vids figure:nth-child(4){ grid-column: 2 / span 2; }
   figcaption{ font-size:.85rem; color: var(--ink-soft); margin-top:8px; line-height:1.45; }
   .exp figure{ margin:0; }
   .dbg{ display:grid; grid-template-columns: repeat(6,minmax(0,1fr)); gap: 10px; margin-bottom: 26px; }
@@ -81,6 +82,7 @@
   .models .lic{ color: var(--ink-soft); text-align:right; }
   @media (max-width: 900px){
     .how, .exp-intro, .exp-foot, .flow, .vids, .bot{ grid-template-columns: 1fr; }
+    .vids figure:first-child{ grid-row: auto; } .vids figure:nth-child(4){ grid-column: auto; }
     .flow li:not(:last-child)::after{ content:"↓"; right:auto; left:50%; top:auto; bottom:-17px; transform:translateX(-50%); }
     .dbg{ grid-template-columns: repeat(3,minmax(0,1fr)); }
     .bot{ max-width: 420px; }
@@ -269,7 +271,9 @@
       <figure><video src="../assets/lab/f4-wan.mp4" poster="../assets/lab/f4-wan-poster.jpg" controls muted playsinline preload="none"></video><figcaption>First attempt with Wan 2.2: the characters move and the strokes shimmer. <span class="badge b-ai">AI-generated</span></figcaption></figure>
       <figure><video src="../assets/lab/f4-paneo-2d.mp4" poster="../assets/lab/f4-paneo-2d-poster.jpg" controls muted playsinline preload="none"></video><figcaption>Result: sketch-to-watercolour pan rendered from the PSD. <span class="badge b-mix">My work + AI</span></figcaption></figure>
       <figure><video src="../assets/lab/f4-evolucion.mp4" poster="../assets/lab/f4-evolucion-poster.jpg" controls muted playsinline preload="none"></video><figcaption>Variant: from children to the construction site. <span class="badge b-mix">My work + AI</span></figcaption></figure>
+      <figure><video src="../assets/lab/f5-vuelo-dron.mp4" poster="../assets/lab/f5-vuelo-dron-poster.jpg" controls muted playsinline preload="none"></video><figcaption>Drone-flight test over the extended universe, from sketch to watercolour. <span class="badge b-mix">My work + AI</span></figcaption></figure>
     </div>
+    <p class="note-final">All the videos in experiments 03 and 04 are work-in-progress tests. The final result delivered to the client cannot be published.</p>
     <div class="exp-foot">
       <div><h3 class="lab-k">What failed and limits</h3><ul class="lim"><li>Wan redraws the illustration on every frame: characters move, strokes shimmer and dimensions become illegible. I dropped it for the final result.</li><li>Early renders took too long to iterate on. Describing the scene as data and rendering drafts solved it.</li><li>The extra forest on the sides was generated once with Adobe Firefly; everything else is poster layers and elements from experiment 03.</li></ul></div>
       <div><h3 class="lab-k">What I would do next</h3><p>Move to true 2.5D with estimated depth, and a visual timeline editor instead of editing JSON.</p>
@@ -280,13 +284,6 @@
   </div>
 </section>
 
-<section class="exp" id="pruebas">
-  <div class="wrap">
-    <div class="exp-head"><span class="exp-num">+</span><div><h2>Drone flight</h2><p class="exp-meta">Ferrovial · Innovate Construction Awards (ICA) 2026</p></div></div>
-    <figure class="final-vid"><video src="../assets/lab/f5-vuelo-dron.mp4" poster="../assets/lab/f5-vuelo-dron-poster.jpg" controls muted playsinline preload="none"></video><figcaption>Drone-flight test over the extended universe, from sketch to watercolour. <span class="badge b-mix">My work + AI</span></figcaption></figure>
-    <p class="note-final">Everything shown in experiments 03 and 04 and in this video is work-in-progress testing. The final version delivered to the client is not available for publication.</p>
-  </div>
-</section>
 
 <footer>
   <div class="wrap">
