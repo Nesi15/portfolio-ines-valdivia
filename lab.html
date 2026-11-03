@@ -41,6 +41,9 @@
   .graph{ margin: 6px 0 34px; }
   .graph-scroll{ overflow:auto; max-height: 560px; border:1px solid var(--line-soft); border-radius: var(--radius-md); background:#f6f7f6; -webkit-overflow-scrolling: touch; }
   .graph-scroll img{ display:block; max-width:none; }
+  .final-vid{ max-width: 980px; }
+  .final-vid video{ width:100%; aspect-ratio:16/9; border-radius: var(--radius-lg); background:#000; display:block; }
+  .note-final{ margin: 22px 0 0; padding: 14px 18px; border-left:3px solid var(--accent-sand); background:#fff; border-radius: 0 var(--radius-md) var(--radius-md) 0; max-width: 90ch; }
   .why{ margin: -14px 0 34px; padding: 14px 18px; border-left: 3px solid var(--accent); background: #fff; border-radius: 0 var(--radius-md) var(--radius-md) 0; line-height:1.6; max-width: 90ch; }
   .ba{ position:relative; overflow:hidden; border-radius: var(--radius-lg); border:1px solid var(--line-soft); background:#fff; max-width: 980px; user-select:none; }
   .ba img{ display:block; width:100%; height:auto; }
@@ -220,12 +223,12 @@
     <figure class="graph"><div class="graph-scroll"><img src="assets/lab/wf-ferro-bosque.svg" width="1714" height="703" alt="Grafo de ComfyUI dibujado a partir del archivo del flujo. Desliza para recorrerlo o" loading="lazy"></div><figcaption>Grafo de ComfyUI dibujado a partir del archivo del flujo. Desliza para recorrerlo o <a class="ext-link" href="assets/lab/wf-ferro-bosque.svg" target="_blank" rel="noopener">ábrelo en grande ↗</a></figcaption></figure>
     <h3 class="lab-k">Antes y después</h3>
     <div class="ba" style="--pos:50%;max-width:980px">
-      <img src="assets/lab/f3-bosque_00001.jpg" alt="Primera versión: la selección sale negra">
+      <img src="assets/lab/f3-bosque_00001.jpg" alt="Primera versión: fallo, la selección sale negra (NaN)">
       <div class="ba-after"><img src="assets/lab/f3-bosque_00006.jpg" alt="Versión final: bosque continuo sobre el papel"></div>
-      <span class="ba-label l">Primera versión: la selección sale negra <span class="badge b-ai">Generado con IA</span></span><span class="ba-label r">Versión final: bosque continuo sobre el papel <span class="badge b-ai">Generado con IA</span></span>
+      <span class="ba-label l">Primera versión: fallo, la selección sale negra (NaN) <span class="badge b-ai">Generado con IA</span></span><span class="ba-label r">Versión final: bosque continuo sobre el papel <span class="badge b-ai">Generado con IA</span></span>
       <input type="range" min="0" max="100" value="50" aria-label="Arrastra para comparar">
     </div>
-    <h3 class="lab-k">Depurar el flujo</h3><p class="flow-note">La primera versión devolvía la selección en negro y, una vez arreglada, un rectángulo de otro tono. Guardé cada paso intermedio para encontrar el fallo:</p>
+    <h3 class="lab-k">Depurar el flujo</h3><p class="flow-note">La primera versión devolvía la selección en negro: el decodificado daba valores NaN. Guardando cada paso intermedio vimos que el recorte y la máscara estaban bien y que el fallo aparecía al activar el ControlNet. Este ControlNet Union (de xinsir) espera la zona a rellenar marcada con píxeles negros, y el preprocesador la marcaba de otra forma; al activar esa opción (black_pixel_for_xinsir_cn) desapareció el negro. Quedaba un rectángulo de otro tono, que se resolvió partiendo del propio papel y, al final, con el nodo «Pigmento sobre papel».</p>
     <div class="dbg"><figure><img src="assets/lab/f3-debug-crop.jpg" alt="Recorte con contexto" loading="lazy"><figcaption>1 · Recorte con contexto</figcaption></figure><figure><img src="assets/lab/f3-debug-mask.jpg" alt="Máscara" loading="lazy"><figcaption>2 · Máscara</figcaption></figure><figure><img src="assets/lab/f3-debug-sincn.jpg" alt="Sin ControlNet" loading="lazy"><figcaption>3 · Sin ControlNet</figcaption></figure><figure><img src="assets/lab/f3-debug-concn.jpg" alt="Con ControlNet: negro (NaN)" loading="lazy"><figcaption>4 · Con ControlNet: negro (NaN)</figcaption></figure><figure><img src="assets/lab/f3-debug-den80.jpg" alt="Partiendo del papel, denoise 0,80" loading="lazy"><figcaption>5 · Partiendo del papel, denoise 0,80</figcaption></figure><figure><img src="assets/lab/f3-debug-den88.jpg" alt="Denoise 0,88" loading="lazy"><figcaption>6 · Denoise 0,88</figcaption></figure></div>
     <div class="lab-gal">
       <figure><img src="assets/lab/f3-personajes_00002.jpg" alt="Personaje añadido con el flujo de personajes." loading="lazy"><figcaption>Personaje añadido con el flujo de personajes. <span class="badge b-mix">Mi trabajo + IA</span></figcaption></figure>
@@ -274,6 +277,14 @@
         <p class="flow-note">El vídeo final no usa ningún modelo generativo: es código (Python y ffmpeg) sobre las capas del PSD.</p>
       </div>
     </div>
+  </div>
+</section>
+
+<section class="exp" id="pruebas">
+  <div class="wrap">
+    <div class="exp-head"><span class="exp-num">+</span><div><h2>Vuelo de dron</h2><p class="exp-meta">Ferrovial · Innovate Construction Awards (ICA) 2026</p></div></div>
+    <figure class="final-vid"><video src="assets/lab/f5-vuelo-dron.mp4" poster="assets/lab/f5-vuelo-dron-poster.jpg" controls muted playsinline preload="none"></video><figcaption>Prueba de vuelo de dron sobre el universo ampliado, de boceto a acuarela. <span class="badge b-mix">Mi trabajo + IA</span></figcaption></figure>
+    <p class="note-final">Todo lo que aparece en los experimentos 03 y 04 y en este vídeo son pruebas de trabajo. La versión final entregada al cliente no está disponible para publicar.</p>
   </div>
 </section>
 
