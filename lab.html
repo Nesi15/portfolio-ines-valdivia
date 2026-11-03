@@ -45,7 +45,7 @@
   .final-vid video{ width:100%; aspect-ratio:16/9; border-radius: var(--radius-lg); background:#000; display:block; }
   .note-final{ margin: 22px 0 0; padding: 14px 18px; border-left:3px solid var(--accent-sand); background:#fff; border-radius: 0 var(--radius-md) var(--radius-md) 0; max-width: 90ch; }
   .why{ margin: -14px 0 34px; padding: 14px 18px; border-left: 3px solid var(--accent); background: #fff; border-radius: 0 var(--radius-md) var(--radius-md) 0; line-height:1.6; max-width: 90ch; }
-  .ba{ position:relative; overflow:hidden; border-radius: var(--radius-lg); border:1px solid var(--line-soft); background:#fff; max-width: 980px; margin-left:auto; margin-right:auto; user-select:none; }
+  .ba{ position:relative; overflow:hidden; border-radius: var(--radius-lg); border:1px solid var(--line-soft); background:#fff; max-width: 980px; user-select:none; }
   .ba img{ display:block; width:100%; height:auto; }
   .ba-after{ position:absolute; inset:0; clip-path: inset(0 0 0 var(--pos)); }
   .ba-after img{ width:100%; height:100%; object-fit:cover; }
@@ -143,7 +143,7 @@
     </ol>
     <figure class="graph"><div class="graph-scroll"><img src="assets/lab/wf-mascota-pose.svg" width="1047" height="410" alt="Grafo de ComfyUI dibujado a partir del archivo del flujo. Desliza para recorrerlo o" loading="lazy"></div><figcaption>Grafo de ComfyUI dibujado a partir del archivo del flujo. Desliza para recorrerlo o <a class="ext-link" href="assets/lab/wf-mascota-pose.svg" target="_blank" rel="noopener">ábrelo en grande ↗</a></figcaption></figure>
     <h3 class="lab-k">Antes y después</h3>
-    <div class="ba" style="--pos:50%;max-width:560px">
+    <div class="ba" style="--pos:50%;max-width:440px">
       <img src="assets/lab/m1-boceto.jpg" alt="Entrada scribble para ControlNet">
       <div class="ba-after"><img src="assets/lab/m1-pose.jpg" alt="Pose generada"></div>
       <span class="ba-label l">Entrada scribble para ControlNet <span class="badge b-me">Mi trabajo</span></span><span class="ba-label r">Pose generada <span class="badge b-ai">Generado con IA</span></span>
@@ -177,7 +177,7 @@
     </ol>
     <figure class="graph"><div class="graph-scroll"><img src="assets/lab/wf-mascota-expresiones.svg" width="1168" height="832" alt="Grafo de ComfyUI dibujado a partir del archivo del flujo. Desliza para recorrerlo o" loading="lazy"></div><figcaption>Grafo de ComfyUI dibujado a partir del archivo del flujo. Desliza para recorrerlo o <a class="ext-link" href="assets/lab/wf-mascota-expresiones.svg" target="_blank" rel="noopener">ábrelo en grande ↗</a></figcaption></figure>
     <h3 class="lab-k">Antes y después</h3>
-    <div class="ba" style="--pos:50%;max-width:560px">
+    <div class="ba" style="--pos:50%;max-width:440px">
       <img src="assets/lab/m1-diseno.jpg" alt="Antes: 2D, infantil">
       <div class="ba-after"><img src="assets/lab/m2-base.jpg" alt="Después: mascota de empresa en 3D"></div>
       <span class="ba-label l">Antes: 2D, infantil <span class="badge b-ai">Generado con IA</span></span><span class="ba-label r">Después: mascota de empresa en 3D <span class="badge b-ai">Generado con IA</span></span>
@@ -220,7 +220,7 @@
     <p class="flow-note">Seis flujos con la misma estructura (bosque, puente, personajes, dron, grúa y lego), cada uno con su referencia de estilo y una descripción fija editable.</p>
     <figure class="graph"><div class="graph-scroll"><img src="assets/lab/wf-ferro-bosque.svg" width="1714" height="703" alt="Grafo de ComfyUI dibujado a partir del archivo del flujo. Desliza para recorrerlo o" loading="lazy"></div><figcaption>Grafo de ComfyUI dibujado a partir del archivo del flujo. Desliza para recorrerlo o <a class="ext-link" href="assets/lab/wf-ferro-bosque.svg" target="_blank" rel="noopener">ábrelo en grande ↗</a></figcaption></figure>
     <h3 class="lab-k">Antes y después</h3>
-    <div class="ba" style="--pos:50%;max-width:760px">
+    <div class="ba" style="--pos:50%;max-width:600px">
       <img src="assets/lab/f3-bosque_00001.jpg" alt="Primera versión: fallo, la selección sale negra (NaN)">
       <div class="ba-after"><img src="assets/lab/f3-bosque_00006.jpg" alt="Versión final: bosque continuo sobre el papel"></div>
       <span class="ba-label l">Primera versión: fallo, la selección sale negra (NaN) <span class="badge b-ai">Generado con IA</span></span><span class="ba-label r">Versión final: bosque continuo sobre el papel <span class="badge b-ai">Generado con IA</span></span>
@@ -257,7 +257,7 @@
     </ol>
     <figure class="graph"><div class="graph-scroll"><img src="assets/lab/wf-ferro-wan.svg" width="844" height="1193" alt="Grafo de ComfyUI del primer intento (Wan 2.2), dibujado a partir del archivo del flujo. Desliza para recorrerlo o" loading="lazy"></div><figcaption>Grafo de ComfyUI del primer intento (Wan 2.2), dibujado a partir del archivo del flujo. Desliza para recorrerlo o <a class="ext-link" href="assets/lab/wf-ferro-wan.svg" target="_blank" rel="noopener">ábrelo en grande ↗</a></figcaption></figure>
     <h3 class="lab-k">Antes y después</h3>
-    <div class="ba" style="--pos:50%;max-width:380px">
+    <div class="ba" style="--pos:50%;max-width:300px">
       <img src="assets/lab/f4-boceto.jpg" alt="Fase de lápiz">
       <div class="ba-after"><img src="assets/lab/f4-final.jpg" alt="Final"></div>
       <span class="ba-label l">Fase de lápiz <span class="badge b-mix">Mi trabajo + IA</span></span><span class="ba-label r">Final <span class="badge b-mix">Mi trabajo + IA</span></span>
