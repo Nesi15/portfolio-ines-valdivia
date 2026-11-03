@@ -38,7 +38,10 @@
   .flow code{ display:block; font-size:.74rem; line-height:1.45; color:#5a2d82; background:#f6f1fb; border-radius:6px; padding:6px 8px; margin-bottom:8px; word-break: break-word; }
   .flow p{ margin:0; font-size:.92rem; color: var(--ink-soft); line-height:1.5; }
   .flow-note{ color: var(--ink-soft); font-size:.92rem; margin: 4px 0 10px; }
-  .graph-link{ margin: 0 0 34px; font-size:.92rem; }
+  .graph{ margin: 6px 0 34px; }
+  .graph-scroll{ overflow:auto; max-height: 560px; border:1px solid var(--line-soft); border-radius: var(--radius-md); background:#f6f7f6; -webkit-overflow-scrolling: touch; }
+  .graph-scroll img{ display:block; max-width:none; }
+  .why{ margin: -14px 0 34px; padding: 14px 18px; border-left: 3px solid var(--accent); background: #fff; border-radius: 0 var(--radius-md) var(--radius-md) 0; line-height:1.6; max-width: 90ch; }
   .ba{ position:relative; overflow:hidden; border-radius: var(--radius-lg); border:1px solid var(--line-soft); background:#fff; max-width: 980px; user-select:none; }
   .ba img{ display:block; width:100%; height:auto; }
   .ba-after{ position:absolute; inset:0; clip-path: inset(0 0 0 var(--pos)); }
@@ -110,14 +113,13 @@
   <div class="wrap">
     <span class="eyebrow">Lab · IA generativa</span>
     <h1>Experimentos con IA</h1>
-    <p class="lede">Cuatro experimentos con ComfyUI y modelos abiertos, ejecutados en local en un portátil con una RTX 4060 de 8 GB. En cada uno cuento qué problema resolvía, cómo es el flujo, qué falló y qué haría después.</p>
+    <p class="lede">Cuatro experimentos con ComfyUI y modelos abiertos, ejecutados en local. En cada uno cuento qué problema resolvía, cómo es el flujo, qué falló y qué haría después.</p>
     <div class="how">
-      <div><h2>Cómo trabajo con IA</h2><p>Yo planteo el problema, dirijo el aspecto visual y decido el método. Los flujos de ComfyUI, los nodos propios y los scripts los desarrollé con Claude Code, un asistente de programación con IA, bajo mi dirección: pedía cambios, revisaba cada resultado y corregía el rumbo. La selección, el montaje y la entrega final son míos.</p></div>
+      <div><h2>Cómo trabajo con IA</h2><p>Yo planteo el problema, dirijo el aspecto visual y decido el método. Los flujos de ComfyUI, los nodos propios y los scripts los desarrollé con Claude Code bajo mi dirección: pedía cambios, revisaba cada resultado y corregía el rumbo. La selección, el montaje y la entrega final son míos.</p></div>
       <ul>
         <li><span class="badge b-me">Mi trabajo</span> Dirección, decisiones, selección y montaje</li>
         <li><span class="badge b-ai">Generado con IA</span> Salida directa de un modelo</li>
         <li><span class="badge b-mix">Mi trabajo + IA</span> Mi composición con elementos generados</li>
-        <li style="opacity:.8">RTX 4060 Laptop · 8 GB VRAM · 16 GB RAM</li>
       </ul>
     </div>
     <div class="lab-toc"><a class="activity-link magnetic" href="#boceto">01 · Del boceto al personaje</a><a class="activity-link magnetic" href="#bucles">02 · Un personaje, cuatro gestos, en bucle</a><a class="activity-link magnetic" href="#estilo">03 · Ampliar una ilustración sin romper su estilo</a><a class="activity-link magnetic" href="#animacion">04 · Animar una ilustración sin redibujarla</a></div>
@@ -126,23 +128,24 @@
 
 <section class="exp" id="boceto">
   <div class="wrap">
-    <div class="exp-head"><span class="exp-num">01</span><div><h2>Del boceto al personaje</h2><p class="exp-meta">Melboss · octubre 2026 · imagen</p></div></div>
+    <div class="exp-head"><span class="exp-num">01</span><div><h2>Del boceto al personaje</h2><p class="exp-meta">Melboss Music · mascota para el chatbot y stickers · octubre 2026 · imagen</p></div></div>
     <div class="exp-intro">
-      <div><h3 class="lab-k">Problema</h3><p>Crear la mascota de Melboss, un gibón (canta y sus brazos largos se animan bien), y poder sacarla en cualquier pose para stickers sin que deje de ser el mismo personaje.</p></div>
-      <div><h3 class="lab-k">Mi papel</h3><p>Concepto (el gibón y su porqué), boceto de la pose, dirección y selección. Flujos montados con Claude Code.</p></div>
+      <div><h3 class="lab-k">Problema</h3><p>Melboss Music, la empresa de tecnología musical en la que trabajo, necesitaba una mascota para su chatbot y para usarla como stickers en sus contenidos. El reto: poder sacarla en cualquier pose sin que deje de ser el mismo personaje.</p></div>
+      <div><h3 class="lab-k">Mi papel</h3><p>Concepto, boceto de la pose, dirección y selección. Flujos montados con Claude Code.</p></div>
     </div>
+    <p class="why">Por qué un gibón: es un animal cantor, así que se asocia con la música. Un pájaro también canta, pero da muy poco juego de poses. El gibón, con sus brazos largos y su aspecto casi humano, se puede humanizar y gesticula con claridad (saludar, pensar, señalar), algo útil para un chatbot, sin dejar de ser un animal simpático.</p>
     <h3 class="lab-k">El flujo</h3>
     <ol class="flow">
       <li><strong>Diseño</strong><code>SDXL base · KSampler · batch 4</code><p>Exploración rápida: cuatro variantes por ejecución para elegir el personaje.</p></li>
-      <li><strong>Pose desde mi boceto</strong><code>LoadImage → ImageInvert → SetUnionControlNetType → ControlNetApplyAdvanced</code><p>Mi monigote, invertido, guía la pose con ControlNet Union; el prompt fija el aspecto.</p></li>
+      <li><strong>Pose con ControlNet scribble</strong><code>LoadImage → ImageInvert → SetUnionControlNetType (scribble) → ControlNetApplyAdvanced</code><p>Un trazo a mano, invertido, entra en ControlNet Union en modo scribble y guía la pose; el prompt fija el aspecto.</p></li>
       <li><strong>Nueva pose, mismo personaje</strong><code>Flux Kontext · ReferenceLatent · FluxGuidance</code><p>Edita la imagen de referencia con una instrucción («ahora canta con un micrófono») en lugar de generar desde cero.</p></li>
     </ol>
-    <p class="graph-link"><a class="ext-link" href="assets/lab/wf-mascota-pose.svg" target="_blank" rel="noopener">Ver el grafo completo de ComfyUI ↗</a></p>
+    <figure class="graph"><div class="graph-scroll"><img src="assets/lab/wf-mascota-pose.svg" width="1047" height="410" alt="Grafo de ComfyUI dibujado a partir del archivo del flujo. Desliza para recorrerlo o" loading="lazy"></div><figcaption>Grafo de ComfyUI dibujado a partir del archivo del flujo. Desliza para recorrerlo o <a class="ext-link" href="assets/lab/wf-mascota-pose.svg" target="_blank" rel="noopener">ábrelo en grande ↗</a></figcaption></figure>
     <h3 class="lab-k">Antes y después</h3>
     <div class="ba" style="--pos:50%;max-width:560px">
-      <img src="assets/lab/m1-boceto.jpg" alt="Mi boceto">
+      <img src="assets/lab/m1-boceto.jpg" alt="Entrada scribble para ControlNet">
       <div class="ba-after"><img src="assets/lab/m1-pose.jpg" alt="Pose generada"></div>
-      <span class="ba-label l">Mi boceto <span class="badge b-me">Mi trabajo</span></span><span class="ba-label r">Pose generada <span class="badge b-ai">Generado con IA</span></span>
+      <span class="ba-label l">Entrada scribble para ControlNet <span class="badge b-me">Mi trabajo</span></span><span class="ba-label r">Pose generada <span class="badge b-ai">Generado con IA</span></span>
       <input type="range" min="0" max="100" value="50" aria-label="Arrastra para comparar">
     </div>
     <div class="lab-gal">
@@ -160,7 +163,7 @@
 </section>
 <section class="exp" id="bucles">
   <div class="wrap">
-    <div class="exp-head"><span class="exp-num">02</span><div><h2>Un personaje, cuatro gestos, en bucle</h2><p class="exp-meta">Melboss · octubre 2026 · imagen y vídeo</p></div></div>
+    <div class="exp-head"><span class="exp-num">02</span><div><h2>Un personaje, cuatro gestos, en bucle</h2><p class="exp-meta">Melboss Music · chatbot · octubre 2026 · imagen y vídeo</p></div></div>
     <div class="exp-intro">
       <div><h3 class="lab-k">Problema</h3><p>La versión 2D quedaba infantil y Melboss necesitaba una mascota de empresa para su chatbot: una versión 3D que hiciera acciones completas (saludar, pensar, tener una idea) y pasara de una a otra sin cortes.</p></div>
       <div><h3 class="lab-k">Mi papel</h3><p>Dirección de arte (de dibujo animado a mascota de empresa, paleta, cascos sobre los hombros, iris azul claro), elección de las acciones y el criterio de «acción completa, sin saltos ni bocadillos». Flujos y reproductor hechos con Claude Code.</p></div>
@@ -171,7 +174,7 @@
       <li><strong>Expresiones</strong><code>Flux Kontext × 3 ramas · ReferenceLatent</code><p>Una referencia y tres instrucciones en paralelo: solo cambian la pose y la expresión.</p></li>
       <li><strong>Bucles</strong><code>WanFirstLastFrameToVideo · FrameInterpolate (FILM)</code><p>Cada clip de 5 s empieza y acaba en la pose de reposo, así se encadenan sin cortes. FILM pasa de 16 a 32 fps.</p></li>
     </ol>
-    <p class="graph-link"><a class="ext-link" href="assets/lab/wf-mascota-expresiones.svg" target="_blank" rel="noopener">Ver el grafo completo de ComfyUI ↗</a></p>
+    <figure class="graph"><div class="graph-scroll"><img src="assets/lab/wf-mascota-expresiones.svg" width="1168" height="832" alt="Grafo de ComfyUI dibujado a partir del archivo del flujo. Desliza para recorrerlo o" loading="lazy"></div><figcaption>Grafo de ComfyUI dibujado a partir del archivo del flujo. Desliza para recorrerlo o <a class="ext-link" href="assets/lab/wf-mascota-expresiones.svg" target="_blank" rel="noopener">ábrelo en grande ↗</a></figcaption></figure>
     <h3 class="lab-k">Antes y después</h3>
     <div class="ba" style="--pos:50%;max-width:560px">
       <img src="assets/lab/m1-diseno.jpg" alt="Antes: 2D, infantil">
@@ -202,9 +205,9 @@
 </section>
 <section class="exp" id="estilo">
   <div class="wrap">
-    <div class="exp-head"><span class="exp-num">03</span><div><h2>Ampliar una ilustración sin romper su estilo</h2><p class="exp-meta">Ferrovial · Innovate Construction Awards 2026 · octubre 2026 · imagen</p></div></div>
+    <div class="exp-head"><span class="exp-num">03</span><div><h2>Ampliar una ilustración sin romper su estilo</h2><p class="exp-meta">Ferrovial · Innovate Construction Awards (ICA) 2026 · carteles y animación del evento · octubre 2026</p></div></div>
     <div class="exp-intro">
-      <div><h3 class="lab-k">Problema</h3><p>Para la animación del evento había que convertir un cartel ilustrado vertical en un universo horizontal: más bosque, drones, grúas y personajes, con la misma acuarela sobre papel y sin que se notaran las costuras.</p></div>
+      <div><h3 class="lab-k">Problema</h3><p>Para la animación de los premios había que convertir el cartel ilustrado vertical en un universo horizontal: más bosque, drones, grúas y personajes, con la misma acuarela sobre papel y sin que se notaran las costuras.</p></div>
       <div><h3 class="lab-k">Mi papel</h3><p>La idea del método (un flujo por elemento, lanzado desde Photoshop, que ya tenía conectado a ComfyUI), la dirección de arte y la composición del PSD. Flujos, nodos propios y depuración con Claude Code.</p></div>
     </div>
     <h3 class="lab-k">El flujo</h3>
@@ -214,7 +217,7 @@
       <li><strong>De vuelta al papel</strong><code>Pigmento sobre papel (nodo propio) → InpaintStitchImproved → Enviar a Photoshop (nodo propio)</code><p>Solo la pintura nueva se multiplica sobre el papel original, como una aguada real, y vuelve a Photoshop como capa.</p></li>
     </ol>
     <p class="flow-note">Seis flujos con la misma estructura (bosque, puente, personajes, dron, grúa y lego), cada uno con su referencia de estilo y una descripción fija editable.</p>
-    <p class="graph-link"><a class="ext-link" href="assets/lab/wf-ferro-bosque.svg" target="_blank" rel="noopener">Ver el grafo completo de ComfyUI ↗</a></p>
+    <figure class="graph"><div class="graph-scroll"><img src="assets/lab/wf-ferro-bosque.svg" width="1714" height="703" alt="Grafo de ComfyUI dibujado a partir del archivo del flujo. Desliza para recorrerlo o" loading="lazy"></div><figcaption>Grafo de ComfyUI dibujado a partir del archivo del flujo. Desliza para recorrerlo o <a class="ext-link" href="assets/lab/wf-ferro-bosque.svg" target="_blank" rel="noopener">ábrelo en grande ↗</a></figcaption></figure>
     <h3 class="lab-k">Antes y después</h3>
     <div class="ba" style="--pos:50%;max-width:980px">
       <img src="assets/lab/f3-bosque_00001.jpg" alt="Primera versión: la selección sale negra">
@@ -240,7 +243,7 @@
 </section>
 <section class="exp" id="animacion">
   <div class="wrap">
-    <div class="exp-head"><span class="exp-num">04</span><div><h2>Animar una ilustración sin redibujarla</h2><p class="exp-meta">Ferrovial · Innovate Construction Awards 2026 · octubre 2026 · vídeo</p></div></div>
+    <div class="exp-head"><span class="exp-num">04</span><div><h2>Animar una ilustración sin redibujarla</h2><p class="exp-meta">Ferrovial · Innovate Construction Awards (ICA) 2026 · intro del evento · octubre 2026</p></div></div>
     <div class="exp-intro">
       <div><h3 class="lab-k">Problema</h3><p>La intro del evento debía enseñar cómo se dibuja ese universo, de boceto a lápiz y de lápiz a acuarela, durante un paneo de cámara, sin que los personajes se movieran ni cambiaran.</p></div>
       <div><h3 class="lab-k">Mi papel</h3><p>Concepto y dirección de la animación (paneo continuo, el papel fijo mientras la cámara se mueve, ver cómo se dibuja cada trazo, ritmo) y el cambio de método al ver que la IA de vídeo no servía. Motor en Python y pruebas con Wan desarrollados con Claude Code.</p></div>
@@ -251,7 +254,7 @@
       <li><strong>El PSD manda</strong><code>psd_a_escena.py → escena.json</code><p>Un script lee los grupos del PSD (bosque, puente, personajes, dron, grúa, lego) y escribe la escena. Lo que cambio en Photoshop aparece en el vídeo.</p></li>
       <li><strong>Motor de animación</strong><code>horizontal.py · Pillow · NumPy · ffmpeg</code><p>Cada elemento pasa de lápiz a acuarela con su calendario, la cámara sigue unas claves y drones y grúas tienen bucles propios. Los borradores a media resolución van unas 4 veces más rápido.</p></li>
     </ol>
-    <p class="graph-link"><a class="ext-link" href="assets/lab/wf-ferro-wan.svg" target="_blank" rel="noopener">Ver el grafo de ComfyUI del primer intento (Wan 2.2) ↗</a></p>
+    <figure class="graph"><div class="graph-scroll"><img src="assets/lab/wf-ferro-wan.svg" width="844" height="1193" alt="Grafo de ComfyUI del primer intento (Wan 2.2), dibujado a partir del archivo del flujo. Desliza para recorrerlo o" loading="lazy"></div><figcaption>Grafo de ComfyUI del primer intento (Wan 2.2), dibujado a partir del archivo del flujo. Desliza para recorrerlo o <a class="ext-link" href="assets/lab/wf-ferro-wan.svg" target="_blank" rel="noopener">ábrelo en grande ↗</a></figcaption></figure>
     <h3 class="lab-k">Antes y después</h3>
     <div class="ba" style="--pos:50%;max-width:460px">
       <img src="assets/lab/f4-boceto.jpg" alt="Fase de lápiz">

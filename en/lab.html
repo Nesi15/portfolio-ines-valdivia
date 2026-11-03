@@ -38,7 +38,10 @@
   .flow code{ display:block; font-size:.74rem; line-height:1.45; color:#5a2d82; background:#f6f1fb; border-radius:6px; padding:6px 8px; margin-bottom:8px; word-break: break-word; }
   .flow p{ margin:0; font-size:.92rem; color: var(--ink-soft); line-height:1.5; }
   .flow-note{ color: var(--ink-soft); font-size:.92rem; margin: 4px 0 10px; }
-  .graph-link{ margin: 0 0 34px; font-size:.92rem; }
+  .graph{ margin: 6px 0 34px; }
+  .graph-scroll{ overflow:auto; max-height: 560px; border:1px solid var(--line-soft); border-radius: var(--radius-md); background:#f6f7f6; -webkit-overflow-scrolling: touch; }
+  .graph-scroll img{ display:block; max-width:none; }
+  .why{ margin: -14px 0 34px; padding: 14px 18px; border-left: 3px solid var(--accent); background: #fff; border-radius: 0 var(--radius-md) var(--radius-md) 0; line-height:1.6; max-width: 90ch; }
   .ba{ position:relative; overflow:hidden; border-radius: var(--radius-lg); border:1px solid var(--line-soft); background:#fff; max-width: 980px; user-select:none; }
   .ba img{ display:block; width:100%; height:auto; }
   .ba-after{ position:absolute; inset:0; clip-path: inset(0 0 0 var(--pos)); }
@@ -110,14 +113,13 @@
   <div class="wrap">
     <span class="eyebrow">Lab · Generative AI</span>
     <h1>AI experiments</h1>
-    <p class="lede">Four experiments with ComfyUI and open models, run locally on a laptop with an 8 GB RTX 4060. For each one: the problem it solved, the workflow, what failed and what I would do next.</p>
+    <p class="lede">Four experiments with ComfyUI and open models, run locally. For each one: the problem it solved, the workflow, what failed and what I would do next.</p>
     <div class="how">
-      <div><h2>How I work with AI</h2><p>I frame the problem, direct the look and choose the method. The ComfyUI workflows, custom nodes and scripts were developed with Claude Code, an AI coding assistant, under my direction: I asked for changes, reviewed every result and corrected course. Selection, editing and final delivery are mine.</p></div>
+      <div><h2>How I work with AI</h2><p>I frame the problem, direct the look and choose the method. The ComfyUI workflows, custom nodes and scripts were developed with Claude Code under my direction: I asked for changes, reviewed every result and corrected course. Selection, editing and final delivery are mine.</p></div>
       <ul>
         <li><span class="badge b-me">My work</span> Direction, decisions, selection and editing</li>
         <li><span class="badge b-ai">AI-generated</span> Direct output of a model</li>
         <li><span class="badge b-mix">My work + AI</span> My composition with generated elements</li>
-        <li style="opacity:.8">RTX 4060 Laptop · 8 GB VRAM · 16 GB RAM</li>
       </ul>
     </div>
     <div class="lab-toc"><a class="activity-link magnetic" href="#boceto">01 · From sketch to character</a><a class="activity-link magnetic" href="#bucles">02 · One character, four gestures, looping</a><a class="activity-link magnetic" href="#estilo">03 · Extending an illustration without breaking its style</a><a class="activity-link magnetic" href="#animacion">04 · Animating an illustration without redrawing it</a></div>
@@ -126,23 +128,24 @@
 
 <section class="exp" id="boceto">
   <div class="wrap">
-    <div class="exp-head"><span class="exp-num">01</span><div><h2>From sketch to character</h2><p class="exp-meta">Melboss · October 2026 · image</p></div></div>
+    <div class="exp-head"><span class="exp-num">01</span><div><h2>From sketch to character</h2><p class="exp-meta">Melboss Music · chatbot mascot and stickers · October 2026 · image</p></div></div>
     <div class="exp-intro">
-      <div><h3 class="lab-k">Problem</h3><p>Create Melboss&#x27;s mascot, a gibbon (it sings, and its long arms animate well), and be able to put it in any pose for stickers without it turning into a different character.</p></div>
-      <div><h3 class="lab-k">My role</h3><p>Concept (the gibbon and why), pose sketch, direction and selection. Workflows built with Claude Code.</p></div>
+      <div><h3 class="lab-k">Problem</h3><p>Melboss Music, the music-technology company I work for, needed a mascot for its chatbot and to use as stickers in its content. The challenge: putting it in any pose without it turning into a different character.</p></div>
+      <div><h3 class="lab-k">My role</h3><p>Concept, pose sketch, direction and selection. Workflows built with Claude Code.</p></div>
     </div>
+    <p class="why">Why a gibbon: it is a singing animal, so it connects with music. A bird sings too, but offers very few poses. With its long arms and almost human look, a gibbon can be humanised and gestures clearly (waving, thinking, pointing), which helps a chatbot, while staying a friendly animal.</p>
     <h3 class="lab-k">The workflow</h3>
     <ol class="flow">
       <li><strong>Design</strong><code>SDXL base · KSampler · batch 4</code><p>Fast exploration: four variants per run to pick the character.</p></li>
-      <li><strong>Pose from my sketch</strong><code>LoadImage → ImageInvert → SetUnionControlNetType → ControlNetApplyAdvanced</code><p>My stick figure, inverted, drives the pose through ControlNet Union; the prompt sets the look.</p></li>
+      <li><strong>Pose with ControlNet scribble</strong><code>LoadImage → ImageInvert → SetUnionControlNetType (scribble) → ControlNetApplyAdvanced</code><p>A hand-drawn scribble, inverted, enters ControlNet Union in scribble mode and drives the pose; the prompt sets the look.</p></li>
       <li><strong>New pose, same character</strong><code>Flux Kontext · ReferenceLatent · FluxGuidance</code><p>Edits the reference image with an instruction (&quot;now singing into a microphone&quot;) instead of generating from scratch.</p></li>
     </ol>
-    <p class="graph-link"><a class="ext-link" href="../assets/lab/wf-mascota-pose.svg" target="_blank" rel="noopener">View the full ComfyUI graph ↗</a></p>
+    <figure class="graph"><div class="graph-scroll"><img src="../assets/lab/wf-mascota-pose.svg" width="1047" height="410" alt="ComfyUI graph drawn from the workflow file. Scroll to explore it or" loading="lazy"></div><figcaption>ComfyUI graph drawn from the workflow file. Scroll to explore it or <a class="ext-link" href="../assets/lab/wf-mascota-pose.svg" target="_blank" rel="noopener">open it full size ↗</a></figcaption></figure>
     <h3 class="lab-k">Before and after</h3>
     <div class="ba" style="--pos:50%;max-width:560px">
-      <img src="../assets/lab/m1-boceto.jpg" alt="My sketch">
+      <img src="../assets/lab/m1-boceto.jpg" alt="Scribble input for ControlNet">
       <div class="ba-after"><img src="../assets/lab/m1-pose.jpg" alt="Generated pose"></div>
-      <span class="ba-label l">My sketch <span class="badge b-me">My work</span></span><span class="ba-label r">Generated pose <span class="badge b-ai">AI-generated</span></span>
+      <span class="ba-label l">Scribble input for ControlNet <span class="badge b-me">My work</span></span><span class="ba-label r">Generated pose <span class="badge b-ai">AI-generated</span></span>
       <input type="range" min="0" max="100" value="50" aria-label="Drag to compare">
     </div>
     <div class="lab-gal">
@@ -160,7 +163,7 @@
 </section>
 <section class="exp" id="bucles">
   <div class="wrap">
-    <div class="exp-head"><span class="exp-num">02</span><div><h2>One character, four gestures, looping</h2><p class="exp-meta">Melboss · October 2026 · image and video</p></div></div>
+    <div class="exp-head"><span class="exp-num">02</span><div><h2>One character, four gestures, looping</h2><p class="exp-meta">Melboss Music · chatbot · October 2026 · image and video</p></div></div>
     <div class="exp-intro">
       <div><h3 class="lab-k">Problem</h3><p>The 2D version looked childish, and Melboss needed a corporate mascot for its chatbot: a 3D version performing complete actions (waving, thinking, getting an idea) and moving between them without cuts.</p></div>
       <div><h3 class="lab-k">My role</h3><p>Art direction (from cartoon to corporate mascot, palette, headphones on the shoulders, light-blue irises), choice of actions and the rule of &quot;complete action, no jumps, no speech bubbles&quot;. Workflows and player built with Claude Code.</p></div>
@@ -171,7 +174,7 @@
       <li><strong>Expressions</strong><code>Flux Kontext × 3 branches · ReferenceLatent</code><p>One reference, three instructions in parallel: only pose and expression change.</p></li>
       <li><strong>Loops</strong><code>WanFirstLastFrameToVideo · FrameInterpolate (FILM)</code><p>Each 5 s clip starts and ends on the rest pose, so clips chain without cuts. FILM doubles 16 to 32 fps.</p></li>
     </ol>
-    <p class="graph-link"><a class="ext-link" href="../assets/lab/wf-mascota-expresiones.svg" target="_blank" rel="noopener">View the full ComfyUI graph ↗</a></p>
+    <figure class="graph"><div class="graph-scroll"><img src="../assets/lab/wf-mascota-expresiones.svg" width="1168" height="832" alt="ComfyUI graph drawn from the workflow file. Scroll to explore it or" loading="lazy"></div><figcaption>ComfyUI graph drawn from the workflow file. Scroll to explore it or <a class="ext-link" href="../assets/lab/wf-mascota-expresiones.svg" target="_blank" rel="noopener">open it full size ↗</a></figcaption></figure>
     <h3 class="lab-k">Before and after</h3>
     <div class="ba" style="--pos:50%;max-width:560px">
       <img src="../assets/lab/m1-diseno.jpg" alt="Before: 2D, childish">
@@ -202,9 +205,9 @@
 </section>
 <section class="exp" id="estilo">
   <div class="wrap">
-    <div class="exp-head"><span class="exp-num">03</span><div><h2>Extending an illustration without breaking its style</h2><p class="exp-meta">Ferrovial · Innovate Construction Awards 2026 · October 2026 · image</p></div></div>
+    <div class="exp-head"><span class="exp-num">03</span><div><h2>Extending an illustration without breaking its style</h2><p class="exp-meta">Ferrovial · Innovate Construction Awards (ICA) 2026 · event posters and animation · October 2026</p></div></div>
     <div class="exp-intro">
-      <div><h3 class="lab-k">Problem</h3><p>For the event animation, a vertical illustrated poster had to become a horizontal universe: more forest, drones, cranes and people, with the same watercolour on paper and no visible seams.</p></div>
+      <div><h3 class="lab-k">Problem</h3><p>For the awards animation, the vertical illustrated poster had to become a horizontal universe: more forest, drones, cranes and people, with the same watercolour on paper and no visible seams.</p></div>
       <div><h3 class="lab-k">My role</h3><p>The method (one workflow per element, launched from Photoshop, which I already had connected to ComfyUI), art direction and the PSD composition. Workflows, custom nodes and debugging with Claude Code.</p></div>
     </div>
     <h3 class="lab-k">The workflow</h3>
@@ -214,7 +217,7 @@
       <li><strong>Back onto the paper</strong><code>Pigment on paper (custom node) → InpaintStitchImproved → Send to Photoshop (custom node)</code><p>Only the new paint is multiplied over the original paper, like a real wash, and returns to Photoshop as a layer.</p></li>
     </ol>
     <p class="flow-note">Six workflows with the same structure (forest, bridge, people, drone, crane, Lego), each with its own style reference and an editable base description.</p>
-    <p class="graph-link"><a class="ext-link" href="../assets/lab/wf-ferro-bosque.svg" target="_blank" rel="noopener">View the full ComfyUI graph ↗</a></p>
+    <figure class="graph"><div class="graph-scroll"><img src="../assets/lab/wf-ferro-bosque.svg" width="1714" height="703" alt="ComfyUI graph drawn from the workflow file. Scroll to explore it or" loading="lazy"></div><figcaption>ComfyUI graph drawn from the workflow file. Scroll to explore it or <a class="ext-link" href="../assets/lab/wf-ferro-bosque.svg" target="_blank" rel="noopener">open it full size ↗</a></figcaption></figure>
     <h3 class="lab-k">Before and after</h3>
     <div class="ba" style="--pos:50%;max-width:980px">
       <img src="../assets/lab/f3-bosque_00001.jpg" alt="First version: the selection comes out black">
@@ -240,7 +243,7 @@
 </section>
 <section class="exp" id="animacion">
   <div class="wrap">
-    <div class="exp-head"><span class="exp-num">04</span><div><h2>Animating an illustration without redrawing it</h2><p class="exp-meta">Ferrovial · Innovate Construction Awards 2026 · October 2026 · video</p></div></div>
+    <div class="exp-head"><span class="exp-num">04</span><div><h2>Animating an illustration without redrawing it</h2><p class="exp-meta">Ferrovial · Innovate Construction Awards (ICA) 2026 · event intro · October 2026</p></div></div>
     <div class="exp-intro">
       <div><h3 class="lab-k">Problem</h3><p>The event intro had to show the universe being drawn, from sketch to pencil to watercolour, during a camera pan, without the characters moving or changing.</p></div>
       <div><h3 class="lab-k">My role</h3><p>Concept and direction of the animation (continuous pan, the paper fixed while the camera moves, seeing each stroke drawn, pacing) and the change of method once video AI proved unsuitable. Python engine and Wan tests developed with Claude Code.</p></div>
@@ -251,7 +254,7 @@
       <li><strong>The PSD is the source</strong><code>psd_a_escena.py → escena.json</code><p>A script reads the PSD groups (forest, bridge, people, drone, crane, Lego) and writes the scene. Whatever I change in Photoshop shows up in the video.</p></li>
       <li><strong>Animation engine</strong><code>horizontal.py · Pillow · NumPy · ffmpeg</code><p>Each element goes from pencil to watercolour on its own schedule, the camera follows keyframes and drones and cranes have their own loops. Half-resolution drafts render about 4 times faster.</p></li>
     </ol>
-    <p class="graph-link"><a class="ext-link" href="../assets/lab/wf-ferro-wan.svg" target="_blank" rel="noopener">View the ComfyUI graph of the first attempt (Wan 2.2) ↗</a></p>
+    <figure class="graph"><div class="graph-scroll"><img src="../assets/lab/wf-ferro-wan.svg" width="844" height="1193" alt="ComfyUI graph of the first attempt (Wan 2.2), drawn from the workflow file. Scroll to explore it or" loading="lazy"></div><figcaption>ComfyUI graph of the first attempt (Wan 2.2), drawn from the workflow file. Scroll to explore it or <a class="ext-link" href="../assets/lab/wf-ferro-wan.svg" target="_blank" rel="noopener">open it full size ↗</a></figcaption></figure>
     <h3 class="lab-k">Before and after</h3>
     <div class="ba" style="--pos:50%;max-width:460px">
       <img src="../assets/lab/f4-boceto.jpg" alt="Pencil stage">
