@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="70 100 2493.8560546875 964" font-family="Instrument Sans, Arial, sans-serif">
+<rect x="70" y="100" width="2493.8560546875" height="964" fill="#f6f7f6"/>
+<path d="M370 198 C433.2841796875 198 433.2841796875 174 496.568359375 174" fill="none" stroke="#d6a417" stroke-width="4" stroke-opacity="0.85"/>
+<path d="M370 198 C433.2841796875 198 433.2841796875 504 496.568359375 504" fill="none" stroke="#d6a417" stroke-width="4" stroke-opacity="0.85"/>
+<path d="M370 174 C868.2841796875 174 868.2841796875 174 1366.568359375 174" fill="none" stroke="#8a6cc9" stroke-width="4" stroke-opacity="0.85"/>
+<path d="M1266.568359375 174 C1326.568359375 174 1306.568359375 198 1366.568359375 198" fill="none" stroke="#e07b39" stroke-width="4" stroke-opacity="0.85"/>
+<path d="M1266.568359375 198 C1326.568359375 198 1306.568359375 222 1366.568359375 222" fill="none" stroke="#e07b39" stroke-width="4" stroke-opacity="0.85"/>
+<path d="M370 402 C868.2841796875 402 868.2841796875 246 1366.568359375 246" fill="none" stroke="#d65d9a" stroke-width="4" stroke-opacity="0.85"/>
+<path d="M1651.998046875 174 C1711.998046875 174 1691.998046875 174 1751.998046875 174" fill="none" stroke="#d65d9a" stroke-width="4" stroke-opacity="0.85"/>
+<path d="M370 222 C1060.9990234375 222 1060.9990234375 198 1751.998046875 198" fill="none" stroke="#d64545" stroke-width="4" stroke-opacity="0.85"/>
+<path d="M1921.8560546875 174 C1981.8560546875 174 1961.8560546875 174 2021.8560546875 174" fill="none" stroke="#3f8dd6" stroke-width="4" stroke-opacity="0.85"/>
+<path d="M396.568359375 638 C456.568359375 638 436.568359375 834 496.568359375 834" fill="none" stroke="#3f8dd6" stroke-width="4" stroke-opacity="0.85"/>
+<path d="M376.306640625 870 C436.4375 870 436.4375 990 496.568359375 990" fill="none" stroke="#2a9d8f" stroke-width="4" stroke-opacity="0.85"/>
+<path d="M896.568359375 174 C956.568359375 174 936.568359375 174 996.568359375 174" fill="none" stroke="#e07b39" stroke-width="4" stroke-opacity="0.85"/>
+<path d="M896.568359375 504 C956.568359375 504 936.568359375 198 996.568359375 198" fill="none" stroke="#e07b39" stroke-width="4" stroke-opacity="0.85"/>
+<path d="M844.05234375 990 C920.3103515625 990 920.3103515625 222 996.568359375 222" fill="none" stroke="#2a9d8f" stroke-width="4" stroke-opacity="0.85"/>
+<path d="M636.568359375 834 C816.568359375 834 816.568359375 246 996.568359375 246" fill="none" stroke="#3f8dd6" stroke-width="4" stroke-opacity="0.85"/>
+<path d="M370 222 C683.2841796875 222 683.2841796875 270 996.568359375 270" fill="none" stroke="#d64545" stroke-width="4" stroke-opacity="0.85"/>
+<rect x="100" y="130" width="270" height="128" rx="10" fill="#fff" stroke="#c9cdd1" stroke-width="2"/>
+<rect x="100" y="130" width="270" height="34" rx="10" fill="#2b2f33"/><rect x="100" y="150" width="270" height="14" fill="#2b2f33"/>
+<text x="112" y="153" font-size="17" font-weight="700" fill="#fff">CheckpointLoaderSimple</text>
+<rect x="496.568359375" y="130" width="400" height="180" rx="10" fill="#fff" stroke="#c9cdd1" stroke-width="2"/>
+<rect x="496.568359375" y="130" width="400" height="34" rx="10" fill="#2b2f33"/><rect x="496.568359375" y="150" width="400" height="14" fill="#2b2f33"/>
+<text x="508.568359375" y="153" font-size="17" font-weight="700" fill="#fff">CLIPTextEncode</text>
+<rect x="496.568359375" y="460" width="400" height="180" rx="10" fill="#fff" stroke="#c9cdd1" stroke-width="2"/>
+<rect x="496.568359375" y="460" width="400" height="34" rx="10" fill="#2b2f33"/><rect x="496.568359375" y="480" width="400" height="14" fill="#2b2f33"/>
+<text x="508.568359375" y="483" font-size="17" font-weight="700" fill="#fff">CLIPTextEncode</text>
+<rect x="100" y="358" width="270" height="136" rx="10" fill="#fff" stroke="#c9cdd1" stroke-width="2"/>
+<rect x="100" y="358" width="270" height="34" rx="10" fill="#2b2f33"/><rect x="100" y="378" width="270" height="14" fill="#2b2f33"/>
+<text x="112" y="381" font-size="17" font-weight="700" fill="#fff">EmptyLatentImage</text>
+<rect x="1366.568359375" y="130" width="285.4296875" height="180" rx="10" fill="#fff" stroke="#c9cdd1" stroke-width="2"/>
+<rect x="1366.568359375" y="130" width="285.4296875" height="34" rx="10" fill="#2b2f33"/><rect x="1366.568359375" y="150" width="285.4296875" height="14" fill="#2b2f33"/>
+<text x="1378.568359375" y="153" font-size="17" font-weight="700" fill="#fff">KSampler</text>
+<rect x="1751.998046875" y="130" width="169.8580078125" height="76" rx="10" fill="#fff" stroke="#c9cdd1" stroke-width="2"/>
+<rect x="1751.998046875" y="130" width="169.8580078125" height="34" rx="10" fill="#2b2f33"/><rect x="1751.998046875" y="150" width="169.8580078125" height="14" fill="#2b2f33"/>
+<text x="1763.998046875" y="153" font-size="17" font-weight="700" fill="#fff">VAEDecode</text>
+<rect x="2021.8560546875" y="130" width="512" height="180" rx="10" fill="#fff" stroke="#c9cdd1" stroke-width="2"/>
+<rect x="2021.8560546875" y="130" width="512" height="34" rx="10" fill="#2b2f33"/><rect x="2021.8560546875" y="150" width="512" height="14" fill="#2b2f33"/>
+<text x="2033.8560546875" y="153" font-size="17" font-weight="700" fill="#fff">PreviewImage</text>
+<rect x="100" y="594" width="296.568359375" height="180" rx="10" fill="#fff" stroke="#c9cdd1" stroke-width="2"/>
+<rect x="100" y="594" width="296.568359375" height="34" rx="10" fill="#2b2f33"/><rect x="100" y="614" width="296.568359375" height="14" fill="#2b2f33"/>
+<text x="112" y="617" font-size="17" font-weight="700" fill="#fff">LoadImage</text>
+<rect x="496.568359375" y="790" width="140" height="56" rx="10" fill="#fff" stroke="#c9cdd1" stroke-width="2"/>
+<rect x="496.568359375" y="790" width="140" height="34" rx="10" fill="#2b2f33"/><rect x="496.568359375" y="810" width="140" height="14" fill="#2b2f33"/>
+<text x="508.568359375" y="813" font-size="17" font-weight="700" fill="#fff">ImageInvert</text>
+<rect x="100" y="826" width="276.306640625" height="88" rx="10" fill="#fff" stroke="#c9cdd1" stroke-width="2"/>
+<rect x="100" y="826" width="276.306640625" height="34" rx="10" fill="#2b2f33"/><rect x="100" y="846" width="276.306640625" height="14" fill="#2b2f33"/>
+<text x="112" y="849" font-size="17" font-weight="700" fill="#fff">ControlNetLoader</text>
+<rect x="496.568359375" y="946" width="347.483984375" height="88" rx="10" fill="#fff" stroke="#c9cdd1" stroke-width="2"/>
+<rect x="496.568359375" y="946" width="347.483984375" height="34" rx="10" fill="#2b2f33"/><rect x="496.568359375" y="966" width="347.483984375" height="14" fill="#2b2f33"/>
+<text x="508.568359375" y="969" font-size="17" font-weight="700" fill="#fff">SetUnionControlNetType</text>
+<rect x="996.568359375" y="130" width="270" height="180" rx="10" fill="#fff" stroke="#c9cdd1" stroke-width="2"/>
+<rect x="996.568359375" y="130" width="270" height="34" rx="10" fill="#2b2f33"/><rect x="996.568359375" y="150" width="270" height="14" fill="#2b2f33"/>
+<text x="1008.568359375" y="153" font-size="17" font-weight="700" fill="#fff">ControlNetApplyAdvanced</text>
+</svg>

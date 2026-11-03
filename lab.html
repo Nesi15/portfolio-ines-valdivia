@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lab · Experimentos con IA - Inés Valdivia</title>
+<meta name="description" content="Cuatro experimentos con IA generativa en ComfyUI: problema, flujo, antes y después, límites y modelos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  .lab-hero{ padding: 120px 0 40px; border-bottom:1px solid var(--line-soft); }
+  .lab-hero h1{ font-size: clamp(2.2rem,5vw,3.6rem); margin: 12px 0 14px; }
+  .lab-hero .lede{ max-width: 62ch; font-size: 1.08rem; color: var(--ink-soft); }
+  .how{ margin-top: 30px; display:grid; grid-template-columns: minmax(0,1.4fr) minmax(0,1fr); gap: 26px; background: var(--accent-darker); color:#fff; border-radius: var(--radius-lg); padding: 26px 28px; }
+  .how h2{ color:#fff; font-size:1.15rem; margin:0 0 8px; }
+  .how p{ margin:0; color:#d3dee0; line-height:1.6; }
+  .how ul{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px; align-self:center; }
+  .how li{ display:flex; gap:10px; align-items:center; color:#d3dee0; font-size:.92rem; }
+  .lab-toc{ display:flex; flex-wrap:wrap; gap:10px; margin-top: 22px; }
+  .badge{ display:inline-block; font: 700 .68rem var(--font); letter-spacing:.04em; text-transform:uppercase; padding: 3px 8px; border-radius: 999px; vertical-align: middle; white-space:nowrap; }
+  .b-ai{ background:#ead9f7; color:#5a2d82; } .b-me{ background:#d9efe9; color:#0d5a47; } .b-mix{ background:#fbe8cc; color:#7a4a08; } .b-ref{ background:#e6e8ea; color:#3b4148; }
+  .exp{ padding: 70px 0; border-bottom: 1px solid var(--line-soft); }
+  .exp:nth-of-type(even){ background: var(--paper); }
+  .exp-head{ display:flex; gap: 20px; align-items:flex-start; margin-bottom: 26px; }
+  .exp-num{ font-family: var(--font-serif); font-size: clamp(2.4rem,5vw,3.6rem); line-height:.9; color: var(--accent); }
+  .exp-head h2{ font-size: clamp(1.5rem,3vw,2.2rem); margin:0 0 6px; }
+  .exp-meta{ margin:0; color: var(--ink-soft); font-size:.92rem; }
+  .exp-intro{ display:grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 30px; margin-bottom: 34px; }
+  .exp-intro p, .exp-foot p{ margin:0; line-height:1.65; }
+  .lab-k{ font-size:.78rem; letter-spacing:.08em; text-transform:uppercase; color: var(--ink-soft); margin: 0 0 10px; }
+  .flow{ list-style:none; padding:0; margin:0 0 12px; display:grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 14px; counter-reset: f; }
+  .flow li{ position:relative; background:#fff; border:1px solid var(--line-soft); border-radius: var(--radius-md); padding: 16px 18px; counter-increment: f; }
+  .flow li::before{ content: counter(f); position:absolute; top:14px; right:16px; font-family: var(--font-serif); color: var(--accent); font-size:1.3rem; }
+  .flow li:not(:last-child)::after{ content:"→"; position:absolute; right:-13px; top:50%; transform:translateY(-50%); color: var(--accent); font-weight:700; z-index:1; }
+  .flow strong{ display:block; margin-bottom:8px; padding-right:24px; }
+  .flow code{ display:block; font-size:.74rem; line-height:1.45; color:#5a2d82; background:#f6f1fb; border-radius:6px; padding:6px 8px; margin-bottom:8px; word-break: break-word; }
+  .flow p{ margin:0; font-size:.92rem; color: var(--ink-soft); line-height:1.5; }
+  .flow-note{ color: var(--ink-soft); font-size:.92rem; margin: 4px 0 10px; }
+  .graph-link{ margin: 0 0 34px; font-size:.92rem; }
+  .ba{ position:relative; overflow:hidden; border-radius: var(--radius-lg); border:1px solid var(--line-soft); background:#fff; max-width: 980px; user-select:none; }
+  .ba img{ display:block; width:100%; height:auto; }
+  .ba-after{ position:absolute; inset:0; clip-path: inset(0 0 0 var(--pos)); }
+  .ba-after img{ width:100%; height:100%; object-fit:cover; }
+  .ba::after{ content:""; position:absolute; top:0; bottom:0; left: var(--pos); width:3px; margin-left:-1.5px; background:#fff; box-shadow:0 0 0 1px rgba(0,0,0,.15); pointer-events:none; }
+  .ba input{ position:absolute; inset:0; width:100%; height:100%; opacity:0; cursor: ew-resize; margin:0; }
+  .ba input:focus-visible{ opacity:.0; }
+  .ba:focus-within{ outline: 2px solid var(--accent); outline-offset: 3px; }
+  .ba + h3, .ba + .bot, .ba + .vids{ margin-top: 30px; }
+  .lab-gal img{ max-height: 300px; object-fit: contain; background:#fff; }
+  .ba-label{ position:absolute; bottom:12px; background: rgba(17,18,20,.72); color:#fff; font-size:.8rem; font-weight:600; padding: 6px 10px; border-radius: 999px; pointer-events:none; }
+  .ba-label.l{ left:12px; } .ba-label.r{ right:12px; }
+  .bot{ display:grid; grid-template-columns: 260px minmax(0,1fr); gap: 24px; align-items:center; margin-top: 26px; background:#fff; border:1px solid var(--line-soft); border-radius: var(--radius-lg); padding: 18px; max-width: 760px; }
+  .bot-v{ width:100%; aspect-ratio:1; border-radius: var(--radius-md); background:#eceaf3; display:block; }
+  .bot-ui p{ margin:0 0 14px; color: var(--ink-soft); line-height:1.55; }
+  .bot-btns{ display:flex; flex-wrap:wrap; gap:10px; }
+  .bot-btns button{ font: 700 .95rem var(--font); border:1px solid var(--line); background:#fff; border-radius:999px; padding: 10px 18px; cursor:pointer; }
+  .bot-btns button:hover, .bot-btns button[aria-pressed="true"]{ background: var(--accent); color:#fff; border-color: var(--accent); }
+  .vids{ display:grid; grid-template-columns: minmax(0,.62fr) minmax(0,1fr) minmax(0,1fr); gap: 16px; margin-top: 26px; align-items:start; }
+  .vids video{ width:100%; border-radius: var(--radius-md); background:#000; display:block; }
+  .vids figure:first-child video{ aspect-ratio: 480/672; object-fit: contain; background:#f3efe9; }
+  .vids figure:not(:first-child) video{ aspect-ratio: 16/9; }
+  .vids figure:first-child{ grid-row: span 1; }
+  figcaption{ font-size:.85rem; color: var(--ink-soft); margin-top:8px; line-height:1.45; }
+  .exp figure{ margin:0; }
+  .dbg{ display:grid; grid-template-columns: repeat(6,minmax(0,1fr)); gap: 10px; margin-bottom: 26px; }
+  .dbg img{ width:100%; aspect-ratio: 1344/768; object-fit:cover; border-radius:8px; border:1px solid var(--line-soft); background:#fff; }
+  .lab-gal{ display:grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 16px; margin-top: 26px; }
+  .lab-gal img{ width:100%; border-radius: var(--radius-md); border:1px solid var(--line-soft); background:#fff; display:block; }
+  .exp-foot{ display:grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 30px; margin-top: 40px; }
+  .lim{ margin:0; padding-left: 18px; display:flex; flex-direction:column; gap:10px; line-height:1.55; }
+  .models{ list-style:none; padding:0; margin:0 0 8px; display:flex; flex-direction:column; gap:8px; }
+  .models li{ display:flex; justify-content:space-between; gap:14px; border-bottom:1px dashed var(--line); padding-bottom:6px; font-size:.92rem; }
+  .models .lic{ color: var(--ink-soft); text-align:right; }
+  @media (max-width: 900px){
+    .how, .exp-intro, .exp-foot, .flow, .vids, .bot{ grid-template-columns: 1fr; }
+    .flow li:not(:last-child)::after{ content:"↓"; right:auto; left:50%; top:auto; bottom:-17px; transform:translateX(-50%); }
+    .dbg{ grid-template-columns: repeat(3,minmax(0,1fr)); }
+    .bot{ max-width: 420px; }
+  }
+  @media (max-width: 600px){
+    .ba-label.l{ top:10px; bottom:auto; } .ba-label{ font-size:.72rem; }
+    .lab-gal{ grid-template-columns: repeat(2,minmax(0,1fr)); }
+  }
+</style>
+</head>
+<body class="lab">
+
+<div class="cursor-dot" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"></div>
+<div class="scroll-progress" aria-hidden="true"></div>
+
+<nav class="site-nav">
+  <div class="wrap">
+    <a class="brand" href="index.html">Inés Valdivia Urbano</a>
+    <div class="nav-links">
+      <a href="index.html">Inicio</a>
+      <a href="documental.html">Documental</a>
+      <a href="proyectos.html">Proyectos</a>
+      <a href="lab.html" class="current">Lab</a>
+      <a class="nav-cv" href="cv.html">CV</a>
+      <a class="cta" href="mailto:inesvaldivia02@gmail.com">Contacto</a>
+      <span class="lang-switch" aria-label="Idioma"><a class="active" href="lab.html" hreflang="es" aria-current="true">ES</a><a href="en/lab.html" hreflang="en" lang="en">EN</a></span>
+    </div>
+  </div>
+</nav>
+
+<header class="lab-hero">
+  <div class="wrap">
+    <span class="eyebrow">Lab · IA generativa</span>
+    <h1>Experimentos con IA</h1>
+    <p class="lede">Cuatro experimentos con ComfyUI y modelos abiertos, ejecutados en local en un portátil con una RTX 4060 de 8 GB. En cada uno cuento qué problema resolvía, cómo es el flujo, qué falló y qué haría después.</p>
+    <div class="how">
+      <div><h2>Cómo trabajo con IA</h2><p>Yo planteo el problema, dirijo el aspecto visual y decido el método. Los flujos de ComfyUI, los nodos propios y los scripts los desarrollé con Claude Code, un asistente de programación con IA, bajo mi dirección: pedía cambios, revisaba cada resultado y corregía el rumbo. La selección, el montaje y la entrega final son míos.</p></div>
+      <ul>
+        <li><span class="badge b-me">Mi trabajo</span> Dirección, decisiones, selección y montaje</li>
+        <li><span class="badge b-ai">Generado con IA</span> Salida directa de un modelo</li>
+        <li><span class="badge b-mix">Mi trabajo + IA</span> Mi composición con elementos generados</li>
+        <li style="opacity:.8">RTX 4060 Laptop · 8 GB VRAM · 16 GB RAM</li>
+      </ul>
+    </div>
+    <div class="lab-toc"><a class="activity-link magnetic" href="#boceto">01 · Del boceto al personaje</a><a class="activity-link magnetic" href="#bucles">02 · Un personaje, cuatro gestos, en bucle</a><a class="activity-link magnetic" href="#estilo">03 · Ampliar una ilustración sin romper su estilo</a><a class="activity-link magnetic" href="#animacion">04 · Animar una ilustración sin redibujarla</a></div>
+  </div>
+</header>
+
+<section class="exp" id="boceto">
+  <div class="wrap">
+    <div class="exp-head"><span class="exp-num">01</span><div><h2>Del boceto al personaje</h2><p class="exp-meta">Melboss · octubre 2026 · imagen</p></div></div>
+    <div class="exp-intro">
+      <div><h3 class="lab-k">Problema</h3><p>Crear la mascota de Melboss, un gibón (canta y sus brazos largos se animan bien), y poder sacarla en cualquier pose para stickers sin que deje de ser el mismo personaje.</p></div>
+      <div><h3 class="lab-k">Mi papel</h3><p>Concepto (el gibón y su porqué), boceto de la pose, dirección y selección. Flujos montados con Claude Code.</p></div>
+    </div>
+    <h3 class="lab-k">El flujo</h3>
+    <ol class="flow">
+      <li><strong>Diseño</strong><code>SDXL base · KSampler · batch 4</code><p>Exploración rápida: cuatro variantes por ejecución para elegir el personaje.</p></li>
+      <li><strong>Pose desde mi boceto</strong><code>LoadImage → ImageInvert → SetUnionControlNetType → ControlNetApplyAdvanced</code><p>Mi monigote, invertido, guía la pose con ControlNet Union; el prompt fija el aspecto.</p></li>
+      <li><strong>Nueva pose, mismo personaje</strong><code>Flux Kontext · ReferenceLatent · FluxGuidance</code><p>Edita la imagen de referencia con una instrucción («ahora canta con un micrófono») en lugar de generar desde cero.</p></li>
+    </ol>
+    <p class="graph-link"><a class="ext-link" href="assets/lab/wf-mascota-pose.svg" target="_blank" rel="noopener">Ver el grafo completo de ComfyUI ↗</a></p>
+    <h3 class="lab-k">Antes y después</h3>
+    <div class="ba" style="--pos:50%;max-width:560px">
+      <img src="assets/lab/m1-boceto.jpg" alt="Mi boceto">
+      <div class="ba-after"><img src="assets/lab/m1-pose.jpg" alt="Pose generada"></div>
+      <span class="ba-label l">Mi boceto <span class="badge b-me">Mi trabajo</span></span><span class="ba-label r">Pose generada <span class="badge b-ai">Generado con IA</span></span>
+      <input type="range" min="0" max="100" value="50" aria-label="Arrastra para comparar">
+    </div>
+    <div class="lab-gal">
+      <figure><img src="assets/lab/m1-exploracion.jpg" alt="Exploración: cuatro variantes de SDXL en una ejecución." loading="lazy"><figcaption>Exploración: cuatro variantes de SDXL en una ejecución. <span class="badge b-ai">Generado con IA</span></figcaption></figure>
+      <figure><img src="assets/lab/m1-diseno.jpg" alt="Diseño elegido." loading="lazy"><figcaption>Diseño elegido. <span class="badge b-ai">Generado con IA</span></figcaption></figure>
+      <figure><img src="assets/lab/m1-kontext.jpg" alt="Kontext: la misma mascota, ahora cantando." loading="lazy"><figcaption>Kontext: la misma mascota, ahora cantando. <span class="badge b-ai">Generado con IA</span></figcaption></figure>
+    </div>
+    <div class="exp-foot">
+      <div><h3 class="lab-k">Qué falló y límites</h3><ul class="lim"><li>ControlNet respeta la pose, pero no las proporciones: el cuerpo sale más alargado y simplificado que el diseño elegido.</li><li>El borrado automático del fondo dejaba bordes sucios; lo quité de todos los flujos.</li><li>El resultado quedaba demasiado infantil para una marca. Eso llevó al experimento 02.</li></ul></div>
+      <div><h3 class="lab-k">Qué haría ahora</h3><p>Entrenar una LoRA del personaje con las mejores imágenes para fijar su identidad en cualquier modelo.</p>
+        <h3 class="lab-k" style="margin-top:22px">Modelos y licencias</h3><ul class="models"><li><span>SDXL base 1.0 (Stability AI)</span><span class="lic">CreativeML Open RAIL++-M</span></li><li><span>ControlNet Union SDXL ProMax (xinsir)</span><span class="lic">Apache 2.0</span></li><li><span>FLUX.1 Kontext [dev], GGUF Q4</span><span class="lic">FLUX.1 [dev] Non-Commercial License</span></li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="exp" id="bucles">
+  <div class="wrap">
+    <div class="exp-head"><span class="exp-num">02</span><div><h2>Un personaje, cuatro gestos, en bucle</h2><p class="exp-meta">Melboss · octubre 2026 · imagen y vídeo</p></div></div>
+    <div class="exp-intro">
+      <div><h3 class="lab-k">Problema</h3><p>La versión 2D quedaba infantil y Melboss necesitaba una mascota de empresa para su chatbot: una versión 3D que hiciera acciones completas (saludar, pensar, tener una idea) y pasara de una a otra sin cortes.</p></div>
+      <div><h3 class="lab-k">Mi papel</h3><p>Dirección de arte (de dibujo animado a mascota de empresa, paleta, cascos sobre los hombros, iris azul claro), elección de las acciones y el criterio de «acción completa, sin saltos ni bocadillos». Flujos y reproductor hechos con Claude Code.</p></div>
+    </div>
+    <h3 class="lab-k">El flujo</h3>
+    <ol class="flow">
+      <li><strong>Diseño 3D</strong><code>Z-Image Turbo · ModelSamplingAuraFlow · KSampler</code><p>Cuatro propuestas; una se convierte en la referencia.</p></li>
+      <li><strong>Expresiones</strong><code>Flux Kontext × 3 ramas · ReferenceLatent</code><p>Una referencia y tres instrucciones en paralelo: solo cambian la pose y la expresión.</p></li>
+      <li><strong>Bucles</strong><code>WanFirstLastFrameToVideo · FrameInterpolate (FILM)</code><p>Cada clip de 5 s empieza y acaba en la pose de reposo, así se encadenan sin cortes. FILM pasa de 16 a 32 fps.</p></li>
+    </ol>
+    <p class="graph-link"><a class="ext-link" href="assets/lab/wf-mascota-expresiones.svg" target="_blank" rel="noopener">Ver el grafo completo de ComfyUI ↗</a></p>
+    <h3 class="lab-k">Antes y después</h3>
+    <div class="ba" style="--pos:50%;max-width:560px">
+      <img src="assets/lab/m1-diseno.jpg" alt="Antes: 2D, infantil">
+      <div class="ba-after"><img src="assets/lab/m2-base.jpg" alt="Después: mascota de empresa en 3D"></div>
+      <span class="ba-label l">Antes: 2D, infantil <span class="badge b-ai">Generado con IA</span></span><span class="ba-label r">Después: mascota de empresa en 3D <span class="badge b-ai">Generado con IA</span></span>
+      <input type="range" min="0" max="100" value="50" aria-label="Arrastra para comparar">
+    </div>
+    <div class="bot">
+      <video class="bot-v" src="assets/lab/m2-reposo.mp4" poster="assets/lab/m2-poster.jpg" muted playsinline loop autoplay preload="metadata" aria-label="Reproductor como el del chatbot: el reposo se repite en bucle y cada acción vuelve sola al reposo."></video>
+      <div class="bot-ui">
+        <p>Reproductor como el del chatbot: el reposo se repite en bucle y cada acción vuelve sola al reposo. <span class="badge b-ai">Generado con IA</span></p>
+        <div class="bot-btns"><button type="button" data-v="assets/lab/m2-saluda.mp4">Saluda</button><button type="button" data-v="assets/lab/m2-piensa.mp4">Piensa</button><button type="button" data-v="assets/lab/m2-idea.mp4">Idea</button></div>
+      </div>
+    </div>
+    <div class="lab-gal">
+      <figure><img src="assets/lab/m2-exploracion.jpg" alt="Cuatro propuestas en 3D." loading="lazy"><figcaption>Cuatro propuestas en 3D. <span class="badge b-ai">Generado con IA</span></figcaption></figure>
+      <figure><img src="assets/lab/m2-saluda.jpg" alt="Kontext: saluda." loading="lazy"><figcaption>Kontext: saluda. <span class="badge b-ai">Generado con IA</span></figcaption></figure>
+      <figure><img src="assets/lab/m2-piensa.jpg" alt="Kontext: piensa." loading="lazy"><figcaption>Kontext: piensa. <span class="badge b-ai">Generado con IA</span></figcaption></figure>
+      <figure><img src="assets/lab/m2-idea.jpg" alt="Kontext: tiene una idea." loading="lazy"><figcaption>Kontext: tiene una idea. <span class="badge b-ai">Generado con IA</span></figcaption></figure>
+    </div>
+    <div class="exp-foot">
+      <div><h3 class="lab-k">Qué falló y límites</h3><ul class="lim"><li>Primer intento: un HTML que fundía imágenes fijas. Lo descarté porque el personaje saltaba de una pose a otra.</li><li>Wan añade cosas que no se piden: en una versión del saludo apareció una cola, que un gibón no tiene, y hubo que regenerarla.</li><li>Kontext a veces ponía los cascos en las orejas o teñía de azul el contorno de los ojos; lo corregí en el prompt.</li><li>512 × 512 px: es lo que permiten 8 GB de VRAM con estos modelos.</li></ul></div>
+      <div><h3 class="lab-k">Qué haría ahora</h3><p>Más resolución con una GPU con más memoria, una LoRA de identidad para no depender del prompt y conectar los bucles al estado real del chatbot (escucha, piensa, responde).</p>
+        <h3 class="lab-k" style="margin-top:22px">Modelos y licencias</h3><ul class="models"><li><span>Z-Image Turbo, GGUF Q5 + Qwen3 4B</span><span class="lic">Apache 2.0</span></li><li><span>FLUX.1 Kontext [dev], GGUF Q4</span><span class="lic">FLUX.1 [dev] Non-Commercial License</span></li><li><span>Wan 2.2 I2V A14B, GGUF Q3</span><span class="lic">Apache 2.0</span></li><li><span>LoRA lightx2v de 4 pasos para Wan 2.2</span><span class="lic">Apache 2.0</span></li><li><span>FILM (interpolación de fotogramas)</span><span class="lic">Apache 2.0</span></li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="exp" id="estilo">
+  <div class="wrap">
+    <div class="exp-head"><span class="exp-num">03</span><div><h2>Ampliar una ilustración sin romper su estilo</h2><p class="exp-meta">Ferrovial · Innovate Construction Awards 2026 · octubre 2026 · imagen</p></div></div>
+    <div class="exp-intro">
+      <div><h3 class="lab-k">Problema</h3><p>Para la animación del evento había que convertir un cartel ilustrado vertical en un universo horizontal: más bosque, drones, grúas y personajes, con la misma acuarela sobre papel y sin que se notaran las costuras.</p></div>
+      <div><h3 class="lab-k">Mi papel</h3><p>La idea del método (un flujo por elemento, lanzado desde Photoshop, que ya tenía conectado a ComfyUI), la dirección de arte y la composición del PSD. Flujos, nodos propios y depuración con Claude Code.</p></div>
+    </div>
+    <h3 class="lab-k">El flujo</h3>
+    <ol class="flow">
+      <li><strong>Selección en Photoshop</strong><code>Photoshop ComfyUI Plugin → InpaintCropImproved</code><p>Dibujo una selección donde quiero el elemento; se recorta con contexto alrededor.</p></li>
+      <li><strong>Estilo y continuidad</strong><code>Juggernaut XL · IPAdapterAdvanced · ControlNet Union «repaint» · DifferentialDiffusion</code><p>El IP-Adapter toma la acuarela de una referencia del propio cartel; el ControlNet continúa lo que rodea la selección.</p></li>
+      <li><strong>De vuelta al papel</strong><code>Pigmento sobre papel (nodo propio) → InpaintStitchImproved → Enviar a Photoshop (nodo propio)</code><p>Solo la pintura nueva se multiplica sobre el papel original, como una aguada real, y vuelve a Photoshop como capa.</p></li>
+    </ol>
+    <p class="flow-note">Seis flujos con la misma estructura (bosque, puente, personajes, dron, grúa y lego), cada uno con su referencia de estilo y una descripción fija editable.</p>
+    <p class="graph-link"><a class="ext-link" href="assets/lab/wf-ferro-bosque.svg" target="_blank" rel="noopener">Ver el grafo completo de ComfyUI ↗</a></p>
+    <h3 class="lab-k">Antes y después</h3>
+    <div class="ba" style="--pos:50%;max-width:980px">
+      <img src="assets/lab/f3-bosque_00001.jpg" alt="Primera versión: la selección sale negra">
+      <div class="ba-after"><img src="assets/lab/f3-bosque_00006.jpg" alt="Versión final: bosque continuo sobre el papel"></div>
+      <span class="ba-label l">Primera versión: la selección sale negra <span class="badge b-ai">Generado con IA</span></span><span class="ba-label r">Versión final: bosque continuo sobre el papel <span class="badge b-ai">Generado con IA</span></span>
+      <input type="range" min="0" max="100" value="50" aria-label="Arrastra para comparar">
+    </div>
+    <h3 class="lab-k">Depurar el flujo</h3><p class="flow-note">La primera versión devolvía la selección en negro y, una vez arreglada, un rectángulo de otro tono. Guardé cada paso intermedio para encontrar el fallo:</p>
+    <div class="dbg"><figure><img src="assets/lab/f3-debug-crop.jpg" alt="Recorte con contexto" loading="lazy"><figcaption>1 · Recorte con contexto</figcaption></figure><figure><img src="assets/lab/f3-debug-mask.jpg" alt="Máscara" loading="lazy"><figcaption>2 · Máscara</figcaption></figure><figure><img src="assets/lab/f3-debug-sincn.jpg" alt="Sin ControlNet" loading="lazy"><figcaption>3 · Sin ControlNet</figcaption></figure><figure><img src="assets/lab/f3-debug-concn.jpg" alt="Con ControlNet: negro (NaN)" loading="lazy"><figcaption>4 · Con ControlNet: negro (NaN)</figcaption></figure><figure><img src="assets/lab/f3-debug-den80.jpg" alt="Partiendo del papel, denoise 0,80" loading="lazy"><figcaption>5 · Partiendo del papel, denoise 0,80</figcaption></figure><figure><img src="assets/lab/f3-debug-den88.jpg" alt="Denoise 0,88" loading="lazy"><figcaption>6 · Denoise 0,88</figcaption></figure></div>
+    <div class="lab-gal">
+      <figure><img src="assets/lab/f3-personajes_00002.jpg" alt="Personaje añadido con el flujo de personajes." loading="lazy"><figcaption>Personaje añadido con el flujo de personajes. <span class="badge b-mix">Mi trabajo + IA</span></figcaption></figure>
+      <figure><img src="assets/lab/f3-dron_00003.jpg" alt="Drones añadidos con el flujo del dron." loading="lazy"><figcaption>Drones añadidos con el flujo del dron. <span class="badge b-mix">Mi trabajo + IA</span></figcaption></figure>
+      <figure><img src="assets/lab/f3-ref-personajes.jpg" alt="Referencia de estilo recortada del cartel." loading="lazy"><figcaption>Referencia de estilo recortada del cartel. <span class="badge b-ref">Referencia</span></figcaption></figure>
+    </div>
+    <div class="exp-foot">
+      <div><h3 class="lab-k">Qué falló y límites</h3><ul class="lim"><li>El nodo «SendTo Photoshop» del plugin fallaba en mi versión de ComfyUI (asyncio); en lugar de modificar el plugin, escribimos un nodo propio que hace lo mismo.</li><li>Con selecciones grandes puede salir más de un elemento, y a veces queda un resto tenue del borde de la selección.</li><li>Juggernaut con IP-Adapter imita el trazo del ilustrador del cartel. Lo usé con su permiso y el del cliente, y solo para ampliar su propio universo.</li></ul></div>
+      <div><h3 class="lab-k">Qué haría ahora</h3><p>Medir la coherencia de estilo entre elementos de forma objetiva, por ejemplo con distancias entre embeddings de imagen, en vez de a ojo.</p>
+        <h3 class="lab-k" style="margin-top:22px">Modelos y licencias</h3><ul class="models"><li><span>Juggernaut XL (RunDiffusion)</span><span class="lic">CreativeML Open RAIL-M</span></li><li><span>IP-Adapter SDXL</span><span class="lic">Apache 2.0</span></li><li><span>ControlNet Union SDXL ProMax (xinsir)</span><span class="lic">Apache 2.0</span></li><li><span>FLUX.1 Kontext [dev], GGUF Q4</span><span class="lic">FLUX.1 [dev] Non-Commercial License</span></li></ul>
+        <p class="flow-note">Kontext solo en una prueba del dron. Nodos propios: FerroviarioPigmentoSobrePapel y FerroviarioEnviarAPhotoshop.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="exp" id="animacion">
+  <div class="wrap">
+    <div class="exp-head"><span class="exp-num">04</span><div><h2>Animar una ilustración sin redibujarla</h2><p class="exp-meta">Ferrovial · Innovate Construction Awards 2026 · octubre 2026 · vídeo</p></div></div>
+    <div class="exp-intro">
+      <div><h3 class="lab-k">Problema</h3><p>La intro del evento debía enseñar cómo se dibuja ese universo, de boceto a lápiz y de lápiz a acuarela, durante un paneo de cámara, sin que los personajes se movieran ni cambiaran.</p></div>
+      <div><h3 class="lab-k">Mi papel</h3><p>Concepto y dirección de la animación (paneo continuo, el papel fijo mientras la cámara se mueve, ver cómo se dibuja cada trazo, ritmo) y el cambio de método al ver que la IA de vídeo no servía. Motor en Python y pruebas con Wan desarrollados con Claude Code.</p></div>
+    </div>
+    <h3 class="lab-k">El flujo</h3>
+    <ol class="flow">
+      <li><strong>Primer intento: IA de vídeo</strong><code>Flux Kontext → WanFirstLastFrameToVideo × 3 → FILM</code><p>Cuatro fotogramas clave (boceto con cotas, lápiz, acuarela, final) y Wan anima las transiciones.</p></li>
+      <li><strong>El PSD manda</strong><code>psd_a_escena.py → escena.json</code><p>Un script lee los grupos del PSD (bosque, puente, personajes, dron, grúa, lego) y escribe la escena. Lo que cambio en Photoshop aparece en el vídeo.</p></li>
+      <li><strong>Motor de animación</strong><code>horizontal.py · Pillow · NumPy · ffmpeg</code><p>Cada elemento pasa de lápiz a acuarela con su calendario, la cámara sigue unas claves y drones y grúas tienen bucles propios. Los borradores a media resolución van unas 4 veces más rápido.</p></li>
+    </ol>
+    <p class="graph-link"><a class="ext-link" href="assets/lab/wf-ferro-wan.svg" target="_blank" rel="noopener">Ver el grafo de ComfyUI del primer intento (Wan 2.2) ↗</a></p>
+    <h3 class="lab-k">Antes y después</h3>
+    <div class="ba" style="--pos:50%;max-width:460px">
+      <img src="assets/lab/f4-boceto.jpg" alt="Fase de lápiz">
+      <div class="ba-after"><img src="assets/lab/f4-final.jpg" alt="Final"></div>
+      <span class="ba-label l">Fase de lápiz <span class="badge b-mix">Mi trabajo + IA</span></span><span class="ba-label r">Final <span class="badge b-mix">Mi trabajo + IA</span></span>
+      <input type="range" min="0" max="100" value="50" aria-label="Arrastra para comparar">
+    </div>
+    <div class="vids">
+      <figure><video src="assets/lab/f4-wan.mp4" poster="assets/lab/f4-wan-poster.jpg" controls muted playsinline preload="none"></video><figcaption>Primer intento con Wan 2.2: los personajes se mueven y los trazos tiemblan. <span class="badge b-ai">Generado con IA</span></figcaption></figure>
+      <figure><video src="assets/lab/f4-paneo-2d.mp4" poster="assets/lab/f4-paneo-2d-poster.jpg" controls muted playsinline preload="none"></video><figcaption>Resultado: paneo de boceto a acuarela generado a partir del PSD. <span class="badge b-mix">Mi trabajo + IA</span></figcaption></figure>
+      <figure><video src="assets/lab/f4-evolucion.mp4" poster="assets/lab/f4-evolucion-poster.jpg" controls muted playsinline preload="none"></video><figcaption>Variante: de los niños a la obra. <span class="badge b-mix">Mi trabajo + IA</span></figcaption></figure>
+    </div>
+    <div class="exp-foot">
+      <div><h3 class="lab-k">Qué falló y límites</h3><ul class="lim"><li>Wan redibuja la ilustración en cada fotograma: los personajes se mueven, los trazos tiemblan y las cotas salen ilegibles. Lo descarté para el resultado final.</li><li>Los primeros renders tardaban demasiado para iterar. Describir la escena en datos y renderizar borradores lo resolvió.</li><li>El bosque extra de los laterales lo generó Adobe Firefly una sola vez; el resto son capas del cartel y elementos del experimento 03.</li></ul></div>
+      <div><h3 class="lab-k">Qué haría ahora</h3><p>Pasar a 2,5D real con profundidad estimada y un editor visual de la línea de tiempo en lugar de editar el JSON.</p>
+        <h3 class="lab-k" style="margin-top:22px">Modelos y licencias</h3><ul class="models"><li><span>FLUX.1 Kontext [dev], GGUF Q4</span><span class="lic">FLUX.1 [dev] Non-Commercial License</span></li><li><span>Wan 2.2 I2V A14B, GGUF Q3</span><span class="lic">Apache 2.0</span></li><li><span>LoRA lightx2v de 4 pasos para Wan 2.2</span><span class="lic">Apache 2.0</span></li><li><span>FILM (interpolación de fotogramas)</span><span class="lic">Apache 2.0</span></li><li><span>Adobe Firefly (bosque extra, generado una vez)</span><span class="lic">Condiciones de Adobe</span></li></ul>
+        <p class="flow-note">El vídeo final no usa ningún modelo generativo: es código (Python y ffmpeg) sobre las capas del PSD.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="contact">
+      <h3>Inés Valdivia Urbano</h3>
+      <p><a href="mailto:inesvaldivia02@gmail.com">inesvaldivia02@gmail.com</a></p>
+    </div>
+    <div class="foot-links">
+      <a href="proyectos.html">← Volver a proyectos</a>
+      <a href="mailto:inesvaldivia02@gmail.com">Escríbeme</a>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/script.js"></script>
+<script>
+document.querySelectorAll('.ba').forEach(function(b){
+  var r=b.querySelector('input');
+  function set(){ b.style.setProperty('--pos', r.value+'%'); }
+  r.addEventListener('input', set); set();
+});
+document.querySelectorAll('.bot').forEach(function(bot){
+  var v=bot.querySelector('video'), rest=v.getAttribute('src'), btns=bot.querySelectorAll('button');
+  var reduce=window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduce){ v.removeAttribute('autoplay'); v.pause(); }
+  btns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      btns.forEach(function(x){ x.setAttribute('aria-pressed', x===btn?'true':'false'); });
+      v.loop=false; v.src=btn.dataset.v; v.play().catch(function(){});
+    });
+  });
+  v.addEventListener('ended', function(){
+    btns.forEach(function(x){ x.setAttribute('aria-pressed','false'); });
+    v.src=rest; v.loop=true; if(!reduce) v.play().catch(function(){});
+  });
+});
+</script>
+</body>
+</html>

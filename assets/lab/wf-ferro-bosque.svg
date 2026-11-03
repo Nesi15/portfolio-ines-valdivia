@@ -1,0 +1,134 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="40 70 4080 1664" font-family="Instrument Sans, Arial, sans-serif">
+<rect x="40" y="70" width="4080" height="1664" fill="#f6f7f6"/>
+<path d="M400 144 C480.0 144 480.0 144 560 144" fill="none" stroke="#3f8dd6" stroke-width="4" stroke-opacity="0.85"/>
+<path d="M400 168 C480.0 168 480.0 168 560 168" fill="none" stroke="#3fa66b" stroke-width="4" stroke-opacity="0.85"/>
+<path d="M400 410 C480.0 410 480.0 894 560 894" fill="none" stroke="#8a6cc9" stroke-width="4" stroke-opacity="0.85"/>
+<path d="M890 894 C950 894 900 364 960 364" fill="none" stroke="#8a6cc9" stroke-width="4" stroke-opacity="0.85"/>
+<path d="M1290 364 C1350 364 1300 144 1360 144" fill="none" stroke="#8a6cc9" stroke-width="4" stroke-opacity="0.85"/>
+<path d="M1290 388 C1350 388 1300 168 1360 168" fill="none" stroke="#7b8794" stroke-width="4" stroke-opacity="0.85"/>
+<path d="M890 168 C1125.0 168 1125.0 192 1360 192" fill="none" stroke="#3f8dd6" stroke-width="4" stroke-opacity="0.85"/>
+<path d="M400 240 C480.0 240 480.0 1114 560 1114" fill="none" stroke="#9aa0a6" stroke-width="4" stroke-opacity="0.85"/>
+<path d="M400 630 C480.0 630 480.0 1138 560 1138" fill="none" stroke="#9aa0a6" stroke-width="4" stroke-opacity="0.85"/>
+<path d="M400 264 C480.0 264 480.0 1356 560 1356" fill="none" stroke="#9aa0a6" stroke-width="4" stroke-opacity="0.85"/>
+<path d="M400 850 C480.0 850 480.0 1380 560 1380" fill="none" stroke="#9aa0a6" stroke-width="4" stroke-opacity="0.85"/>
+<path d="M400 1070 C480.0 1070 480.0 1598 560 1598" fill="none" stroke="#2a9d8f" stroke-width="4" stroke-opacity="0.85"/>
+<path d="M890 168 C950 168 900 144 960 144" fill="none" stroke="#3f8dd6" stroke-width="4" stroke-opacity="0.85"/>
+<path d="M890 192 C950 192 900 168 960 168" fill="none" stroke="#3fa66b" stroke-width="4" stroke-opacity="0.85"/>
+<path d="M1290 584 C1350 584 1300 522 1360 522" fill="none" stroke="#e07b39" stroke-width="4" stroke-opacity="0.85"/>
+<path d="M1290 804 C1350 804 1300 546 1360 546" fill="none" stroke="#e07b39" stroke-width="4" stroke-opacity="0.85"/>
+<path d="M890 1598 C1125.0 1598 1125.0 570 1360 570" fill="none" stroke="#2a9d8f" stroke-width="4" stroke-opacity="0.85"/>
+<path d="M1290 144 C1350 144 1300 594 1360 594" fill="none" stroke="#3f8dd6" stroke-width="4" stroke-opacity="0.85"/>
+<path d="M400 458 C880.0 458 880.0 618 1360 618" fill="none" stroke="#d64545" stroke-width="4" stroke-opacity="0.85"/>
+<path d="M1690 522 C1750 522 1700 144 1760 144" fill="none" stroke="#e07b39" stroke-width="4" stroke-opacity="0.85"/>
+<path d="M1690 546 C1750 546 1700 168 1760 168" fill="none" stroke="#e07b39" stroke-width="4" stroke-opacity="0.85"/>
+<path d="M400 458 C1080.0 458 1080.0 192 1760 192" fill="none" stroke="#d64545" stroke-width="4" stroke-opacity="0.85"/>
+<path d="M890 168 C1325.0 168 1325.0 216 1760 216" fill="none" stroke="#3f8dd6" stroke-width="4" stroke-opacity="0.85"/>
+<path d="M890 192 C1325.0 192 1325.0 240 1760 240" fill="none" stroke="#3fa66b" stroke-width="4" stroke-opacity="0.85"/>
+<path d="M1690 144 C1925.0 144 1925.0 144 2160 144" fill="none" stroke="#8a6cc9" stroke-width="4" stroke-opacity="0.85"/>
+<path d="M2490 144 C2550 144 2500 144 2560 144" fill="none" stroke="#d65d9a" stroke-width="4" stroke-opacity="0.85"/>
+<path d="M400 458 C1480.0 458 1480.0 168 2560 168" fill="none" stroke="#d64545" stroke-width="4" stroke-opacity="0.85"/>
+<path d="M890 168 C1925.0 168 1925.0 144 2960 144" fill="none" stroke="#3f8dd6" stroke-width="4" stroke-opacity="0.85"/>
+<path d="M2890 144 C2950 144 2900 168 2960 168" fill="none" stroke="#3f8dd6" stroke-width="4" stroke-opacity="0.85"/>
+<path d="M890 192 C1925.0 192 1925.0 192 2960 192" fill="none" stroke="#3fa66b" stroke-width="4" stroke-opacity="0.85"/>
+<path d="M890 144 C2125.0 144 2125.0 144 3360 144" fill="none" stroke="#9aa0a6" stroke-width="4" stroke-opacity="0.85"/>
+<path d="M3290 144 C3350 144 3300 168 3360 168" fill="none" stroke="#3f8dd6" stroke-width="4" stroke-opacity="0.85"/>
+<path d="M3690 144 C3750 144 3700 144 3760 144" fill="none" stroke="#3f8dd6" stroke-width="4" stroke-opacity="0.85"/>
+<path d="M3690 144 C3750 144 3700 364 3760 364" fill="none" stroke="#3f8dd6" stroke-width="4" stroke-opacity="0.85"/>
+<path d="M890 1114 C950 1114 900 608 960 608" fill="none" stroke="#9aa0a6" stroke-width="4" stroke-opacity="0.85"/>
+<path d="M400 434 C680.0 434 680.0 584 960 584" fill="none" stroke="#d6a417" stroke-width="4" stroke-opacity="0.85"/>
+<path d="M890 1356 C950 1356 900 828 960 828" fill="none" stroke="#9aa0a6" stroke-width="4" stroke-opacity="0.85"/>
+<path d="M400 434 C680.0 434 680.0 804 960 804" fill="none" stroke="#d6a417" stroke-width="4" stroke-opacity="0.85"/>
+<path d="M400 216 C1280.0 216 1280.0 240 2160 240" fill="none" stroke="#9aa0a6" stroke-width="4" stroke-opacity="0.85"/>
+<path d="M2090 144 C2150 144 2100 168 2160 168" fill="none" stroke="#e07b39" stroke-width="4" stroke-opacity="0.85"/>
+<path d="M2090 168 C2150 168 2100 192 2160 192" fill="none" stroke="#e07b39" stroke-width="4" stroke-opacity="0.85"/>
+<path d="M2090 192 C2150 192 2100 216 2160 216" fill="none" stroke="#d65d9a" stroke-width="4" stroke-opacity="0.85"/>
+<rect x="70" y="100" width="330" height="180" rx="10" fill="#fff" stroke="#c9cdd1" stroke-width="2"/>
+<rect x="70" y="100" width="330" height="34" rx="10" fill="#2b2f33"/><rect x="70" y="120" width="330" height="14" fill="#2b2f33"/>
+<text x="82" y="123" font-size="17" font-weight="700" fill="#fff">Photoshop ComfyUI Plugin</text>
+<text x="82" y="160" font-size="16" fill="#3b4148">Photoshop: lienzo + selección</text>
+<rect x="560" y="100" width="330" height="180" rx="10" fill="#fff" stroke="#c9cdd1" stroke-width="2"/>
+<rect x="560" y="100" width="330" height="34" rx="10" fill="#2b2f33"/><rect x="560" y="120" width="330" height="14" fill="#2b2f33"/>
+<text x="572" y="123" font-size="17" font-weight="700" fill="#fff">InpaintCropImproved</text>
+<text x="572" y="160" font-size="16" fill="#3b4148">Recorte alrededor de la selección</text>
+<rect x="70" y="366" width="330" height="150" rx="10" fill="#fff" stroke="#c9cdd1" stroke-width="2"/>
+<rect x="70" y="366" width="330" height="34" rx="10" fill="#2b2f33"/><rect x="70" y="386" width="330" height="14" fill="#2b2f33"/>
+<text x="82" y="389" font-size="17" font-weight="700" fill="#fff">CheckpointLoaderSimple</text>
+<text x="82" y="426" font-size="16" fill="#3b4148">Juggernaut XL</text>
+<rect x="560" y="850" width="330" height="150" rx="10" fill="#fff" stroke="#c9cdd1" stroke-width="2"/>
+<rect x="560" y="850" width="330" height="34" rx="10" fill="#2b2f33"/><rect x="560" y="870" width="330" height="14" fill="#2b2f33"/>
+<text x="572" y="873" font-size="17" font-weight="700" fill="#fff">DifferentialDiffusion</text>
+<rect x="960" y="320" width="330" height="150" rx="10" fill="#fff" stroke="#c9cdd1" stroke-width="2"/>
+<rect x="960" y="320" width="330" height="34" rx="10" fill="#2b2f33"/><rect x="960" y="340" width="330" height="14" fill="#2b2f33"/>
+<text x="972" y="343" font-size="17" font-weight="700" fill="#fff">IPAdapterUnifiedLoader</text>
+<text x="972" y="380" font-size="16" fill="#3b4148">IPAdapter</text>
+<rect x="1360" y="100" width="330" height="180" rx="10" fill="#fff" stroke="#c9cdd1" stroke-width="2"/>
+<rect x="1360" y="100" width="330" height="34" rx="10" fill="#2b2f33"/><rect x="1360" y="120" width="330" height="14" fill="#2b2f33"/>
+<text x="1372" y="123" font-size="17" font-weight="700" fill="#fff">IPAdapterAdvanced</text>
+<text x="1372" y="160" font-size="16" fill="#3b4148">Estilo de la referencia</text>
+<rect x="70" y="586" width="330" height="150" rx="10" fill="#fff" stroke="#c9cdd1" stroke-width="2"/>
+<rect x="70" y="586" width="330" height="34" rx="10" fill="#2b2f33"/><rect x="70" y="606" width="330" height="14" fill="#2b2f33"/>
+<text x="82" y="609" font-size="17" font-weight="700" fill="#fff">PrimitiveStringMultiline</text>
+<text x="82" y="646" font-size="16" fill="#3b4148">Descripción fija del elemento (edítala)</text>
+<rect x="560" y="1070" width="330" height="172" rx="10" fill="#fff" stroke="#c9cdd1" stroke-width="2"/>
+<rect x="560" y="1070" width="330" height="34" rx="10" fill="#2b2f33"/><rect x="560" y="1090" width="330" height="14" fill="#2b2f33"/>
+<text x="572" y="1093" font-size="17" font-weight="700" fill="#fff">Text Concatenate</text>
+<text x="572" y="1130" font-size="16" fill="#3b4148">Panel de Photoshop + descripción</text>
+<rect x="960" y="540" width="330" height="150" rx="10" fill="#fff" stroke="#c9cdd1" stroke-width="2"/>
+<rect x="960" y="540" width="330" height="34" rx="10" fill="#2b2f33"/><rect x="960" y="560" width="330" height="14" fill="#2b2f33"/>
+<text x="972" y="563" font-size="17" font-weight="700" fill="#fff">CLIPTextEncode</text>
+<text x="972" y="600" font-size="16" fill="#3b4148">Prompt positivo</text>
+<rect x="70" y="806" width="330" height="150" rx="10" fill="#fff" stroke="#c9cdd1" stroke-width="2"/>
+<rect x="70" y="806" width="330" height="34" rx="10" fill="#2b2f33"/><rect x="70" y="826" width="330" height="14" fill="#2b2f33"/>
+<text x="82" y="829" font-size="17" font-weight="700" fill="#fff">PrimitiveStringMultiline</text>
+<text x="82" y="866" font-size="16" fill="#3b4148">Negativo fijo (edítalo)</text>
+<rect x="560" y="1312" width="330" height="172" rx="10" fill="#fff" stroke="#c9cdd1" stroke-width="2"/>
+<rect x="560" y="1312" width="330" height="34" rx="10" fill="#2b2f33"/><rect x="560" y="1332" width="330" height="14" fill="#2b2f33"/>
+<text x="572" y="1335" font-size="17" font-weight="700" fill="#fff">Text Concatenate</text>
+<text x="572" y="1372" font-size="16" fill="#3b4148">Negativo del panel + fijo</text>
+<rect x="960" y="760" width="330" height="150" rx="10" fill="#fff" stroke="#c9cdd1" stroke-width="2"/>
+<rect x="960" y="760" width="330" height="34" rx="10" fill="#2b2f33"/><rect x="960" y="780" width="330" height="14" fill="#2b2f33"/>
+<text x="972" y="783" font-size="17" font-weight="700" fill="#fff">CLIPTextEncode</text>
+<text x="972" y="820" font-size="16" fill="#3b4148">Prompt negativo</text>
+<rect x="70" y="1026" width="330" height="150" rx="10" fill="#fff" stroke="#c9cdd1" stroke-width="2"/>
+<rect x="70" y="1026" width="330" height="34" rx="10" fill="#2b2f33"/><rect x="70" y="1046" width="330" height="14" fill="#2b2f33"/>
+<text x="82" y="1049" font-size="17" font-weight="700" fill="#fff">ControlNetLoader</text>
+<text x="82" y="1086" font-size="16" fill="#3b4148">ControlNet Union ProMax</text>
+<rect x="560" y="1554" width="330" height="150" rx="10" fill="#fff" stroke="#c9cdd1" stroke-width="2"/>
+<rect x="560" y="1554" width="330" height="34" rx="10" fill="#2b2f33"/><rect x="560" y="1574" width="330" height="14" fill="#2b2f33"/>
+<text x="572" y="1577" font-size="17" font-weight="700" fill="#fff">SetUnionControlNetType</text>
+<text x="572" y="1614" font-size="16" fill="#3b4148">Modo «repaint»</text>
+<rect x="960" y="100" width="330" height="150" rx="10" fill="#fff" stroke="#c9cdd1" stroke-width="2"/>
+<rect x="960" y="100" width="330" height="34" rx="10" fill="#2b2f33"/><rect x="960" y="120" width="330" height="14" fill="#2b2f33"/>
+<text x="972" y="123" font-size="17" font-weight="700" fill="#fff">InpaintPreprocessor</text>
+<text x="972" y="160" font-size="16" fill="#3b4148">Zona a rellenar en negro (xinsir)</text>
+<rect x="1360" y="478" width="330" height="180" rx="10" fill="#fff" stroke="#c9cdd1" stroke-width="2"/>
+<rect x="1360" y="478" width="330" height="34" rx="10" fill="#2b2f33"/><rect x="1360" y="498" width="330" height="14" fill="#2b2f33"/>
+<text x="1372" y="501" font-size="17" font-weight="700" fill="#fff">ControlNetApplyAdvanced</text>
+<text x="1372" y="538" font-size="16" fill="#3b4148">Continuidad con lo que rodea</text>
+<rect x="1760" y="100" width="330" height="168" rx="10" fill="#fff" stroke="#c9cdd1" stroke-width="2"/>
+<rect x="1760" y="100" width="330" height="34" rx="10" fill="#2b2f33"/><rect x="1760" y="120" width="330" height="14" fill="#2b2f33"/>
+<text x="1772" y="123" font-size="17" font-weight="700" fill="#fff">InpaintModelConditioning</text>
+<rect x="2160" y="100" width="330" height="180" rx="10" fill="#fff" stroke="#c9cdd1" stroke-width="2"/>
+<rect x="2160" y="100" width="330" height="34" rx="10" fill="#2b2f33"/><rect x="2160" y="120" width="330" height="14" fill="#2b2f33"/>
+<text x="2172" y="123" font-size="17" font-weight="700" fill="#fff">KSampler</text>
+<text x="2172" y="160" font-size="16" fill="#3b4148">Generar</text>
+<rect x="2560" y="100" width="330" height="150" rx="10" fill="#fff" stroke="#c9cdd1" stroke-width="2"/>
+<rect x="2560" y="100" width="330" height="34" rx="10" fill="#2b2f33"/><rect x="2560" y="120" width="330" height="14" fill="#2b2f33"/>
+<text x="2572" y="123" font-size="17" font-weight="700" fill="#fff">VAEDecode</text>
+<rect x="2960" y="100" width="330" height="176" rx="10" fill="#fff" stroke="#01454f" stroke-width="4"/>
+<rect x="2960" y="100" width="330" height="34" rx="10" fill="#01454f"/><rect x="2960" y="120" width="330" height="14" fill="#01454f"/>
+<text x="2972" y="123" font-size="17" font-weight="700" fill="#fff">FerroviarioPigmentoSobrePapel</text>
+<text x="2972" y="160" font-size="16" fill="#3b4148">Solo el pigmento, sobre el papel origina</text>
+<rect x="3360" y="100" width="330" height="150" rx="10" fill="#fff" stroke="#c9cdd1" stroke-width="2"/>
+<rect x="3360" y="100" width="330" height="34" rx="10" fill="#2b2f33"/><rect x="3360" y="120" width="330" height="14" fill="#2b2f33"/>
+<text x="3372" y="123" font-size="17" font-weight="700" fill="#fff">InpaintStitchImproved</text>
+<text x="3372" y="160" font-size="16" fill="#3b4148">Fundir en el lienzo original</text>
+<rect x="3760" y="100" width="330" height="150" rx="10" fill="#fff" stroke="#01454f" stroke-width="4"/>
+<rect x="3760" y="100" width="330" height="34" rx="10" fill="#01454f"/><rect x="3760" y="120" width="330" height="14" fill="#01454f"/>
+<text x="3772" y="123" font-size="17" font-weight="700" fill="#fff">FerroviarioEnviarAPhotoshop</text>
+<text x="3772" y="160" font-size="16" fill="#3b4148">A Photoshop</text>
+<rect x="3760" y="320" width="330" height="150" rx="10" fill="#fff" stroke="#c9cdd1" stroke-width="2"/>
+<rect x="3760" y="320" width="330" height="34" rx="10" fill="#2b2f33"/><rect x="3760" y="340" width="330" height="14" fill="#2b2f33"/>
+<text x="3772" y="343" font-size="17" font-weight="700" fill="#fff">SaveImage</text>
+<text x="3772" y="380" font-size="16" fill="#3b4148">Copia en output/ferroviario</text>
+</svg>
