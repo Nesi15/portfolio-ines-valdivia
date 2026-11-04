@@ -86,6 +86,9 @@
   .gallery3{ display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px; }
   .gallery3 img{ aspect-ratio: 4/3; object-fit: cover; }
   @media (max-width: 760px){ .proto-audio, .gallery3{ grid-template-columns: 1fr; } }
+  .gallery4.catt-row{ grid-template-columns: minmax(0,1.95fr) minmax(0,1.95fr) minmax(0,1.54fr) minmax(0,1.54fr); align-items:start; }
+  @media (max-width: 900px){ .gallery4.catt-row{ grid-template-columns: repeat(2, minmax(0,1fr)); } }
+  .gallery4.catt-row img{ width:100%; height:auto; }
   .gallery2{ display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 16px; }
   .credits{ font-size:0.82rem; color: var(--ink-soft); max-width: 75ch; }
   .credits p{ text-align:left !important; }
@@ -254,7 +257,7 @@
     </div>
     <h3 style="margin:34px 0 6px">Straight from the software</h3>
     <p style="margin:0 0 16px;color:var(--ink-soft)">Original CATT-Acoustic output, before (left) and after (right): the statistical reverberation estimate for the whole room, and the STI at the pianist's position.</p>
-    <div class="gallery4">
+    <div class="gallery4 catt-row">
       <figure class="fig"><img src="../assets/acoustics/catt-rt-before.png" alt="CATT-Acoustic statistical reverberation estimate for the untreated room, about 1.5 s at mid frequencies" loading="lazy"><figcaption>Statistical RT estimate, untreated: Tmf 1.52–1.56 s.</figcaption></figure>
       <figure class="fig"><img src="../assets/acoustics/catt-rt-after.png" alt="CATT-Acoustic statistical reverberation estimate for the treated room, about 0.4 s" loading="lazy"><figcaption>Statistical RT estimate, treated: Tmf 0.41–0.45 s.</figcaption></figure>
       <figure class="fig"><img src="../assets/acoustics/catt-sti-before.png" alt="CATT-Acoustic STI and modulation transfer index by band for the untreated room, STI about 0.53" loading="lazy"><figcaption>STI by band, untreated: 0.52–0.53 (fair).</figcaption></figure>
