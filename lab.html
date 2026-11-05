@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lab · Experimentos con IA - Inés Valdivia</title>
-<meta name="description" content="Cuatro experimentos con IA generativa en ComfyUI: problema, flujo, antes y después, límites y modelos.">
+<meta name="description" content="Dos experimentos con IA generativa en ComfyUI: problema, flujo, antes y después, límites y modelos.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&display=swap" rel="stylesheet">
@@ -19,7 +19,7 @@
   .how ul{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px; }
   .how li{ display:flex; gap:10px; align-items:center; color:#d3dee0; font-size:.92rem; }
   .graph + .lab-k{ margin-top: 36px; }
-  .lab-toc{ display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:10px; margin-top: 22px; }
+  .lab-toc{ display:flex; flex-wrap:wrap; gap:10px; margin-top: 22px; }
   @media (max-width: 640px){ .lab-toc{ grid-template-columns: 1fr; } }
   .badge{ display:inline-block; font: 700 .68rem var(--font); letter-spacing:.04em; text-transform:uppercase; padding: 3px 8px; border-radius: 999px; vertical-align: middle; white-space:nowrap; }
   .b-ai{ background:#ead9f7; color:#5a2d82; } .b-me{ background:#d9efe9; color:#0d5a47; } .b-mix{ background:#fbe8cc; color:#7a4a08; } .b-ref{ background:#e6e8ea; color:#3b4148; }
@@ -116,7 +116,7 @@
   <div class="wrap">
     <span class="eyebrow">Lab · IA generativa</span>
     <h1>Experimentos con IA</h1>
-    <p class="lede">Cuatro experimentos con ComfyUI y modelos abiertos, ejecutados en local. En cada uno cuento qué problema resolvía, cómo es el flujo, qué falló y qué haría después.</p>
+    <p class="lede">Dos experimentos con ComfyUI y modelos abiertos, ejecutados en local. En cada uno cuento qué problema resolvía, cómo es el flujo, qué falló y qué haría después.</p>
     <div class="how">
       <ul>
         <li><span class="badge b-me">Mi trabajo</span> Dirección, decisiones, selección y montaje</li>
@@ -124,7 +124,7 @@
         <li><span class="badge b-mix">Mi trabajo + IA</span> Mi composición con elementos generados</li>
       </ul>
     </div>
-    <div class="lab-toc"><a class="activity-link magnetic" href="#boceto">01 · Del boceto al personaje</a><a class="activity-link magnetic" href="#bucles">02 · Un personaje, cuatro gestos, en bucle</a><a class="activity-link magnetic" href="#estilo">03 · Ampliar una ilustración sin romper su estilo</a><a class="activity-link magnetic" href="#animacion">04 · Animar una ilustración sin redibujarla</a></div>
+    <div class="lab-toc"><a class="activity-link magnetic" href="#boceto">01 · Del boceto al personaje</a><a class="activity-link magnetic" href="#bucles">02 · Un personaje, cuatro gestos, en bucle</a></div>
   </div>
 </header>
 
@@ -201,80 +201,6 @@
       <div><h3 class="lab-k">Qué falló y límites</h3><ul class="lim"><li>Primer intento: un HTML que fundía imágenes fijas. Lo descarté porque el personaje saltaba de una pose a otra.</li><li>Wan añade cosas que no se piden: en una versión del saludo apareció una cola, que un gibón no tiene, y hubo que regenerarla.</li><li>Kontext a veces ponía los cascos en las orejas o teñía de azul el contorno de los ojos; lo corregí en el prompt.</li><li>512 × 512 px: es lo que permiten 8 GB de VRAM con estos modelos.</li></ul></div>
       <div><h3 class="lab-k">Qué haría ahora</h3><p>Más resolución con una GPU con más memoria, una LoRA de identidad para no depender del prompt y conectar los bucles al estado real del chatbot (escucha, piensa, responde).</p>
         <h3 class="lab-k" style="margin-top:22px">Modelos y licencias</h3><ul class="models"><li><span>Z-Image Turbo, GGUF Q5 + Qwen3 4B</span><span class="lic">Apache 2.0</span></li><li><span>FLUX.1 Kontext [dev], GGUF Q4</span><span class="lic">FLUX.1 [dev] Non-Commercial License</span></li><li><span>Wan 2.2 I2V A14B, GGUF Q3</span><span class="lic">Apache 2.0</span></li><li><span>LoRA lightx2v de 4 pasos para Wan 2.2</span><span class="lic">Apache 2.0</span></li><li><span>FILM (interpolación de fotogramas)</span><span class="lic">Apache 2.0</span></li></ul>
-      </div>
-    </div>
-  </div>
-</section>
-<section class="exp" id="estilo">
-  <div class="wrap">
-    <div class="exp-head"><span class="exp-num">03</span><div><h2>Ampliar una ilustración sin romper su estilo</h2><p class="exp-meta">Ferrovial · Innovate Construction Awards (ICA) 2026 · carteles y animación del evento · octubre 2026</p></div></div>
-    <div class="exp-intro">
-      <div><h3 class="lab-k">Problema</h3><p>Para la animación de los premios había que convertir el cartel ilustrado vertical en un universo horizontal: más bosque, drones, grúas y personajes, con la misma acuarela sobre papel y sin que se notaran las costuras.</p></div>
-      <div><h3 class="lab-k">Mi papel</h3><p>La idea del método (un flujo por elemento, lanzado desde Photoshop conectado a ComfyUI), la dirección de arte y la composición del PSD. Flujos, nodos propios y depuración con Claude Code.</p></div>
-    </div>
-    <h3 class="lab-k">El flujo</h3>
-    <ol class="flow">
-      <li><strong>Selección en Photoshop</strong><code>Photoshop ComfyUI Plugin → InpaintCropImproved</code><p>Dibujo una selección donde quiero el elemento; se recorta con contexto alrededor.</p></li>
-      <li><strong>Estilo y continuidad</strong><code>Juggernaut XL · IPAdapterAdvanced · ControlNet Union «repaint» · DifferentialDiffusion</code><p>El IP-Adapter toma la acuarela de una referencia del propio cartel; el ControlNet continúa lo que rodea la selección.</p></li>
-      <li><strong>De vuelta al papel</strong><code>Pigmento sobre papel (nodo propio) → InpaintStitchImproved → Enviar a Photoshop (nodo propio)</code><p>Solo la pintura nueva se multiplica sobre el papel original, como una aguada real, y vuelve a Photoshop como capa.</p></li>
-    </ol>
-    <p class="flow-note">Seis flujos con la misma estructura (bosque, puente, personajes, dron, grúa y lego), cada uno con su referencia de estilo y una descripción fija editable.</p>
-    <figure class="graph"><div class="graph-scroll"><img src="assets/lab/wf-ferro-bosque.svg" width="1714" height="703" alt="Grafo de ComfyUI dibujado a partir del archivo del flujo. Desliza para recorrerlo o" loading="lazy"></div><figcaption>Grafo de ComfyUI dibujado a partir del archivo del flujo. Desliza para recorrerlo o <a class="ext-link" href="assets/lab/wf-ferro-bosque.svg" target="_blank" rel="noopener">ábrelo en grande ↗</a></figcaption></figure>
-    <h3 class="lab-k">Antes y después</h3>
-    <div class="ba" style="--pos:50%;max-width:600px">
-      <img src="assets/lab/f3-bosque_00001.jpg" alt="Primera versión: fallo, la selección sale negra (NaN)">
-      <div class="ba-after"><img src="assets/lab/f3-bosque_00006.jpg" alt="Versión final: bosque continuo sobre el papel"></div>
-      <span class="ba-label l">Primera versión: fallo, la selección sale negra (NaN) <span class="badge b-ai">Generado con IA</span></span><span class="ba-label r">Versión final: bosque continuo sobre el papel <span class="badge b-ai">Generado con IA</span></span>
-      <input type="range" min="0" max="100" value="50" aria-label="Arrastra para comparar">
-    </div>
-    <h3 class="lab-k">Depurar el flujo</h3><p class="flow-note">La primera versión devolvía la selección en negro: el decodificado daba valores NaN. Guardando cada paso intermedio vi que el recorte y la máscara estaban bien y que el fallo aparecía al activar el ControlNet. Este ControlNet Union (de xinsir) espera la zona a rellenar marcada con píxeles negros, y el preprocesador la marcaba de otra forma; al activar esa opción (black_pixel_for_xinsir_cn) desapareció el negro. Quedaba un rectángulo de otro tono, que se resolvió partiendo del propio papel y, al final, con el nodo «Pigmento sobre papel».</p>
-    <div class="dbg"><figure><img src="assets/lab/f3-debug-crop.jpg" alt="Recorte con contexto" loading="lazy"><figcaption>1 · Recorte con contexto</figcaption></figure><figure><img src="assets/lab/f3-debug-mask.jpg" alt="Máscara" loading="lazy"><figcaption>2 · Máscara</figcaption></figure><figure><img src="assets/lab/f3-debug-sincn.jpg" alt="Sin ControlNet" loading="lazy"><figcaption>3 · Sin ControlNet</figcaption></figure><figure><img src="assets/lab/f3-debug-concn.jpg" alt="Con ControlNet: negro (NaN)" loading="lazy"><figcaption>4 · Con ControlNet: negro (NaN)</figcaption></figure><figure><img src="assets/lab/f3-debug-den80.jpg" alt="Partiendo del papel, denoise 0,80" loading="lazy"><figcaption>5 · Partiendo del papel, denoise 0,80</figcaption></figure><figure><img src="assets/lab/f3-debug-den88.jpg" alt="Denoise 0,88" loading="lazy"><figcaption>6 · Denoise 0,88</figcaption></figure></div>
-    <div class="lab-gal">
-      <figure><img src="assets/lab/f3-personajes_00002.jpg" alt="Personaje añadido con el flujo de personajes." loading="lazy"><figcaption>Personaje añadido con el flujo de personajes. <span class="badge b-mix">Mi trabajo + IA</span></figcaption></figure>
-      <figure><img src="assets/lab/f3-dron_00003.jpg" alt="Drones añadidos con el flujo del dron." loading="lazy"><figcaption>Drones añadidos con el flujo del dron. <span class="badge b-mix">Mi trabajo + IA</span></figcaption></figure>
-      <figure><img src="assets/lab/f3-ref-personajes.jpg" alt="Referencia de estilo recortada del cartel." loading="lazy"><figcaption>Referencia de estilo recortada del cartel. <span class="badge b-ref">Referencia</span></figcaption></figure>
-    </div>
-    <div class="exp-foot">
-      <div><h3 class="lab-k">Qué falló y límites</h3><ul class="lim"><li>El nodo «SendTo Photoshop» del plugin fallaba en mi versión de ComfyUI (asyncio); en lugar de modificar el plugin, escribí un nodo propio que hace lo mismo.</li><li>Con selecciones grandes puede salir más de un elemento, y a veces queda un resto tenue del borde de la selección.</li><li>Juggernaut con IP-Adapter imita el trazo del ilustrador del cartel. Lo usé con su permiso y el del cliente, y solo para ampliar su propio universo.</li></ul></div>
-      <div><h3 class="lab-k">Qué haría ahora</h3><p>Medir la coherencia de estilo entre elementos de forma objetiva, por ejemplo con distancias entre embeddings de imagen, en vez de a ojo.</p>
-        <h3 class="lab-k" style="margin-top:22px">Modelos y licencias</h3><ul class="models"><li><span>Juggernaut XL (RunDiffusion)</span><span class="lic">CreativeML Open RAIL-M</span></li><li><span>IP-Adapter SDXL</span><span class="lic">Apache 2.0</span></li><li><span>ControlNet Union SDXL ProMax (xinsir)</span><span class="lic">Apache 2.0</span></li><li><span>FLUX.1 Kontext [dev], GGUF Q4</span><span class="lic">FLUX.1 [dev] Non-Commercial License</span></li></ul>
-        <p class="flow-note">Kontext solo en una prueba del dron. Nodos propios: FerroviarioPigmentoSobrePapel y FerroviarioEnviarAPhotoshop.</p>
-      </div>
-    </div>
-  </div>
-</section>
-<section class="exp" id="animacion">
-  <div class="wrap">
-    <div class="exp-head"><span class="exp-num">04</span><div><h2>Animar una ilustración sin redibujarla</h2><p class="exp-meta">Ferrovial · Innovate Construction Awards (ICA) 2026 · intro del evento · octubre 2026</p></div></div>
-    <div class="exp-intro">
-      <div><h3 class="lab-k">Problema</h3><p>La intro del evento debía enseñar cómo se dibuja ese universo, de boceto a lápiz y de lápiz a acuarela, durante un paneo de cámara, sin que los personajes se movieran ni cambiaran.</p></div>
-      <div><h3 class="lab-k">Mi papel</h3><p>Concepto y dirección de la animación (paneo continuo, el papel fijo mientras la cámara se mueve, ver cómo se dibuja cada trazo, ritmo) y el cambio de método al ver que la IA de vídeo no servía. Motor en Python y pruebas con Wan desarrollados con Claude Code.</p></div>
-    </div>
-    <h3 class="lab-k">El flujo</h3>
-    <ol class="flow">
-      <li><strong>Primer intento: IA de vídeo</strong><code>Flux Kontext → WanFirstLastFrameToVideo × 3 → FILM</code><p>Cuatro fotogramas clave (boceto con cotas, lápiz, acuarela, final) y Wan anima las transiciones.</p></li>
-      <li><strong>El PSD manda</strong><code>psd_a_escena.py → escena.json</code><p>Un script lee los grupos del PSD (bosque, puente, personajes, dron, grúa, lego) y escribe la escena. Lo que cambio en Photoshop aparece en el vídeo.</p></li>
-      <li><strong>Motor de animación</strong><code>horizontal.py · Pillow · NumPy · ffmpeg</code><p>Cada elemento pasa de lápiz a acuarela con su calendario, la cámara sigue unas claves y drones y grúas tienen bucles propios. Los borradores a media resolución van unas 4 veces más rápido.</p></li>
-    </ol>
-    <figure class="graph"><div class="graph-scroll"><img src="assets/lab/wf-ferro-wan.svg" width="844" height="1193" alt="Grafo de ComfyUI del primer intento (Wan 2.2), dibujado a partir del archivo del flujo. Desliza para recorrerlo o" loading="lazy"></div><figcaption>Grafo de ComfyUI del primer intento (Wan 2.2), dibujado a partir del archivo del flujo. Desliza para recorrerlo o <a class="ext-link" href="assets/lab/wf-ferro-wan.svg" target="_blank" rel="noopener">ábrelo en grande ↗</a></figcaption></figure>
-    <h3 class="lab-k">Antes y después</h3>
-    <div class="ba" style="--pos:50%;max-width:300px">
-      <img src="assets/lab/f4-boceto.jpg" alt="Fase de lápiz">
-      <div class="ba-after"><img src="assets/lab/f4-final.jpg" alt="Final"></div>
-      <span class="ba-label l">Fase de lápiz <span class="badge b-mix">Mi trabajo + IA</span></span><span class="ba-label r">Final <span class="badge b-mix">Mi trabajo + IA</span></span>
-      <input type="range" min="0" max="100" value="50" aria-label="Arrastra para comparar">
-    </div>
-    <div class="vids">
-      <figure><video src="assets/lab/f4-paneo-2d.mp4" poster="assets/lab/f4-paneo-2d-poster.jpg" controls controlslist="nofullscreen nodownload noremoteplayback" disablepictureinpicture muted playsinline preload="none"></video><figcaption>Resultado: paneo de boceto a acuarela generado a partir del PSD. <span class="badge b-mix">Mi trabajo + IA</span></figcaption></figure>
-      <figure><video src="assets/lab/f4-evolucion.mp4" poster="assets/lab/f4-evolucion-poster.jpg" controls controlslist="nofullscreen nodownload noremoteplayback" disablepictureinpicture muted playsinline preload="none"></video><figcaption>Variante: de los niños a la obra. <span class="badge b-mix">Mi trabajo + IA</span></figcaption></figure>
-      <figure><video src="assets/lab/f5-vuelo-dron.mp4" poster="assets/lab/f5-vuelo-dron-poster.jpg" controls controlslist="nofullscreen nodownload noremoteplayback" disablepictureinpicture muted playsinline preload="none"></video><figcaption>Prueba de vuelo de dron sobre el universo ampliado, de boceto a acuarela. <span class="badge b-mix">Mi trabajo + IA</span></figcaption></figure>
-    </div>
-    <p class="note-final">Todo lo que aparece en los experimentos 03 y 04 son pruebas de trabajo. El resultado final entregado al cliente no se puede publicar.</p>
-    <div class="exp-foot">
-      <div><h3 class="lab-k">Qué falló y límites</h3><ul class="lim"><li>Wan redibuja la ilustración en cada fotograma: los personajes se mueven, los trazos tiemblan y las cotas salen ilegibles. Lo descarté para el resultado final.</li><li>Los primeros renders tardaban demasiado para iterar. Describir la escena en datos y renderizar borradores lo resolvió.</li><li>El bosque extra de los laterales lo generó Adobe Firefly una sola vez; el resto son capas del cartel y elementos del experimento 03.</li></ul></div>
-      <div><h3 class="lab-k">Qué haría ahora</h3><p>Pasar a 2,5D real con profundidad estimada y un editor visual de la línea de tiempo en lugar de editar el JSON.</p>
-        <h3 class="lab-k" style="margin-top:22px">Modelos y licencias</h3><ul class="models"><li><span>FLUX.1 Kontext [dev], GGUF Q4</span><span class="lic">FLUX.1 [dev] Non-Commercial License</span></li><li><span>Wan 2.2 I2V A14B, GGUF Q3</span><span class="lic">Apache 2.0</span></li><li><span>LoRA lightx2v de 4 pasos para Wan 2.2</span><span class="lic">Apache 2.0</span></li><li><span>FILM (interpolación de fotogramas)</span><span class="lic">Apache 2.0</span></li><li><span>Adobe Firefly (bosque extra, generado una vez)</span><span class="lic">Condiciones de Adobe</span></li></ul>
-        <p class="flow-note">El vídeo final no usa ningún modelo generativo: es código (Python y ffmpeg) sobre las capas del PSD.</p>
       </div>
     </div>
   </div>

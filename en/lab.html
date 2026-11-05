@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lab · AI experiments - Inés Valdivia</title>
-<meta name="description" content="Four generative AI experiments in ComfyUI: problem, workflow, before and after, limits and models.">
+<meta name="description" content="Two generative AI experiments in ComfyUI: problem, workflow, before and after, limits and models.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&display=swap" rel="stylesheet">
@@ -19,7 +19,7 @@
   .how ul{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px; }
   .how li{ display:flex; gap:10px; align-items:center; color:#d3dee0; font-size:.92rem; }
   .graph + .lab-k{ margin-top: 36px; }
-  .lab-toc{ display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:10px; margin-top: 22px; }
+  .lab-toc{ display:flex; flex-wrap:wrap; gap:10px; margin-top: 22px; }
   @media (max-width: 640px){ .lab-toc{ grid-template-columns: 1fr; } }
   .badge{ display:inline-block; font: 700 .68rem var(--font); letter-spacing:.04em; text-transform:uppercase; padding: 3px 8px; border-radius: 999px; vertical-align: middle; white-space:nowrap; }
   .b-ai{ background:#ead9f7; color:#5a2d82; } .b-me{ background:#d9efe9; color:#0d5a47; } .b-mix{ background:#fbe8cc; color:#7a4a08; } .b-ref{ background:#e6e8ea; color:#3b4148; }
@@ -116,7 +116,7 @@
   <div class="wrap">
     <span class="eyebrow">Lab · Generative AI</span>
     <h1>AI experiments</h1>
-    <p class="lede">Four experiments with ComfyUI and open models, run locally. For each one: the problem it solved, the workflow, what failed and what I would do next.</p>
+    <p class="lede">Two experiments with ComfyUI and open models, run locally. For each one: the problem it solved, the workflow, what failed and what I would do next.</p>
     <div class="how">
       <ul>
         <li><span class="badge b-me">My work</span> Direction, decisions, selection and editing</li>
@@ -124,7 +124,7 @@
         <li><span class="badge b-mix">My work + AI</span> My composition with generated elements</li>
       </ul>
     </div>
-    <div class="lab-toc"><a class="activity-link magnetic" href="#boceto">01 · From sketch to character</a><a class="activity-link magnetic" href="#bucles">02 · One character, four gestures, looping</a><a class="activity-link magnetic" href="#estilo">03 · Extending an illustration without breaking its style</a><a class="activity-link magnetic" href="#animacion">04 · Animating an illustration without redrawing it</a></div>
+    <div class="lab-toc"><a class="activity-link magnetic" href="#boceto">01 · From sketch to character</a><a class="activity-link magnetic" href="#bucles">02 · One character, four gestures, looping</a></div>
   </div>
 </header>
 
@@ -201,80 +201,6 @@
       <div><h3 class="lab-k">What failed and limits</h3><ul class="lim"><li>First attempt: an HTML page crossfading still images. I dropped it because the character jumped from pose to pose.</li><li>Wan adds things nobody asked for: one version of the wave grew a tail, which gibbons do not have, and had to be regenerated.</li><li>Kontext sometimes put the headphones on the ears or tinted the eye area blue; I fixed it in the prompt.</li><li>512 × 512 px: the most 8 GB of VRAM allows with these models.</li></ul></div>
       <div><h3 class="lab-k">What I would do next</h3><p>Higher resolution on a GPU with more memory, an identity LoRA to stop relying on the prompt, and wiring the loops to the chatbot&#x27;s real state (listening, thinking, answering).</p>
         <h3 class="lab-k" style="margin-top:22px">Models and licences</h3><ul class="models"><li><span>Z-Image Turbo, GGUF Q5 + Qwen3 4B</span><span class="lic">Apache 2.0</span></li><li><span>FLUX.1 Kontext [dev], GGUF Q4</span><span class="lic">FLUX.1 [dev] Non-Commercial License</span></li><li><span>Wan 2.2 I2V A14B, GGUF Q3</span><span class="lic">Apache 2.0</span></li><li><span>lightx2v 4-step LoRA for Wan 2.2</span><span class="lic">Apache 2.0</span></li><li><span>FILM (frame interpolation)</span><span class="lic">Apache 2.0</span></li></ul>
-      </div>
-    </div>
-  </div>
-</section>
-<section class="exp" id="estilo">
-  <div class="wrap">
-    <div class="exp-head"><span class="exp-num">03</span><div><h2>Extending an illustration without breaking its style</h2><p class="exp-meta">Ferrovial · Innovate Construction Awards (ICA) 2026 · event posters and animation · October 2026</p></div></div>
-    <div class="exp-intro">
-      <div><h3 class="lab-k">Problem</h3><p>For the awards animation, the vertical illustrated poster had to become a horizontal universe: more forest, drones, cranes and people, with the same watercolour on paper and no visible seams.</p></div>
-      <div><h3 class="lab-k">My role</h3><p>The method (one workflow per element, launched from Photoshop connected to ComfyUI), art direction and the PSD composition. Workflows, custom nodes and debugging with Claude Code.</p></div>
-    </div>
-    <h3 class="lab-k">The workflow</h3>
-    <ol class="flow">
-      <li><strong>Selection in Photoshop</strong><code>Photoshop ComfyUI Plugin → InpaintCropImproved</code><p>I draw a selection where I want the element; it is cropped with surrounding context.</p></li>
-      <li><strong>Style and continuity</strong><code>Juggernaut XL · IPAdapterAdvanced · ControlNet Union «repaint» · DifferentialDiffusion</code><p>IP-Adapter takes the watercolour from a reference cut from the poster; ControlNet continues what surrounds the selection.</p></li>
-      <li><strong>Back onto the paper</strong><code>Pigment on paper (custom node) → InpaintStitchImproved → Send to Photoshop (custom node)</code><p>Only the new paint is multiplied over the original paper, like a real wash, and returns to Photoshop as a layer.</p></li>
-    </ol>
-    <p class="flow-note">Six workflows with the same structure (forest, bridge, people, drone, crane, Lego), each with its own style reference and an editable base description.</p>
-    <figure class="graph"><div class="graph-scroll"><img src="../assets/lab/wf-ferro-bosque.svg" width="1714" height="703" alt="ComfyUI graph drawn from the workflow file. Scroll to explore it or" loading="lazy"></div><figcaption>ComfyUI graph drawn from the workflow file. Scroll to explore it or <a class="ext-link" href="../assets/lab/wf-ferro-bosque.svg" target="_blank" rel="noopener">open it full size ↗</a></figcaption></figure>
-    <h3 class="lab-k">Before and after</h3>
-    <div class="ba" style="--pos:50%;max-width:600px">
-      <img src="../assets/lab/f3-bosque_00001.jpg" alt="First version: bug, the selection comes out black (NaN)">
-      <div class="ba-after"><img src="../assets/lab/f3-bosque_00006.jpg" alt="Final version: continuous forest on the paper"></div>
-      <span class="ba-label l">First version: bug, the selection comes out black (NaN) <span class="badge b-ai">AI-generated</span></span><span class="ba-label r">Final version: continuous forest on the paper <span class="badge b-ai">AI-generated</span></span>
-      <input type="range" min="0" max="100" value="50" aria-label="Drag to compare">
-    </div>
-    <h3 class="lab-k">Debugging the workflow</h3><p class="flow-note">The first version returned the selection in black: decoding produced NaN values. Saving every intermediate step, I saw that the crop and mask were fine and that the failure appeared when ControlNet was on. This ControlNet Union (by xinsir) expects the area to fill to be marked with black pixels, and the preprocessor marked it differently; enabling that option (black_pixel_for_xinsir_cn) removed the black. A rectangle of a different tone remained, solved first by starting from the paper itself and finally with the &quot;Pigment on paper&quot; node.</p>
-    <div class="dbg"><figure><img src="../assets/lab/f3-debug-crop.jpg" alt="Crop with context" loading="lazy"><figcaption>1 · Crop with context</figcaption></figure><figure><img src="../assets/lab/f3-debug-mask.jpg" alt="Mask" loading="lazy"><figcaption>2 · Mask</figcaption></figure><figure><img src="../assets/lab/f3-debug-sincn.jpg" alt="Without ControlNet" loading="lazy"><figcaption>3 · Without ControlNet</figcaption></figure><figure><img src="../assets/lab/f3-debug-concn.jpg" alt="With ControlNet: black (NaN)" loading="lazy"><figcaption>4 · With ControlNet: black (NaN)</figcaption></figure><figure><img src="../assets/lab/f3-debug-den80.jpg" alt="Starting from the paper, denoise 0.80" loading="lazy"><figcaption>5 · Starting from the paper, denoise 0.80</figcaption></figure><figure><img src="../assets/lab/f3-debug-den88.jpg" alt="Denoise 0.88" loading="lazy"><figcaption>6 · Denoise 0.88</figcaption></figure></div>
-    <div class="lab-gal">
-      <figure><img src="../assets/lab/f3-personajes_00002.jpg" alt="Figure added with the people workflow." loading="lazy"><figcaption>Figure added with the people workflow. <span class="badge b-mix">My work + AI</span></figcaption></figure>
-      <figure><img src="../assets/lab/f3-dron_00003.jpg" alt="Drones added with the drone workflow." loading="lazy"><figcaption>Drones added with the drone workflow. <span class="badge b-mix">My work + AI</span></figcaption></figure>
-      <figure><img src="../assets/lab/f3-ref-personajes.jpg" alt="Style reference cut from the poster." loading="lazy"><figcaption>Style reference cut from the poster. <span class="badge b-ref">Reference</span></figcaption></figure>
-    </div>
-    <div class="exp-foot">
-      <div><h3 class="lab-k">What failed and limits</h3><ul class="lim"><li>The plugin&#x27;s &quot;SendTo Photoshop&quot; node failed on my ComfyUI version (asyncio); instead of patching the plugin, I wrote a custom node that does the same job.</li><li>Large selections can produce more than one element, and sometimes a faint trace of the selection edge remains.</li><li>Juggernaut with IP-Adapter imitates the poster illustrator&#x27;s line. I used it with the illustrator&#x27;s and the client&#x27;s permission, and only to extend their own universe.</li></ul></div>
-      <div><h3 class="lab-k">What I would do next</h3><p>Measure style consistency between elements objectively, for example with distances between image embeddings, instead of by eye.</p>
-        <h3 class="lab-k" style="margin-top:22px">Models and licences</h3><ul class="models"><li><span>Juggernaut XL (RunDiffusion)</span><span class="lic">CreativeML Open RAIL-M</span></li><li><span>IP-Adapter SDXL</span><span class="lic">Apache 2.0</span></li><li><span>ControlNet Union SDXL ProMax (xinsir)</span><span class="lic">Apache 2.0</span></li><li><span>FLUX.1 Kontext [dev], GGUF Q4</span><span class="lic">FLUX.1 [dev] Non-Commercial License</span></li></ul>
-        <p class="flow-note">Kontext only in one drone test. Custom nodes: FerroviarioPigmentoSobrePapel and FerroviarioEnviarAPhotoshop.</p>
-      </div>
-    </div>
-  </div>
-</section>
-<section class="exp" id="animacion">
-  <div class="wrap">
-    <div class="exp-head"><span class="exp-num">04</span><div><h2>Animating an illustration without redrawing it</h2><p class="exp-meta">Ferrovial · Innovate Construction Awards (ICA) 2026 · event intro · October 2026</p></div></div>
-    <div class="exp-intro">
-      <div><h3 class="lab-k">Problem</h3><p>The event intro had to show the universe being drawn, from sketch to pencil to watercolour, during a camera pan, without the characters moving or changing.</p></div>
-      <div><h3 class="lab-k">My role</h3><p>Concept and direction of the animation (continuous pan, the paper fixed while the camera moves, seeing each stroke drawn, pacing) and the change of method once video AI proved unsuitable. Python engine and Wan tests developed with Claude Code.</p></div>
-    </div>
-    <h3 class="lab-k">The workflow</h3>
-    <ol class="flow">
-      <li><strong>First attempt: video AI</strong><code>Flux Kontext → WanFirstLastFrameToVideo × 3 → FILM</code><p>Four keyframes (sketch with dimensions, pencil, watercolour, final) and Wan animates the transitions.</p></li>
-      <li><strong>The PSD is the source</strong><code>psd_a_escena.py → escena.json</code><p>A script reads the PSD groups (forest, bridge, people, drone, crane, Lego) and writes the scene. Whatever I change in Photoshop shows up in the video.</p></li>
-      <li><strong>Animation engine</strong><code>horizontal.py · Pillow · NumPy · ffmpeg</code><p>Each element goes from pencil to watercolour on its own schedule, the camera follows keyframes and drones and cranes have their own loops. Half-resolution drafts render about 4 times faster.</p></li>
-    </ol>
-    <figure class="graph"><div class="graph-scroll"><img src="../assets/lab/wf-ferro-wan.svg" width="844" height="1193" alt="ComfyUI graph of the first attempt (Wan 2.2), drawn from the workflow file. Scroll to explore it or" loading="lazy"></div><figcaption>ComfyUI graph of the first attempt (Wan 2.2), drawn from the workflow file. Scroll to explore it or <a class="ext-link" href="../assets/lab/wf-ferro-wan.svg" target="_blank" rel="noopener">open it full size ↗</a></figcaption></figure>
-    <h3 class="lab-k">Before and after</h3>
-    <div class="ba" style="--pos:50%;max-width:300px">
-      <img src="../assets/lab/f4-boceto.jpg" alt="Pencil stage">
-      <div class="ba-after"><img src="../assets/lab/f4-final.jpg" alt="Final"></div>
-      <span class="ba-label l">Pencil stage <span class="badge b-mix">My work + AI</span></span><span class="ba-label r">Final <span class="badge b-mix">My work + AI</span></span>
-      <input type="range" min="0" max="100" value="50" aria-label="Drag to compare">
-    </div>
-    <div class="vids">
-      <figure><video src="../assets/lab/f4-paneo-2d.mp4" poster="../assets/lab/f4-paneo-2d-poster.jpg" controls controlslist="nofullscreen nodownload noremoteplayback" disablepictureinpicture muted playsinline preload="none"></video><figcaption>Result: sketch-to-watercolour pan rendered from the PSD. <span class="badge b-mix">My work + AI</span></figcaption></figure>
-      <figure><video src="../assets/lab/f4-evolucion.mp4" poster="../assets/lab/f4-evolucion-poster.jpg" controls controlslist="nofullscreen nodownload noremoteplayback" disablepictureinpicture muted playsinline preload="none"></video><figcaption>Variant: from children to the construction site. <span class="badge b-mix">My work + AI</span></figcaption></figure>
-      <figure><video src="../assets/lab/f5-vuelo-dron.mp4" poster="../assets/lab/f5-vuelo-dron-poster.jpg" controls controlslist="nofullscreen nodownload noremoteplayback" disablepictureinpicture muted playsinline preload="none"></video><figcaption>Drone-flight test over the extended universe, from sketch to watercolour. <span class="badge b-mix">My work + AI</span></figcaption></figure>
-    </div>
-    <p class="note-final">Everything shown in experiments 03 and 04 is work-in-progress testing. The final result delivered to the client cannot be published.</p>
-    <div class="exp-foot">
-      <div><h3 class="lab-k">What failed and limits</h3><ul class="lim"><li>Wan redraws the illustration on every frame: characters move, strokes shimmer and dimensions become illegible. I dropped it for the final result.</li><li>Early renders took too long to iterate on. Describing the scene as data and rendering drafts solved it.</li><li>The extra forest on the sides was generated once with Adobe Firefly; everything else is poster layers and elements from experiment 03.</li></ul></div>
-      <div><h3 class="lab-k">What I would do next</h3><p>Move to true 2.5D with estimated depth, and a visual timeline editor instead of editing JSON.</p>
-        <h3 class="lab-k" style="margin-top:22px">Models and licences</h3><ul class="models"><li><span>FLUX.1 Kontext [dev], GGUF Q4</span><span class="lic">FLUX.1 [dev] Non-Commercial License</span></li><li><span>Wan 2.2 I2V A14B, GGUF Q3</span><span class="lic">Apache 2.0</span></li><li><span>lightx2v 4-step LoRA for Wan 2.2</span><span class="lic">Apache 2.0</span></li><li><span>FILM (frame interpolation)</span><span class="lic">Apache 2.0</span></li><li><span>Adobe Firefly (extra forest, generated once)</span><span class="lic">Adobe terms</span></li></ul>
-        <p class="flow-note">The final video uses no generative model: it is code (Python and ffmpeg) over the PSD layers.</p>
       </div>
     </div>
   </div>
