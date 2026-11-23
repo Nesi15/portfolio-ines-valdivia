@@ -264,3 +264,36 @@
   steps.forEach(function (s) { io.observe(s); });
   activate('0');
 })();
+
+/* ---------- Video lightbox (data-video-modal) ---------- */
+(function(){
+  var links = document.querySelectorAll('a[data-video-modal]');
+  if (!links.length) return;
+  var en = document.documentElement.lang === 'en';
+  var box = document.createElement('div');
+  box.className = 'lightbox';
+  box.setAttribute('aria-hidden', 'true');
+  box.innerHTML = '<button class="lightbox-close" aria-label="' + (en ? 'Close' : 'Cerrar') + '">&times;</button>' +
+    '<video class="lightbox-video" controls playsinline preload="none"></video>';
+  document.body.appendChild(box);
+  var video = box.querySelector('video');
+  function close(){
+    video.pause();
+    box.classList.remove('is-open');
+    box.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+  links.forEach(function(a){
+    a.addEventListener('click', function(e){
+      e.preventDefault();
+      if (video.getAttribute('src') !== a.getAttribute('href')) video.src = a.getAttribute('href');
+      box.classList.add('is-open');
+      box.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      var p = video.play(); if (p && p.catch) p.catch(function(){});
+    });
+  });
+  box.querySelector('.lightbox-close').addEventListener('click', close);
+  box.addEventListener('click', function(e){ if (e.target === box) close(); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && box.classList.contains('is-open')) close(); });
+})();
